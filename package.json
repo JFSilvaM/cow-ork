@@ -1,0 +1,33 @@
+{
+  "name": "cow-ork",
+  "version": "0.1.0",
+  "description": "Portal donde publicar espacios de coworking, reservar y gestionar cada espacio",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon server.js",
+    "migrate": "node ./database/migrations.js"
+  },
+  "keywords": [
+    "coworking",
+    "booking",
+    "reservation"
+  ],
+  "authors": [
+    "Adrián Rey <adrianreylomba@gmail.com>",
+    "João Silva <joaofrsima2000@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

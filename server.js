@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
+const { handleError, notFound } = require("./middlewares");
 
 const { PORT } = process.env;
 const app = express();
@@ -13,6 +14,12 @@ try {
 
   // Rutas de la aplicación
   app.use("/api", require("./routes"));
+
+  // Manejo de rutas no encontradas
+  app.use(notFound);
+
+  // Manejo de errores
+  app.use(handleError);
 
   app.listen(PORT, () => {
     console.log(`🚀 Servidor inicializado en http://localhost:${PORT}`);

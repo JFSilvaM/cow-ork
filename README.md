@@ -71,10 +71,15 @@ npm run dev
 <strong>PUT</strong>    <em>/api/categories/:id</em>
 <strong>DELETE</strong> <em>/api/categories/:id</em>
 
-<strong>GET</strong>    <em>/api/sercices</em>
-<strong>POST</strong>   <em>/api/sercices</em>
-<strong>PUT</strong>    <em>/api/sercices/:id</em>
-<strong>DELETE</strong> <em>/api/sercices/:id</em>
+<strong>GET</strong>    <em>/api/services</em>
+<strong>POST</strong>   <em>/api/services</em>
+<strong>PUT</strong>    <em>/api/services/:id</em>
+<strong>DELETE</strong> <em>/api/services/:id</em>
+
+<strong>GET</strong>    <em>/api/space_types</em>
+<strong>POST</strong>   <em>/api/space_types</em>
+<strong>PUT</strong>    <em>/api/space_types/:id</em>
+<strong>DELETE</strong> <em>/api/space_types/:id</em>
 </pre>
 
 ## Autores

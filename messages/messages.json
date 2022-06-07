@@ -27,5 +27,19 @@
   "REPORT_CATEGORY_NOT_DELETED": "No se pudo eliminar la categoría",
   "REPORT_CATEGORY_NOT_UPDATED": "No se pudo actualizar la categoría",
   "REPORT_CATEGORY_NOT_CREATED": "No se pudo crear la categoría",
-  "REPORT_CATEGORY_NOT_FOUND": "No se encontró ninguna categoría"
+  "REPORT_CATEGORY_NOT_FOUND": "No se encontró ninguna categoría",
+  "REPORT_CREATED": "Reporte creado correctamente",
+  "REPORT_UPDATED": "Reporte actualizado correctamente",
+  "REPORT_DELETED": "Reporte eliminado correctamente",
+  "REPORT_NOT_DELETED": "No se pudo eliminar el reporte",
+  "REPORT_NOT_UPDATED": "No se pudo actualizar el reporte",
+  "REPORT_NOT_CREATED": "No se pudo crear el reporte",
+  "REPORT_NOT_FOUND": "No se encontró ningún reporte",
+  "REPORT_NOT_FOUND_BY_ID": "No se encontró el reporte especificado",
+  "USER_UPDATED": "Usuario actualizado correctamente",
+  "USER_DELETED": "Usuario eliminado correctamente",
+  "USER_NOT_DELETED": "No se pudo eliminar el usuario",
+  "USER_NOT_UPDATED": "No se pudo actualizar el usuario",
+  "USER_NOT_FOUND": "No se encontró ningún usuario",
+  "USER_NOT_FOUND_BY_ID": "No se encontró el usuario especificado"
 }

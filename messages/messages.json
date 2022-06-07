@@ -6,5 +6,12 @@
   "BOOKING_NOT_UPDATED": "No se pudo actualizar la reserva",
   "BOOKING_NOT_CREATED": "No se pudo crear la reserva",
   "BOOKING_NOT_FOUND": "No se encontró ninguna reserva",
-  "BOOKING_NOT_FOUND_BY_ID": "No se encontró la reserva especificada"
+  "BOOKING_NOT_FOUND_BY_ID": "No se encontró la reserva especificada",
+  "SPACE_TYPE_CREATED": "Tipo de espacio creado correctamente",
+  "SPACE_TYPE_UPDATED": "Tipo de espacio actualizado correctamente",
+  "SPACE_TYPE_DELETED": "Tipo de espacio eliminado correctamente",
+  "SPACE_TYPE_NOT_DELETED": "No se pudo eliminar el tipo de espacio",
+  "SPACE_TYPE_NOT_UPDATED": "No se pudo actualizar el tipo de espacio",
+  "SPACE_TYPE_NOT_CREATED": "No se pudo crear el tipo de espacio",
+  "SPACE_TYPE_NOT_FOUND": "No se encontró ningún tipo de espacio"
 }

@@ -67,10 +67,10 @@ npm run dev
 <strong>PUT</strong>    <em>/api/spaces/:id</em>
 <strong>DELETE</strong> <em>/api/spaces/:id</em>
 
-<strong>GET</strong>    <em>/api/categories</em>
-<strong>POST</strong>   <em>/api/categories</em>
-<strong>PUT</strong>    <em>/api/categories/:id</em>
-<strong>DELETE</strong> <em>/api/categories/:id</em>
+<strong>GET</strong>    <em>/api/report_categories</em>
+<strong>POST</strong>   <em>/api/report_categories</em>
+<strong>PUT</strong>    <em>/api/report_categories/:id</em>
+<strong>DELETE</strong> <em>/api/report_categories/:id</em>
 
 <strong>GET</strong>    <em>/api/services</em>
 <strong>POST</strong>   <em>/api/services</em>

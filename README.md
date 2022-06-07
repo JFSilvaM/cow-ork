@@ -32,9 +32,10 @@ npm run dev
 ### Accesibles por usuarios anónimos
 
 <pre>
-<strong>POST</strong>   <em>/api/login</em>
-<strong>POST</strong>   <em>/api/register</em>
-<strong>GET</strong>    <em>/api/users/activate/:activation_code</em>
+<strong>POST</strong>   <em>/api/auth/login</em>
+<strong>POST</strong>   <em>/api/auth/logout</em>
+<strong>POST</strong>   <em>/api/auth/register</em>
+<strong>PUT</strong>    <em>/api/users/activate/:activation_code</em>
 </pre>
 
 ### Accesibles por usuarios registrados y administradores

@@ -1,0 +1,10 @@
+{
+  "BOOKING_CREATED": "Reserva creada correctamente",
+  "BOOKING_UPDATED": "Reserva actualizada correctamente",
+  "BOOKING_DELETED": "Reserva eliminada correctamente",
+  "BOOKING_NOT_DELETED": "No se pudo eliminar la reserva",
+  "BOOKING_NOT_UPDATED": "No se pudo actualizar la reserva",
+  "BOOKING_NOT_CREATED": "No se pudo crear la reserva",
+  "BOOKING_NOT_FOUND": "No se encontró ninguna reserva",
+  "BOOKING_NOT_FOUND_BY_ID": "No se encontró la reserva especificada"
+}

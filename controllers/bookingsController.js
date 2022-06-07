@@ -6,13 +6,23 @@ const {
   updateBooking,
   removeBooking,
 } = require("../repositories/bookingsRepository");
+const {
+  BOOKING_NOT_FOUND,
+  BOOKING_NOT_FOUND_BY_ID,
+  BOOKING_NOT_CREATED,
+  BOOKING_NOT_UPDATED,
+  BOOKING_NOT_DELETED,
+  BOOKING_CREATED,
+  BOOKING_UPDATED,
+  BOOKING_DELETED,
+} = require("../messages/messages.json");
 
 const findAll = async (req, res, next) => {
   try {
     const data = await findAllBookings();
 
-    if (!data) {
-      generateError("No se encontraron reservas", 404);
+    if (data.length === 0) {
+      generateError(BOOKING_NOT_FOUND, 404);
     }
 
     res.json({ data });
@@ -26,7 +36,7 @@ const findOne = async (req, res, next) => {
     const data = await findOneBooking(req.params.id);
 
     if (!data) {
-      generateError("No se encontró la reserva", 404);
+      generateError(BOOKING_NOT_FOUND_BY_ID, 404);
     }
 
     res.json({ data });
@@ -41,12 +51,12 @@ const create = async (req, res, next) => {
     const insertId = await createBooking(req.body);
 
     if (!insertId) {
-      generateError("No se pudo crear la reserva", 500);
+      generateError(BOOKING_NOT_CREATED, 500);
     }
 
     const data = await findOneBooking(insertId);
 
-    res.json({ data });
+    res.json({ message: BOOKING_CREATED, data });
   } catch (error) {
     next(error);
   }
@@ -58,10 +68,10 @@ const update = async (req, res, next) => {
     const affectedRows = await updateBooking(req.body, req.params.id);
 
     if (!affectedRows) {
-      generateError("No se pudo actualizar la reserva", 500);
+      generateError(BOOKING_NOT_UPDATED, 500);
     }
 
-    res.json({ affectedRows });
+    res.json({ message: BOOKING_UPDATED });
   } catch (error) {
     next(error);
   }
@@ -72,10 +82,10 @@ const remove = async (req, res, next) => {
     const affectedRows = await removeBooking(req.params.id);
 
     if (!affectedRows) {
-      generateError("No se pudo eliminar la reserva", 500);
+      generateError(BOOKING_NOT_DELETED, 500);
     }
 
-    res.json({ affectedRows });
+    res.json({ message: BOOKING_DELETED });
   } catch (error) {
     next(error);
   }

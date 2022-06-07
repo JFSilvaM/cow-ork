@@ -13,5 +13,12 @@
   "SPACE_TYPE_NOT_DELETED": "No se pudo eliminar el tipo de espacio",
   "SPACE_TYPE_NOT_UPDATED": "No se pudo actualizar el tipo de espacio",
   "SPACE_TYPE_NOT_CREATED": "No se pudo crear el tipo de espacio",
-  "SPACE_TYPE_NOT_FOUND": "No se encontró ningún tipo de espacio"
+  "SPACE_TYPE_NOT_FOUND": "No se encontró ningún tipo de espacio",
+  "SERVICE_CREATED": "Servicio creado correctamente",
+  "SERVICE_UPDATED": "Servicio actualizado correctamente",
+  "SERVICE_DELETED": "Servicio eliminado correctamente",
+  "SERVICE_NOT_DELETED": "No se pudo eliminar el servicio",
+  "SERVICE_NOT_UPDATED": "No se pudo actualizar el servicio",
+  "SERVICE_NOT_CREATED": "No se pudo crear el servicio",
+  "SERVICE_NOT_FOUND": "No se encontró ningún servicio"
 }

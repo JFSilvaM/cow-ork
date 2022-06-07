@@ -11,7 +11,7 @@ const findAllSpaceTypes = async () => {
 const findOneSpaceType = async (id) => {
   const query = "SELECT * FROM space_types WHERE id = ?";
 
-  const [rows] = await pool.query(query, [id]);
+  const [[rows]] = await pool.query(query, [id]);
 
   return rows;
 };

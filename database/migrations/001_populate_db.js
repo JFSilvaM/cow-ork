@@ -34,7 +34,7 @@ const migrate = async () => {
     `);
 
     await pool.query(`
-        INSERT INTO categories (name) VALUES
+        INSERT INTO report_categories (name) VALUES
         ('Reformas'),
         ('Catástrofes naturales'),
         ('Inhabilitado'),

@@ -8,7 +8,7 @@ const migrate = async () => {
     await pool.query("DROP TABLE IF EXISTS space_services;");
     await pool.query("DROP TABLE IF EXISTS space_ratings;");
     await pool.query("DROP TABLE IF EXISTS reports;");
-    await pool.query("DROP TABLE IF EXISTS categories;");
+    await pool.query("DROP TABLE IF EXISTS report_categories;");
     await pool.query("DROP TABLE IF EXISTS bookings;");
     await pool.query("DROP TABLE IF EXISTS spaces;");
     await pool.query("DROP TABLE IF EXISTS space_types;");
@@ -40,7 +40,7 @@ const migrate = async () => {
     `);
 
     await pool.query(`
-        CREATE TABLE categories (
+        CREATE TABLE report_categories (
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL
         );
@@ -97,7 +97,7 @@ const migrate = async () => {
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY (space_id) REFERENCES spaces(id) ON DELETE CASCADE,
             FOREIGN KEY (user_id) REFERENCES users(id),
-            FOREIGN KEY (category_id) REFERENCES categories(id)
+            FOREIGN KEY (category_id) REFERENCES report_categories(id)
         );
     `);
 

@@ -11,9 +11,9 @@ const findAllServices = async () => {
 const findOneService = async (id) => {
   const query = "SELECT * FROM services WHERE id = ?";
 
-  const [[rows]] = await pool.query(query, [id]);
+  const [[row]] = await pool.query(query, [id]);
 
-  return rows;
+  return row;
 };
 
 const createService = async (service) => {

@@ -2,7 +2,7 @@ const pool = require("../database/getPool")();
 
 const findAllSpaces = async (queryParams) => {
   const query =
-    "SELECT sp.*, st.name as type_name, GROUP_CONCAT(se.name) AS service_name FROM spaces sp INNER JOIN space_types st ON sp.type_id = st.id INNER JOIN space_services ss ON sp.id = ss.space_id INNER JOIN services se ON ss.service_id = se.id WHERE sp.name LIKE ? AND sp.address LIKE ? AND sp.price BETWEEN ? AND ? AND st.name LIKE ? AND se.name LIKE ? GROUP BY sp.id";
+    "SELECT sp.*, st.name as type_name, JSON_ARRAYAGG(se.name) AS service_names FROM spaces sp INNER JOIN space_types st ON sp.type_id = st.id INNER JOIN space_services ss ON sp.id = ss.space_id INNER JOIN services se ON ss.service_id = se.id WHERE sp.name LIKE ? AND sp.address LIKE ? AND sp.price BETWEEN ? AND ? AND st.name LIKE ? AND se.name LIKE ? GROUP BY sp.id";
 
   const [rows] = await pool.query(query, [
     queryParams.name || "%",

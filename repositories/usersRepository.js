@@ -2,7 +2,7 @@ const pool = require("../database/getPool")();
 
 const findAllUsers = async () => {
   const query =
-    "SELECT first_name, last_name, email, bio, avatar, is_admin, is_active, created_at, updated_at FROM users";
+    "SELECT id, first_name, last_name, email, bio, avatar, is_admin, is_active, created_at, updated_at FROM users";
 
   const [rows] = await pool.query(query);
 
@@ -11,7 +11,7 @@ const findAllUsers = async () => {
 
 const findOneUser = async (id) => {
   const query =
-    "SELECT first_name, last_name, email, bio, avatar FROM users WHERE id = ?";
+    "SELECT id, first_name, last_name, email, bio, avatar FROM users WHERE id = ?";
 
   const [[row]] = await pool.query(query, [id]);
 
@@ -20,7 +20,7 @@ const findOneUser = async (id) => {
 
 const updateUser = async (user, id) => {
   const query =
-    "UPDATE users SET first_name = ?, last_name = ?, email = ?, hashed_password = ?,bio = ?, avatar = ? WHERE id = ?";
+    "UPDATE users SET first_name = ?, last_name = ?, email = ?, hashed_password = ?, bio = ?, avatar = ? WHERE id = ?";
 
   const [{ affectedRows }] = await pool.query(query, [
     user.first_name,

@@ -15,6 +15,7 @@ const {
   REPORT_CATEGORY_UPDATED,
   REPORT_CATEGORY_DELETED,
 } = require("../messages/messages.json");
+const { reportCategoryValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
@@ -32,16 +33,19 @@ const findAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const insertId = await createReportCategory(req.body);
+    const { error, value } = reportCategoryValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const insertId = await createReportCategory(value);
 
     if (!insertId) {
       generateError(REPORT_CATEGORY_NOT_CREATED, 500);
     }
 
-    const data = await findOneReportCategory(insertId);
-
-    res.json({ REPORT_CATEGORY_CREATED, data });
+    res.json({ REPORT_CATEGORY_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -49,8 +53,13 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const affectedRows = await updateReportCategory(req.body, req.params.id);
+    const { error, value } = reportCategoryValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const affectedRows = await updateReportCategory(value, req.params.id);
 
     if (!affectedRows) {
       generateError(REPORT_CATEGORY_NOT_UPDATED, 500);

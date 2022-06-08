@@ -13,6 +13,7 @@ const {
   USER_UPDATED,
   USER_DELETED,
 } = require("../messages/messages.json");
+const { userValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
@@ -44,8 +45,13 @@ const findOne = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const affectedRows = await updateUser(req.body, req.params.id);
+    const { error, value } = userValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const affectedRows = await updateUser(value, req.params.id);
 
     if (!affectedRows) {
       generateError(USER_NOT_UPDATED, 500);

@@ -7,6 +7,7 @@
   "BOOKING_NOT_CREATED": "No se pudo crear la reserva",
   "BOOKING_NOT_FOUND": "No se encontró ninguna reserva",
   "BOOKING_NOT_FOUND_BY_ID": "No se encontró la reserva especificada",
+
   "SPACE_TYPE_CREATED": "Tipo de espacio creado correctamente",
   "SPACE_TYPE_UPDATED": "Tipo de espacio actualizado correctamente",
   "SPACE_TYPE_DELETED": "Tipo de espacio eliminado correctamente",
@@ -14,6 +15,7 @@
   "SPACE_TYPE_NOT_UPDATED": "No se pudo actualizar el tipo de espacio",
   "SPACE_TYPE_NOT_CREATED": "No se pudo crear el tipo de espacio",
   "SPACE_TYPE_NOT_FOUND": "No se encontró ningún tipo de espacio",
+
   "SPACE_CREATED": "Espacio de coworking creado correctamente",
   "SPACE_UPDATED": "Espacio de coworking actualizado correctamente",
   "SPACE_DELETED": "Espacio de coworking eliminado correctamente",
@@ -22,6 +24,7 @@
   "SPACE_NOT_CREATED": "No se pudo crear el espacio de coworking",
   "SPACE_NOT_FOUND": "No se encontró ningún espacio de coworking",
   "SPACE_NOT_FOUND_BY_ID": "No se encontró el espacio de coworking especificado",
+
   "SERVICE_CREATED": "Servicio creado correctamente",
   "SERVICE_UPDATED": "Servicio actualizado correctamente",
   "SERVICE_DELETED": "Servicio eliminado correctamente",
@@ -29,6 +32,7 @@
   "SERVICE_NOT_UPDATED": "No se pudo actualizar el servicio",
   "SERVICE_NOT_CREATED": "No se pudo crear el servicio",
   "SERVICE_NOT_FOUND": "No se encontró ningún servicio",
+
   "REPORT_CATEGORY_CREATED": "Categoría creada correctamente",
   "REPORT_CATEGORY_UPDATED": "Categoría actualizada correctamente",
   "REPORT_CATEGORY_DELETED": "Categoría eliminada correctamente",
@@ -36,6 +40,7 @@
   "REPORT_CATEGORY_NOT_UPDATED": "No se pudo actualizar la categoría",
   "REPORT_CATEGORY_NOT_CREATED": "No se pudo crear la categoría",
   "REPORT_CATEGORY_NOT_FOUND": "No se encontró ninguna categoría",
+
   "REPORT_CREATED": "Reporte creado correctamente",
   "REPORT_UPDATED": "Reporte actualizado correctamente",
   "REPORT_DELETED": "Reporte eliminado correctamente",
@@ -44,10 +49,67 @@
   "REPORT_NOT_CREATED": "No se pudo crear el reporte",
   "REPORT_NOT_FOUND": "No se encontró ningún reporte",
   "REPORT_NOT_FOUND_BY_ID": "No se encontró el reporte especificado",
+
   "USER_UPDATED": "Usuario actualizado correctamente",
   "USER_DELETED": "Usuario eliminado correctamente",
   "USER_NOT_DELETED": "No se pudo eliminar el usuario",
   "USER_NOT_UPDATED": "No se pudo actualizar el usuario",
   "USER_NOT_FOUND": "No se encontró ningún usuario",
-  "USER_NOT_FOUND_BY_ID": "No se encontró el usuario especificado"
+  "USER_NOT_FOUND_BY_ID": "No se encontró el usuario especificado",
+
+  "BOOKING_START_DATE_REQUIRED": "La fecha de inicio de la reserva es requerida",
+  "BOOKING_END_DATE_REQUIRED": "La fecha de fin de la reserva es requerida",
+
+  "REPORT_CATEGORY_NAME_REQUIRED": "El nombre de la categoría es requerido",
+  "REPORT_CATEGORY_NAME_MIN_LENGTH": "El nombre de la categoría debe tener al menos 3 caracteres",
+  "REPORT_CATEGORY_NAME_MAX_LENGTH": "El nombre de la categoría debe tener como máximo 100 caracteres",
+
+  "REPORT_DESCRIPTION_REQUIRED": "La descripción del reporte es requerida",
+  "REPORT_DESCRIPTION_MIN_LENGTH": "La descripción del reporte debe tener al menos 3 caracteres",
+  "REPORT_DESCRIPTION_MAX_LENGTH": "La descripción del reporte debe tener como máximo 250 caracteres",
+  "REPORT_STATUS_REQUIRED": "El estado del reporte es requerido",
+  "REPORT_STATUS_VALID": "El estado del reporte debe ser el valor: 'PENDING', 'OPEN' o 'CLOSED'",
+
+  "SERVICE_NAME_REQUIRED": "El nombre del servicio es requerido",
+  "SERVICE_NAME_MIN_LENGTH": "El nombre del servicio debe tener al menos 3 caracteres",
+  "SERVICE_NAME_MAX_LENGTH": "El nombre del servicio debe tener como máximo 100 caracteres",
+
+  "SPACE_NAME_REQUIRED": "El nombre del espacio es requerido",
+  "SPACE_NAME_MIN_LENGTH": "El nombre del espacio debe tener al menos 3 caracteres",
+  "SPACE_NAME_MAX_LENGTH": "El nombre del espacio debe tener como máximo 100 caracteres",
+  "SPACE_DESCRIPTION_REQUIRED": "La descripción del espacio es requerida",
+  "SPACE_DESCRIPTION_MIN_LENGTH": "La descripción del espacio debe tener al menos 3 caracteres",
+  "SPACE_DESCRIPTION_MAX_LENGTH": "La descripción del espacio debe tener como máximo 250 caracteres",
+  "SPACE_ADDRESS_REQUIRED": "La dirección del espacio es requerida",
+  "SPACE_ADDRESS_MIN_LENGTH": "La dirección del espacio debe tener al menos 3 caracteres",
+  "SPACE_ADDRESS_MAX_LENGTH": "La dirección del espacio debe tener como máximo 250 caracteres",
+  "SPACE_PRICE_REQUIRED": "El precio del espacio es requerido",
+  "SPACE_PRICE_MIN_LENGTH": "El precio del espacio debe ser al menos 1€",
+  "SPACE_PRICE_MAX_LENGTH": "El precio del espacio debe ser como máximo 1000€",
+  "SPACE_CAPACITY_REQUIRED": "La capacidad del espacio es requerida",
+  "SPACE_CAPACITY_MIN_LENGTH": "La capacidad del espacio debe ser al menos 1",
+  "SPACE_IS_CLEAN_REQUIRED": "El campo de limpieza del espacio es requerido",
+  "SPACE_IS_CLEAN_VALID": "El campo de limpieza del espacio debe ser un valor booleano",
+  "SPACE_TYPE_ID_REQUIRED": "El id del tipo de espacio es requerido",
+  "SPACE_TYPE_ID_MIN_LENGTH": "El id del tipo de espacio debe tener al menos 1 caracter",
+
+  "SPACE_TYPE_NAME_REQUIRED": "El nombre del tipo de espacio es requerido",
+  "SPACE_TYPE_NAME_MIN_LENGTH": "El nombre del tipo de espacio debe tener al menos 3 caracteres",
+  "SPACE_TYPE_NAME_MAX_LENGTH": "El nombre del tipo de espacio debe tener como máximo 100 caracteres",
+
+  "USER_FIRST_NAME_REQUIRED": "El nombre es requerido",
+  "USER_FIRST_NAME_MIN_LENGTH": "El nombre debe tener al menos 3 caracteres",
+  "USER_FIRST_NAME_MAX_LENGTH": "El nombre debe tener como máximo 100 caracteres",
+  "USER_LAST_NAME_REQUIRED": "El apellido es requerido",
+  "USER_LAST_NAME_MIN_LENGTH": "El apellido debe tener al menos 3 caracteres",
+  "USER_LAST_NAME_MAX_LENGTH": "El apellido debe tener como máximo 100 caracteres",
+  "USER_EMAIL_REQUIRED": "El email es requerido",
+  "USER_EMAIL_MIN_LENGTH": "El email debe tener al menos 3 caracteres",
+  "USER_EMAIL_MAX_LENGTH": "El email debe tener como máximo 100 caracteres",
+  "USER_EMAIL_VALID": "El email debe tener un formato válido",
+  "USER_PASSWORD_REQUIRED": "La contraseña es requerida",
+  "USER_PASSWORD_MIN_LENGTH": "La contraseña debe tener al menos 3 caracteres",
+  "USER_PASSWORD_MAX_LENGTH": "La contraseña debe tener como máximo 100 caracteres",
+  "USER_PASSWORD_CONFIRMATION_REQUIRED": "La confirmación de la contraseña es requerida",
+  "USER_PASSWORD_CONFIRMATION_VALID": "La confirmación de la contraseña debe ser igual a la contraseña"
 }

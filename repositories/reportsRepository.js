@@ -2,7 +2,7 @@ const pool = require("../database/getPool")();
 
 const findAllReports = async () => {
   const query =
-    "SELECT ca.name categoryName, re.description, sp.name spaceName, re.status, us.first_name, us.last_name, us.email, re.created_at, re.updated_at FROM reports re INNER JOIN spaces sp ON re.space_id = sp.id INNER JOIN users us ON re.user_id = us.id INNER JOIN report_categories ca ON re.category_id = ca.id";
+    "SELECT re.id, ca.name category_name, re.description, sp.name space_name, re.status, us.first_name, us.last_name, us.email, re.created_at, re.updated_at FROM reports re INNER JOIN spaces sp ON re.space_id = sp.id INNER JOIN users us ON re.user_id = us.id INNER JOIN report_categories ca ON re.category_id = ca.id";
 
   const [rows] = await pool.query(query);
 
@@ -11,7 +11,7 @@ const findAllReports = async () => {
 
 const findOneReport = async (id) => {
   const query =
-    "SELECT ca.name categoryName, re.description, sp.name spaceName, re.status, us.first_name, us.last_name, us.email, re.created_at, re.updated_at FROM reports re INNER JOIN spaces sp ON re.space_id = sp.id INNER JOIN users us ON re.user_id = us.id INNER JOIN report_categories ca ON re.category_id = ca.id WHERE re.id = ?";
+    "SELECT re.id, ca.name category_name, re.description, sp.name space_name, re.status, us.first_name, us.last_name, us.email, re.created_at, re.updated_at FROM reports re INNER JOIN spaces sp ON re.space_id = sp.id INNER JOIN users us ON re.user_id = us.id INNER JOIN report_categories ca ON re.category_id = ca.id WHERE re.id = ?";
 
   const [[row]] = await pool.query(query, [id]);
 

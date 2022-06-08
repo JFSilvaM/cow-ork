@@ -16,6 +16,7 @@ const {
   BOOKING_UPDATED,
   BOOKING_DELETED,
 } = require("../messages/messages.json");
+const { bookingValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
@@ -47,16 +48,19 @@ const findOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const insertId = await createBooking(req.body);
+    const { error, value } = bookingValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const insertId = await createBooking(value);
 
     if (!insertId) {
       generateError(BOOKING_NOT_CREATED, 500);
     }
 
-    const data = await findOneBooking(insertId);
-
-    res.json({ message: BOOKING_CREATED, data });
+    res.json({ message: BOOKING_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -64,8 +68,13 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const affectedRows = await updateBooking(req.body, req.params.id);
+    const { error, value } = bookingValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const affectedRows = await updateBooking(value, req.params.id);
 
     if (!affectedRows) {
       generateError(BOOKING_NOT_UPDATED, 500);

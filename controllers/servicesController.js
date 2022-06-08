@@ -15,6 +15,7 @@ const {
   SERVICE_UPDATED,
   SERVICE_DELETED,
 } = require("../messages/messages.json");
+const { serviceValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
@@ -32,16 +33,19 @@ const findAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const insertId = await createService(req.body);
+    const { error, value } = serviceValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const insertId = await createService(value);
 
     if (!insertId) {
       generateError(SERVICE_NOT_CREATED, 500);
     }
 
-    const data = await findOneService(insertId);
-
-    res.json({ SERVICE_CREATED, data });
+    res.json({ SERVICE_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -49,8 +53,13 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const affectedRows = await updateService(req.body, req.params.id);
+    const { error, value } = serviceValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const affectedRows = await updateService(value, req.params.id);
 
     if (!affectedRows) {
       generateError(SERVICE_NOT_UPDATED, 500);

@@ -15,6 +15,7 @@ const {
   SPACE_TYPE_UPDATED,
   SPACE_TYPE_DELETED,
 } = require("../messages/messages.json");
+const { spaceTypeValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
@@ -32,16 +33,19 @@ const findAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const insertId = await createSpaceType(req.body);
+    const { error, value } = spaceTypeValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const insertId = await createSpaceType(value);
 
     if (!insertId) {
       generateError(SPACE_TYPE_NOT_CREATED, 500);
     }
 
-    const data = await findOneSpaceType(insertId);
-
-    res.json({ SPACE_TYPE_CREATED, data });
+    res.json({ SPACE_TYPE_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -49,8 +53,13 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    // TODO: Se necesita validar los datos
-    const affectedRows = await updateSpaceType(req.body, req.params.id);
+    const { error, value } = spaceTypeValidation(req.body);
+
+    if (error) {
+      generateError(error.details[0].message, 400);
+    }
+
+    const affectedRows = await updateSpaceType(value, req.params.id);
 
     if (!affectedRows) {
       generateError(SPACE_TYPE_NOT_UPDATED, 500);

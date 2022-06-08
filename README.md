@@ -1,6 +1,15 @@
 # cow-ork
 
-## Instalación
+- [cow-ork](#cow-ork)
+  - [Instalación y uso](#instalación-y-uso)
+  - [Endpoints](#endpoints)
+    - [Accesibles por todos los usuarios](#accesibles-por-todos-los-usuarios)
+    - [Accesibles por usuarios anónimos](#accesibles-por-usuarios-anónimos)
+    - [Accesibles por usuarios registrados y administradores](#accesibles-por-usuarios-registrados-y-administradores)
+    - [Accesibles por administradores](#accesibles-por-administradores)
+  - [Autores](#autores)
+
+## Instalación y uso
 
 Instalar las dependencias:
 
@@ -8,11 +17,40 @@ Instalar las dependencias:
 npm install
 ```
 
+Copiar el archivo `.env.example` y renombrarlo a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos.
+
+```
+PORT=3000
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=cow_ork
+DB_USER=root
+DB_PASSWORD=
+
+JWT_SECRET=SecretCowLevel
+```
+
 Inicializar la base de datos:
 
 ```bash
 npm run migrate
 ```
+
+Al ejecutar el comando `npm run migrate`, las migraciones crearán las tablas con información que se utilizó para testear la aplicación, todos los datos han sido generados de forma aleatoria. La lista de usuarios insertada es la siguiente:
+
+|              Correo              | Contraseña |      Rol      |
+| :------------------------------: | :--------: | :-----------: |
+|        admin@cow-ork.com         |   123456   | Administrador |
+|     fhunnisett1@archive.org      |   123456   |    Usuario    |
+|     bjefferson2@google.co.jp     |   123456   |    Usuario    |
+|        bhearty3@hc360.com        |   123456   |    Usuario    |
+| plambertazzi4@huffingtonpost.com |   123456   |    Usuario    |
+|        bphette5@narod.ru         |   123456   |    Usuario    |
+|         twiper6@fda.gov          |   123456   |    Usuario    |
+|      rstrickland7@wired.com      |   123456   |    Usuario    |
+| dmarwood8@nationalgeographic.com |   123456   |    Usuario    |
+|      athorndale9@nsw.gov.au      |   123456   |    Usuario    |
 
 Iniciar el servidor de desarrollo:
 

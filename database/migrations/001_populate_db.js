@@ -1,22 +1,25 @@
 require("dotenv").config();
+const bcrypt = require("bcrypt");
 const pool = require("../getPool")();
 
 const migrate = async () => {
   try {
     console.log("🔧 Importando datos...");
 
+    const hashedPassword = await bcrypt.hash("123456", 10);
+
     await pool.query(`
         INSERT INTO users (first_name, last_name, email, hashed_password, bio, is_admin, is_active, activation_code) VALUES
-        ('Hugibert', 'Sheather', 'admin@cowork.com', 'lOxDnsK', 'Low Dose Rate (LDR) Brachytherapy of Tongue using Iodine 125 (I-125)', 1, 1, ''),
-        ('Falito', 'Hunnisett', 'fhunnisett1@archive.org', 'c3zi6Fckyf', 'Repair Thoracolumbar Vertebral Disc, Open Approach', 0, 1, ''),
-        ('Bunny', 'Jefferson', 'bjefferson2@google.co.jp', 'EXz1LxcP97ni', 'Fusion of Left Knee Joint with Autologous Tissue Substitute, Percutaneous Endoscopic Approach', 0, 1, ''),
-        ('Bibbye', 'Hearty', 'bhearty3@hc360.com', 'DXtv3D1sffP', 'Reposition Pudendal Nerve, Open Approach', 0, 1, ''),
-        ('Percival', 'Lambertazzi', 'plambertazzi4@huffingtonpost.com', 'GsS7MMBH', 'Supplement Left Femoral Vein with Nonautologous Tissue Substitute, Open Approach', 0, 1, ''),
-        ('Beatrice', 'Phette', 'bphette5@narod.ru', '50tciOWcdh', 'Excision of Lung Lingula, Percutaneous Endoscopic Approach, Diagnostic', 0, 1, ''),
-        ('Tod', 'Wiper', 'twiper6@fda.gov', 'CmIhyFm4', 'Excision of Olfactory Nerve, Percutaneous Endoscopic Approach, Diagnostic', 0, 1, ''),
-        ('Renae', 'Strickland', 'rstrickland7@wired.com', 'qYy6gNCz5DPF', 'Bypass Right Common Iliac Artery to Bilateral Common Iliac Arteries with Synthetic Substitute, Percutaneous Endoscopic Approach', 0, 1, ''),
-        ('Donia', 'Marwood', 'dmarwood8@nationalgeographic.com', 'AXQ4qma', 'Supplement Right Sphenoid Bone with Synthetic Substitute, Percutaneous Approach', 0, 1, ''),
-        ('Alexio', 'Thorndale', 'athorndale9@nsw.gov.au', 'ny2l0mO6OrhY', 'Extirpation of Matter from Epidural Space, Open Approach', 0, 1, '');
+        ('Hugibert', 'Sheather', 'admin@cow-ork.com', '${hashedPassword}', 'Low Dose Rate (LDR) Brachytherapy of Tongue using Iodine 125 (I-125)', 1, 1, ''),
+        ('Falito', 'Hunnisett', 'cowboy@gmail.moo', '${hashedPassword}', 'Repair Thoracolumbar Vertebral Disc, Open Approach', 0, 1, ''),
+        ('Bunny', 'Jefferson', 'bjefferson2@google.co.jp', '${hashedPassword}', 'Fusion of Left Knee Joint with Autologous Tissue Substitute, Percutaneous Endoscopic Approach', 0, 1, ''),
+        ('Bibbye', 'Hearty', 'bhearty3@hc360.com', '${hashedPassword}', 'Reposition Pudendal Nerve, Open Approach', 0, 1, ''),
+        ('Percival', 'Lambertazzi', 'plambertazzi4@huffingtonpost.com', '${hashedPassword}', 'Supplement Left Femoral Vein with Nonautologous Tissue Substitute, Open Approach', 0, 1, ''),
+        ('Beatrice', 'Phette', 'bphette5@narod.ru', '${hashedPassword}', 'Excision of Lung Lingula, Percutaneous Endoscopic Approach, Diagnostic', 0, 1, ''),
+        ('Tod', 'Wiper', 'twiper6@fda.gov', '${hashedPassword}', 'Excision of Olfactory Nerve, Percutaneous Endoscopic Approach, Diagnostic', 0, 1, ''),
+        ('Renae', 'Strickland', 'rstrickland7@wired.com', '${hashedPassword}', 'Bypass Right Common Iliac Artery to Bilateral Common Iliac Arteries with Synthetic Substitute, Percutaneous Endoscopic Approach', 0, 1, ''),
+        ('Donia', 'Marwood', 'dmarwood8@nationalgeographic.com', '${hashedPassword}', 'Supplement Right Sphenoid Bone with Synthetic Substitute, Percutaneous Approach', 0, 1, ''),
+        ('Alexio', 'Thorndale', 'athorndale9@nsw.gov.au', '${hashedPassword}', 'Extirpation of Matter from Epidural Space, Open Approach', 0, 1, '');
     `);
 
     await pool.query(`

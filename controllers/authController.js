@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const Joi = require("joi");
 const { v4: uuidv4 } = require("uuid");
 const { generateError } = require("../lib");
 const { loginValidation, registerValidation } = require("../validations");
@@ -19,11 +18,8 @@ const login = async (req, res, next) => {
 
     const user = await findUserByEmail(value.email);
 
-    if (!user) {
-      generateError("Usuario o contraseña incorrectos", 401);
-    }
-
-    if (!user.is_active) {
+    // Generamos el mismo error tanto si no se encuentra al usuario como si no está activado
+    if (!user || !user.is_active) {
       generateError("El usuario necesita ser activado.", 400);
     }
 

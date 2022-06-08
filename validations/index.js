@@ -108,6 +108,7 @@ const spaceTypeValidation = (body) => {
   return schema.validate(body);
 };
 
+// TODO: Validar campos restantes para modificar el perfil
 const userValidation = (body) => {
   const schema = Joi.object({
     first_name: Joi.string().min(3).max(100).required().messages({
@@ -126,17 +127,71 @@ const userValidation = (body) => {
       "string.max": messages.EMAIL_MAX_LENGTH,
       "string.email": messages.EMAIL_VALID,
     }),
-    password: Joi.number().min(6).max(36).required().messages({
-      "number.empty": messages.PASSWORD_REQUIRED,
-      "number.min": messages.PASSWORD_MIN_LENGTH,
-      "number.max": messages.PASSWORD_MAX_LENGTH,
+    password: Joi.string().min(6).max(36).required().messages({
+      "string.empty": messages.PASSWORD_REQUIRED,
+      "string.min": messages.PASSWORD_MIN_LENGTH,
+      "string.max": messages.PASSWORD_MAX_LENGTH,
     }),
-    password_confirmation: Joi.number()
+    password_confirmation: Joi.string()
       .valid(Joi.ref("password"))
       .required()
       .messages({
-        "number.empty": messages.PASSWORD_CONFIRMATION_REQUIRED,
-        "number.valid": messages.PASSWORD_CONFIRMATION_VALID,
+        "string.empty": messages.PASSWORD_CONFIRMATION_REQUIRED,
+        "string.valid": messages.PASSWORD_CONFIRMATION_VALID,
+      }),
+  });
+
+  return schema.validate(body);
+};
+
+const loginValidation = (body) => {
+  const schema = Joi.object({
+    email: Joi.string().min(3).max(100).email().required().messages({
+      "string.empty": messages.EMAIL_REQUIRED,
+      "string.min": messages.EMAIL_MIN_LENGTH,
+      "string.max": messages.EMAIL_MAX_LENGTH,
+      "string.email": messages.EMAIL_VALID,
+    }),
+    password: Joi.string().min(6).max(36).required().messages({
+      "string.empty": messages.PASSWORD_REQUIRED,
+      "string.min": messages.PASSWORD_MIN_LENGTH,
+      "string.max": messages.PASSWORD_MAX_LENGTH,
+    }),
+  });
+
+  return schema.validate(body);
+};
+
+const registerValidation = (body) => {
+  const schema = Joi.object({
+    first_name: Joi.string().min(3).max(100).required().messages({
+      "string.empty": messages.FIRST_NAME_REQUIRED,
+      "string.min": messages.FIRST_NAME_MIN_LENGTH,
+      "string.max": messages.FIRST_NAME_MAX_LENGTH,
+    }),
+    last_name: Joi.string().min(3).max(100).required().messages({
+      "string.empty": messages.LAST_NAME_REQUIRED,
+      "string.min": messages.LAST_NAME_MIN_LENGTH,
+      "string.max": messages.LAST_NAME_MAX_LENGTH,
+    }),
+    email: Joi.string().min(3).max(100).email().required().messages({
+      "string.empty": messages.EMAIL_REQUIRED,
+      "string.min": messages.EMAIL_MIN_LENGTH,
+      "string.max": messages.EMAIL_MAX_LENGTH,
+      "string.email": messages.EMAIL_VALID,
+    }),
+    password: Joi.string().min(6).max(36).required().messages({
+      "string.empty": messages.PASSWORD_REQUIRED,
+      "string.min": messages.PASSWORD_MIN_LENGTH,
+      "string.max": messages.PASSWORD_MAX_LENGTH,
+    }),
+    // TODO: Falta traducir otros posibles mensajes de error
+    password_confirmation: Joi.string()
+      .valid(Joi.ref("password"))
+      .required()
+      .messages({
+        "string.empty": messages.PASSWORD_CONFIRMATION_REQUIRED,
+        "string.valid": messages.PASSWORD_CONFIRMATION_VALID,
       }),
   });
 
@@ -151,4 +206,6 @@ module.exports = {
   spaceValidation,
   spaceTypeValidation,
   userValidation,
+  loginValidation,
+  registerValidation,
 };

@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const reportCategoriesController = require("../controllers/reportCategoriesController");
+const { auth } = require("../middlewares");
 
 router
   .route("/")
-  .get(reportCategoriesController.findAll)
-  .post(reportCategoriesController.create);
+  .get(auth.isAdmin, reportCategoriesController.findAll)
+  .post(auth.isAdmin, reportCategoriesController.create);
 
 router
   .route("/:id")
-  .put(reportCategoriesController.update)
-  .delete(reportCategoriesController.remove);
+  .put(auth.isAdmin, reportCategoriesController.update)
+  .delete(auth.isAdmin, reportCategoriesController.remove);
 
 module.exports = router;

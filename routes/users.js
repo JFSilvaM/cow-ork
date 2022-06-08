@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const usersController = require("../controllers/usersController");
+const { auth } = require("../middlewares");
 
-router.route("/").get(usersController.findAll);
+router.route("/").get(auth.isLoggedIn, auth.isAdmin, usersController.findAll);
 
 router
   .route("/:id")
-  .get(usersController.findOne)
-  .put(usersController.update)
-  .delete(usersController.remove);
+  .get(auth.isLoggedIn, usersController.findOne)
+  .put(auth.isLoggedIn, usersController.update)
+  .delete(auth.isLoggedIn, auth.isAdmin, usersController.remove);
 
 module.exports = router;

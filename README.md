@@ -78,8 +78,6 @@ npm run dev
 ### Accesibles por usuarios registrados y administradores
 
 <pre>
-<strong>POST</strong>   <em>/api/auth/logout</em>
-
 <strong>GET</strong>    <em>/api/users/:id</em>
 <strong>PUT</strong>    <em>/api/users/:id</em>
 

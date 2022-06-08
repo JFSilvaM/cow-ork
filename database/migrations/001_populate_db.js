@@ -11,7 +11,7 @@ const migrate = async () => {
     await pool.query(`
         INSERT INTO users (first_name, last_name, email, hashed_password, bio, is_admin, is_active, activation_code) VALUES
         ('Hugibert', 'Sheather', 'admin@cow-ork.com', '${hashedPassword}', 'Low Dose Rate (LDR) Brachytherapy of Tongue using Iodine 125 (I-125)', 1, 1, ''),
-        ('Falito', 'Hunnisett', 'cowboy@gmail.moo', '${hashedPassword}', 'Repair Thoracolumbar Vertebral Disc, Open Approach', 0, 1, ''),
+        ('Falito', 'Hunnisett', 'fhunnisett1@archive.org', '${hashedPassword}', 'Repair Thoracolumbar Vertebral Disc, Open Approach', 0, 1, ''),
         ('Bunny', 'Jefferson', 'bjefferson2@google.co.jp', '${hashedPassword}', 'Fusion of Left Knee Joint with Autologous Tissue Substitute, Percutaneous Endoscopic Approach', 0, 1, ''),
         ('Bibbye', 'Hearty', 'bhearty3@hc360.com', '${hashedPassword}', 'Reposition Pudendal Nerve, Open Approach', 0, 1, ''),
         ('Percival', 'Lambertazzi', 'plambertazzi4@huffingtonpost.com', '${hashedPassword}', 'Supplement Left Femoral Vein with Nonautologous Tissue Substitute, Open Approach', 0, 1, ''),

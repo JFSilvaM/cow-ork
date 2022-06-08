@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const { generateError } = require("../lib");
 const { loginValidation, registerValidation } = require("../validations");
@@ -32,15 +33,19 @@ const login = async (req, res, next) => {
       generateError("Usuario o contraseña incorrectos", 401);
     }
 
-    res.json(user);
-  } catch (error) {
-    next(error);
-  }
-};
+    const tokenPayload = {
+      id: user.id,
+      is_admin: user.is_admin,
+    };
 
-const logout = async (req, res, next) => {
-  try {
-    res.send("logout");
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.json({
+      status: "success",
+      data: { token },
+    });
   } catch (error) {
     next(error);
   }
@@ -105,7 +110,6 @@ const activate = async (req, res, next) => {
 
 module.exports = {
   login,
-  logout,
   register,
   activate,
 };

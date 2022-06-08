@@ -23,7 +23,17 @@ const createUser = async (user) => {
   return insertId;
 };
 
+const updateUserActivation = async (activationCode) => {
+  const query =
+    "UPDATE users SET is_active = 1, activation_code = '' WHERE activation_code = ?";
+
+  const [{ affectedRows }] = await pool.query(query, [activationCode]);
+
+  return affectedRows;
+};
+
 module.exports = {
   findUserByEmail,
   createUser,
+  updateUserActivation,
 };

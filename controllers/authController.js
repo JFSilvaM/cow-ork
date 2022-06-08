@@ -6,6 +6,7 @@ const { loginValidation, registerValidation } = require("../validations");
 const {
   createUser,
   findUserByEmail,
+  updateUserActivation,
 } = require("../repositories/authRepository");
 
 const login = async (req, res, next) => {
@@ -53,8 +54,6 @@ const register = async (req, res, next) => {
   try {
     const { error, value } = registerValidation(req.body);
 
-    console.log(error);
-
     if (error) {
       generateError(error.details[0].message, 400);
     }
@@ -91,8 +90,26 @@ const register = async (req, res, next) => {
   }
 };
 
+const activate = async (req, res, next) => {
+  try {
+    const affectedRows = await updateUserActivation(req.params.activation_code);
+
+    if (!affectedRows) {
+      generateError("No se pudo activar el usuario", 500);
+    }
+
+    res.json({
+      status: "success",
+      message: "El usuario se activó correctamente",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   login,
   logout,
   register,
+  activate,
 };

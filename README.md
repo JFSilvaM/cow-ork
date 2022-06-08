@@ -33,14 +33,15 @@ npm run dev
 
 <pre>
 <strong>POST</strong>   <em>/api/auth/login</em>
-<strong>POST</strong>   <em>/api/auth/logout</em>
 <strong>POST</strong>   <em>/api/auth/register</em>
-<strong>PUT</strong>    <em>/api/users/activate/:activation_code</em>
+<strong>PUT</strong>    <em>/api/auth/activate/:activation_code</em>
 </pre>
 
 ### Accesibles por usuarios registrados y administradores
 
 <pre>
+<strong>POST</strong>   <em>/api/auth/logout</em>
+
 <strong>GET</strong>    <em>/api/users/:id</em>
 <strong>PUT</strong>    <em>/api/users/:id</em>
 

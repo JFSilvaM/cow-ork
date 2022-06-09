@@ -48,7 +48,7 @@ const findOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { error, value } = await reportValidation.validateAsync(req.body);
+    const { error, value } = reportValidation(req.body);
 
     if (error) {
       generateError(error.details[0].message, 400);
@@ -68,7 +68,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = await reportValidation.validateAsync(req.body);
+    const { error, value } = reportValidation(req.body);
 
     if (error) {
       generateError(error.details[0].message, 400);

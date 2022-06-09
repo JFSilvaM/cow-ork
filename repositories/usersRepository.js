@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const pool = require("../database/getPool")();
 
 const findAllUsers = async () => {
@@ -19,6 +20,8 @@ const findOneUser = async (id) => {
 };
 
 const updateUser = async (user, userId) => {
+  const hashedPassword = await bcrypt.hash(user.password, 10);
+
   const query =
     "UPDATE users SET first_name = ?, last_name = ?, email = ?, hashed_password = ?, bio = ?, avatar = ? WHERE id = ?";
 
@@ -26,9 +29,9 @@ const updateUser = async (user, userId) => {
     user.first_name,
     user.last_name,
     user.email,
-    user.hashed_password,
+    hashedPassword,
     user.bio,
-    user.avatar,
+    user.avatar || "default.png",
     userId,
   ]);
 

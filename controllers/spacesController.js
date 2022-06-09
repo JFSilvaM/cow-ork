@@ -17,6 +17,7 @@ const {
   SPACE_DELETED,
 } = require("../messages/messages.json");
 const { spaceValidation } = require("../validations");
+const { uploadFile } = require("../lib/uploadFile");
 
 const findAll = async (req, res, next) => {
   try {
@@ -54,6 +55,16 @@ const create = async (req, res, next) => {
       generateError(error.details[0].message, 400);
     }
 
+    if (req.files) {
+      const fileName = await uploadFile(
+        req.files.space_image,
+        req.auth.id,
+        "spaces"
+      );
+
+      value.image = fileName;
+    }
+
     const insertId = await createSpace(value);
 
     if (!insertId) {
@@ -72,6 +83,16 @@ const update = async (req, res, next) => {
 
     if (error) {
       generateError(error.details[0].message, 400);
+    }
+
+    if (req.files) {
+      const fileName = await uploadFile(
+        req.files.space_image,
+        req.auth.id,
+        "spaces"
+      );
+
+      value.image = fileName;
     }
 
     const affectedRows = await updateSpace(value, req.params.id);

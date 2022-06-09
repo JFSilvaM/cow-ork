@@ -27,12 +27,13 @@ const findOneSpace = async (id) => {
 
 const createSpace = async (space) => {
   const query =
-    "INSERT INTO spaces (name, description, address, price, capacity, is_clean, type_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO spaces (name, description, address, image, price, capacity, is_clean, type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
   const [{ insertId }] = await pool.query(query, [
     space.name,
     space.description,
     space.address,
+    space.image || "default.png",
     space.price,
     space.capacity,
     space.is_clean,
@@ -44,12 +45,13 @@ const createSpace = async (space) => {
 
 const updateSpace = async (space, id) => {
   const query =
-    "UPDATE spaces SET name = ?, description = ?, address = ?, price = ?, capacity = ?, is_clean = ?, type_id = ? WHERE id = ?";
+    "UPDATE spaces SET name = ?, description = ?, address = ?, image = ?, price = ?, capacity = ?, is_clean = ?, type_id = ? WHERE id = ?";
 
   const [{ affectedRows }] = await pool.query(query, [
     space.name,
     space.description,
     space.address,
+    space.image || "default.png",
     space.price,
     space.capacity,
     space.is_clean,

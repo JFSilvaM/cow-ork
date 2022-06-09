@@ -14,6 +14,7 @@ const {
   USER_DELETED,
 } = require("../messages/messages.json");
 const { userValidation } = require("../validations");
+const { uploadFile } = require("../lib/uploadFile");
 
 const findAll = async (req, res, next) => {
   try {
@@ -49,6 +50,15 @@ const update = async (req, res, next) => {
 
     if (error) {
       generateError(error.details[0].message, 400);
+    }
+
+    if (req.files) {
+      const fileName = await uploadFile(
+        req.files.avatar,
+        req.auth.id,
+        "avatars"
+      );
+      value.avatar = fileName;
     }
 
     const affectedRows = await updateUser(value, req.auth.id);

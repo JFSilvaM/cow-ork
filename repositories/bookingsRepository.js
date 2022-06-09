@@ -20,11 +20,11 @@ const findOneBooking = async (id, userId) => {
 
 const createBooking = async (booking, userId) => {
   const query =
-    "INSERT INTO bookings (user_id, space_id, start_date, end_date, is_paid) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO bookings (space_id, user_id, start_date, end_date, is_paid) VALUES (?, ?, ?, ?, ?)";
 
   const [{ insertId }] = await pool.query(query, [
-    userId,
     booking.space_id,
+    userId,
     booking.start_date,
     booking.end_date,
     booking.is_paid,

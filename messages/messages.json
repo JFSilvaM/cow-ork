@@ -1,4 +1,13 @@
 {
+  "USER_ACTIVATION": "El usuario necesita ser activado",
+  "USER_INVALID_CREDENTIALS": "Email o contraseña incorrectos",
+  "USER_EXISTS": "El usuario con ese correo ya existe",
+  "USER_CANNOT_BE_REGISTERED": "No se pudo crear el usuario",
+  "USER_REGISTERED": "Usuario registrado correctamente",
+  "USER_CANNOT_BE_ACTIVATED": "El usuario se activó correctamente",
+  "USER_ACTIVATED": "El usuario se activó correctamente",
+
+  "BOOKING_SPACE_ID_REQUIRED": "El id del espacio de la reserva es requerido",
   "BOOKING_CREATED": "Reserva creada correctamente",
   "BOOKING_UPDATED": "Reserva actualizada correctamente",
   "BOOKING_DELETED": "Reserva eliminada correctamente",
@@ -7,6 +16,7 @@
   "BOOKING_NOT_CREATED": "No se pudo crear la reserva",
   "BOOKING_NOT_FOUND": "No se encontró ninguna reserva",
   "BOOKING_NOT_FOUND_BY_ID": "No se encontró la reserva especificada",
+  "BOOKING_IS_PAID_REQUIRED": "El campo de pago es obligatorio",
 
   "SPACE_TYPE_CREATED": "Tipo de espacio creado correctamente",
   "SPACE_TYPE_UPDATED": "Tipo de espacio actualizado correctamente",
@@ -103,13 +113,17 @@
   "LAST_NAME_REQUIRED": "El apellido es requerido",
   "LAST_NAME_MIN_LENGTH": "El apellido debe tener al menos 3 caracteres",
   "LAST_NAME_MAX_LENGTH": "El apellido debe tener como máximo 100 caracteres",
+  "USER_BIO_REQUIRED": "La biografía es requerida",
+  "USER_BIO_MIN_LENGTH": "La biografía debe tener al menos 3 caracteres",
+  "USER_BIO_MAX_LENGTH": "La biografía debe tener como máximo 250 caracteres",
+  "USER_AVATAR_REQUIRED": "El avatar es requerido",
   "EMAIL_REQUIRED": "El email es requerido",
   "EMAIL_MIN_LENGTH": "El email debe tener al menos 3 caracteres",
   "EMAIL_MAX_LENGTH": "El email debe tener como máximo 100 caracteres",
   "EMAIL_VALID": "El email debe tener un formato válido",
   "PASSWORD_REQUIRED": "La contraseña es requerida",
   "PASSWORD_MIN_LENGTH": "La contraseña debe tener al menos 6 caracteres",
-  "PASSWORD_MAX_LENGTH": "La contraseña debe tener como máximo 100 caracteres",
+  "PASSWORD_MAX_LENGTH": "La contraseña debe tener como máximo 36 caracteres",
   "PASSWORD_CONFIRMATION_REQUIRED": "La confirmación de la contraseña es requerida",
   "PASSWORD_CONFIRMATION_VALID": "La confirmación de la contraseña debe ser igual a la contraseña"
 }

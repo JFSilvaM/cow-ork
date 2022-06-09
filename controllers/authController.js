@@ -8,6 +8,15 @@ const {
   findUserByEmail,
   updateUserActivation,
 } = require("../repositories/authRepository");
+const {
+  USER_ACTIVATION,
+  USER_INVALID_CREDENTIALS,
+  USER_EXISTS,
+  USER_CANNOT_BE_REGISTERED,
+  USER_REGISTERED,
+  USER_CANNOT_BE_ACTIVATED,
+  USER_ACTIVATED,
+} = require("../messages/messages.json");
 
 const login = async (req, res, next) => {
   try {
@@ -21,7 +30,7 @@ const login = async (req, res, next) => {
 
     // Generamos el mismo error tanto si no se encuentra al usuario como si no está activado
     if (!user || !user.is_active) {
-      generateError("El usuario necesita ser activado.", 400);
+      generateError(USER_ACTIVATION, 400);
     }
 
     const passwordMatch = await bcrypt.compare(
@@ -30,7 +39,7 @@ const login = async (req, res, next) => {
     );
 
     if (!passwordMatch) {
-      generateError("Usuario o contraseña incorrectos", 401);
+      generateError(USER_INVALID_CREDENTIALS, 401);
     }
 
     const tokenPayload = {
@@ -62,7 +71,7 @@ const register = async (req, res, next) => {
     const user = await findUserByEmail(value.email);
 
     if (user) {
-      generateError("El usuario con ese correo ya existe", 400);
+      generateError(USER_EXISTS, 400);
     }
 
     const hashedPassword = await bcrypt.hash(value.password, 10);
@@ -77,14 +86,14 @@ const register = async (req, res, next) => {
     });
 
     if (!newUser) {
-      generateError("No se pudo crear el usuario", 500);
+      generateError(USER_CANNOT_BE_REGISTERED, 500);
     }
 
     // TODO: Enviar un email con el código de activación
 
     res.json({
       status: "success",
-      message: "Usuario registrado correctamente",
+      message: USER_REGISTERED,
     });
   } catch (error) {
     next(error);
@@ -96,12 +105,12 @@ const activate = async (req, res, next) => {
     const affectedRows = await updateUserActivation(req.params.activation_code);
 
     if (!affectedRows) {
-      generateError("No se pudo activar el usuario", 500);
+      generateError(USER_CANNOT_BE_ACTIVATED, 500);
     }
 
     res.json({
       status: "success",
-      message: "El usuario se activó correctamente",
+      message: USER_ACTIVATED,
     });
   } catch (error) {
     next(error);

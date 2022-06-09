@@ -9,6 +9,7 @@ const {
   updateUserActivation,
 } = require("../repositories/authRepository");
 const {
+  ACCOUNT_ACTIVATION,
   USER_ACTIVATION,
   USER_INVALID_CREDENTIALS,
   USER_EXISTS,
@@ -94,9 +95,8 @@ const register = async (req, res, next) => {
       generateError(USER_CANNOT_BE_REGISTERED, 500);
     }
 
-    // TODO: Enviar un email con el código de activación
     await sendMail(
-      "Activación de cuenta",
+      ACCOUNT_ACTIVATION,
       templateContent({ value, activationCode }),
       "register"
     );
@@ -130,6 +130,7 @@ const activate = async (req, res, next) => {
 const templateContent = ({ value, activationCode }) => ({
   fullName: `${value.first_name} ${value.last_name}`,
   siteUrl: `${HOST}:${PORT}/api/auth/activate/${activationCode}`,
+  email: value.email,
 });
 
 module.exports = {

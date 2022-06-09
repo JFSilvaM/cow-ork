@@ -1,4 +1,6 @@
 {
+  "ACCOUNT_ACTIVATION": "Activación de cuenta",
+
   "USER_ACTIVATION": "El usuario necesita ser activado",
   "USER_INVALID_CREDENTIALS": "Email o contraseña incorrectos",
   "USER_EXISTS": "El usuario con ese correo ya existe",

@@ -18,7 +18,7 @@ const findOneUser = async (id) => {
   return row;
 };
 
-const updateUser = async (user, id) => {
+const updateUser = async (user, userId) => {
   const query =
     "UPDATE users SET first_name = ?, last_name = ?, email = ?, hashed_password = ?, bio = ?, avatar = ? WHERE id = ?";
 
@@ -29,7 +29,7 @@ const updateUser = async (user, id) => {
     user.hashed_password,
     user.bio,
     user.avatar,
-    id,
+    userId,
   ]);
 
   return affectedRows;

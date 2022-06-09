@@ -20,7 +20,7 @@ const { bookingValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
-    const data = await findAllBookings();
+    const data = await findAllBookings(req.auth.id);
 
     if (data.length === 0) {
       generateError(BOOKING_NOT_FOUND, 404);
@@ -34,7 +34,7 @@ const findAll = async (req, res, next) => {
 
 const findOne = async (req, res, next) => {
   try {
-    const data = await findOneBooking(req.params.id);
+    const data = await findOneBooking(req.params.id, req.auth.id);
 
     if (!data) {
       generateError(BOOKING_NOT_FOUND_BY_ID, 404);
@@ -54,7 +54,7 @@ const create = async (req, res, next) => {
       generateError(error.details[0].message, 400);
     }
 
-    const insertId = await createBooking(value);
+    const insertId = await createBooking(value, req.auth.id);
 
     if (!insertId) {
       generateError(BOOKING_NOT_CREATED, 500);
@@ -74,7 +74,7 @@ const update = async (req, res, next) => {
       generateError(error.details[0].message, 400);
     }
 
-    const affectedRows = await updateBooking(value, req.params.id);
+    const affectedRows = await updateBooking(value, req.params.id, req.auth.id);
 
     if (!affectedRows) {
       generateError(BOOKING_NOT_UPDATED, 500);
@@ -88,7 +88,7 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const affectedRows = await removeBooking(req.params.id);
+    const affectedRows = await removeBooking(req.params.id, req.auth.id);
 
     if (!affectedRows) {
       generateError(BOOKING_NOT_DELETED, 500);

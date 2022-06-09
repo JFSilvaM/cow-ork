@@ -1,7 +1,6 @@
 const { generateError } = require("../lib");
 const {
   findAllReportCategories,
-  findOneReportCategory,
   createReportCategory,
   updateReportCategory,
   removeReportCategory,

@@ -1,7 +1,6 @@
 const { generateError } = require("../lib");
 const {
   findAllServices,
-  findOneService,
   createService,
   updateService,
   removeService,

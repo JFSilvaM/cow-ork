@@ -1,7 +1,6 @@
 const { generateError } = require("../lib");
 const {
   findAllSpaceTypes,
-  findOneSpaceType,
   createSpaceType,
   updateSpaceType,
   removeSpaceType,

@@ -21,7 +21,7 @@ const isLoggedIn = (req, res, next) => {
     const [tokenType, token] = authorization?.split(" ") || [];
 
     if (tokenType !== "Bearer" || !token) {
-      generateError("Ingresa con tu cuenta para continuar", 400);
+      generateError("Ingresa con tu cuenta para continuar", 401);
     }
 
     req.auth = jwt.verify(token, JWT_SECRET);

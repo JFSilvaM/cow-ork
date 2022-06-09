@@ -20,7 +20,7 @@ const { reportValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
-    const data = await findAllReports();
+    const data = await findAllReports(req.auth.id);
 
     if (data.length === 0) {
       generateError(REPORT_NOT_FOUND, 404);
@@ -34,7 +34,7 @@ const findAll = async (req, res, next) => {
 
 const findOne = async (req, res, next) => {
   try {
-    const data = await findOneReport(req.params.id);
+    const data = await findOneReport(req.params.id, req.auth.id);
 
     if (!data) {
       generateError(REPORT_NOT_FOUND_BY_ID, 404);
@@ -48,13 +48,13 @@ const findOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { error, value } = reportValidation(req.body);
+    const { error, value } = await reportValidation.validateAsync(req.body);
 
     if (error) {
       generateError(error.details[0].message, 400);
     }
 
-    const insertId = await createReport(value);
+    const insertId = await createReport(value, req.auth.id);
 
     if (!insertId) {
       generateError(REPORT_NOT_CREATED, 500);
@@ -68,13 +68,13 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = reportValidation(req.body);
+    const { error, value } = await reportValidation.validateAsync(req.body);
 
     if (error) {
       generateError(error.details[0].message, 400);
     }
 
-    const affectedRows = await updateReport(value, req.params.id);
+    const affectedRows = await updateReport(value, req.params.id, req.auth.id);
 
     if (affectedRows === 0) {
       generateError(REPORT_NOT_UPDATED, 500);
@@ -88,7 +88,7 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const affectedRows = await removeReport(req.params.id);
+    const affectedRows = await removeReport(req.params.id, req.auth.id);
 
     if (affectedRows === 0) {
       generateError(REPORT_NOT_DELETED, 500);

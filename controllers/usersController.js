@@ -51,7 +51,7 @@ const update = async (req, res, next) => {
       generateError(error.details[0].message, 400);
     }
 
-    const affectedRows = await updateUser(value, req.params.id);
+    const affectedRows = await updateUser(value, req.auth.id);
 
     if (!affectedRows) {
       generateError(USER_NOT_UPDATED, 500);

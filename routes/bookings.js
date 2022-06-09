@@ -4,13 +4,13 @@ const { auth } = require("../middlewares");
 
 router
   .route("/")
-  .get(auth.isLoggedIn, auth.isAdmin, bookingsController.findAll)
-  .post(auth.isLoggedIn, auth.isAdmin, bookingsController.create);
+  .get(auth.isLoggedIn, bookingsController.findAll)
+  .post(auth.isLoggedIn, bookingsController.create);
 
 router
   .route("/:id")
-  .get(auth.isLoggedIn, auth.isAdmin, bookingsController.findOne)
-  .put(auth.isLoggedIn, auth.isAdmin, bookingsController.update)
-  .delete(auth.isLoggedIn, auth.isAdmin, bookingsController.remove);
+  .get(auth.isLoggedIn, bookingsController.findOne)
+  .put(auth.isLoggedIn, bookingsController.update)
+  .delete(auth.isLoggedIn, bookingsController.remove);
 
 module.exports = router;

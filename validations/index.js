@@ -4,9 +4,11 @@ const messages = require("../messages/messages.json");
 const bookingValidation = (body) => {
   const schema = Joi.object({
     space_id: Joi.number().min(1).required().messages({
-      "number.empty": messages.BOOKING_SPACE_ID_REQUIRED,
-      "any.required": messages.BOOKING_SPACE_ID_REQUIRED,
+      "number.empty": messages.SPACE_ID_REQUIRED,
+      "any.required": messages.SPACE_ID_REQUIRED,
+      "number.min": messages.SPACE_ID_MIN_LENGTH,
     }),
+    // TODO: validate dates
     start_date: Joi.date().required().messages({
       "date.empty": messages.BOOKING_START_DATE_REQUIRED,
       "any.required": messages.BOOKING_START_DATE_REQUIRED,
@@ -16,8 +18,8 @@ const bookingValidation = (body) => {
       "any.required": messages.BOOKING_END_DATE_REQUIRED,
     }),
     is_paid: Joi.number().valid(0, 1).required().messages({
-      "boolean.empty": messages.BOOKING_IS_PAID_REQUIRED,
       "any.required": messages.BOOKING_IS_PAID_REQUIRED,
+      "any.only": messages.BOOKING_IS_PAID_VALID,
     }),
   });
 
@@ -39,6 +41,16 @@ const reportCategoryValidation = (body) => {
 
 const reportValidation = (body) => {
   const schema = Joi.object({
+    space_id: Joi.number().min(1).required().messages({
+      "number.empty": messages.SPACE_ID_REQUIRED,
+      "any.required": messages.SPACE_ID_REQUIRED,
+      "number.min": messages.SPACE_ID_MIN_LENGTH,
+    }),
+    category_id: Joi.number().min(1).required().messages({
+      "number.empty": messages.CATEGORY_ID_REQUIRED,
+      "any.required": messages.CATEGORY_ID_REQUIRED,
+      "number.min": messages.CATEGORY_ID_MIN_LENGTH,
+    }),
     description: Joi.string().min(3).max(250).required().messages({
       "string.empty": messages.REPORT_DESCRIPTION_REQUIRED,
       "any.required": messages.REPORT_DESCRIPTION_REQUIRED,
@@ -49,9 +61,8 @@ const reportValidation = (body) => {
       .valid("PENDING", "OPEN", "CLOSED")
       .required()
       .messages({
-        "string.empty": messages.REPORT_STATUS_REQUIRED,
         "any.required": messages.REPORT_STATUS_REQUIRED,
-        "string.valid": messages.REPORT_STATUS_VALID,
+        "any.only": messages.REPORT_STATUS_VALID,
       }),
   });
 
@@ -103,14 +114,13 @@ const spaceValidation = (body) => {
       "number.min": messages.SPACE_CAPACITY_MIN_LENGTH,
     }),
     is_clean: Joi.number().required().valid(0, 1).messages({
-      "number.empty": messages.SPACE_IS_CLEAN_REQUIRED,
       "any.required": messages.SPACE_IS_CLEAN_REQUIRED,
-      "number.valid": messages.SPACE_IS_CLEAN_VALID,
+      "any.only": messages.SPACE_IS_CLEAN_VALID,
     }),
     type_id: Joi.number().min(1).required().messages({
-      "number.empty": messages.SPACE_TYPE_ID_REQUIRED,
-      "any.required": messages.SPACE_TYPE_ID_REQUIRED,
-      "number.min": messages.SPACE_TYPE_ID_MIN_LENGTH,
+      "number.empty": messages.TYPE_ID_REQUIRED,
+      "any.required": messages.TYPE_ID_REQUIRED,
+      "number.min": messages.TYPE_ID_MIN_LENGTH,
     }),
   });
 

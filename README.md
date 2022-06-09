@@ -17,9 +17,10 @@ Instalar las dependencias:
 npm install
 ```
 
-Copiar el archivo `.env.example` y renombrarlo a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos.
+Copiar el archivo `.env.example` y renombrarlo a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos, adicionalmente, será necesaria una cuenta en [Mailjet](https://www.mailjet.com/), y ajustar las variables de entorno según correspondan.
 
 ```
+HOST=localhost
 PORT=3000
 
 DB_HOST=localhost
@@ -29,6 +30,11 @@ DB_USER=root
 DB_PASSWORD=
 
 JWT_SECRET=SecretCowLevel
+
+MAILJET_API_KEY=
+MAILJET_API_SECRET=
+MAILJET_SENDER_NAME=Admin
+MAILJET_SENDER_EMAIL=admin@cow-ork.com
 ```
 
 Inicializar la base de datos:
@@ -72,7 +78,7 @@ npm run dev
 <pre>
 <strong>POST</strong>   <em>/api/auth/login</em>
 <strong>POST</strong>   <em>/api/auth/register</em>
-<strong>PUT</strong>    <em>/api/auth/activate/:activation_code</em>
+<strong>GET</strong>    <em>/api/auth/activate/:activation_code</em>
 </pre>
 
 ### Accesibles por usuarios registrados y administradores

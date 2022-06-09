@@ -17,6 +17,9 @@ const {
   USER_CANNOT_BE_ACTIVATED,
   USER_ACTIVATED,
 } = require("../messages/messages.json");
+const sendMail = require("../lib/sendMail");
+
+const { HOST, PORT } = process.env;
 
 const login = async (req, res, next) => {
   try {
@@ -77,12 +80,14 @@ const register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(value.password, 10);
 
     // TODO: Las posibilidades de que los UUIDS colisionen son muy bajas, pero sería ideal asegurarse de que no se repitan
+    const activationCode = uuidv4();
+
     const newUser = await createUser({
       firstName: value.first_name,
       lastName: value.last_name,
       email: value.email,
       hashedPassword,
-      activationCode: uuidv4(),
+      activationCode,
     });
 
     if (!newUser) {
@@ -90,6 +95,11 @@ const register = async (req, res, next) => {
     }
 
     // TODO: Enviar un email con el código de activación
+    await sendMail(
+      "Activación de cuenta",
+      templateContent({ value, activationCode }),
+      "register"
+    );
 
     res.json({
       status: "success",
@@ -116,6 +126,11 @@ const activate = async (req, res, next) => {
     next(error);
   }
 };
+
+const templateContent = ({ value, activationCode }) => ({
+  fullName: `${value.first_name} ${value.last_name}`,
+  siteUrl: `${HOST}:${PORT}/api/auth/activate/${activationCode}`,
+});
 
 module.exports = {
   login,

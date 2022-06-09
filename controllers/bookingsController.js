@@ -17,6 +17,7 @@ const {
   BOOKING_DELETED,
 } = require("../messages/messages.json");
 const { bookingValidation } = require("../validations");
+const sendMail = require("../lib/sendMail");
 
 const findAll = async (req, res, next) => {
   try {
@@ -55,10 +56,14 @@ const create = async (req, res, next) => {
     }
 
     const insertId = await createBooking(value, req.auth.id);
-    console.log(insertId);
+
     if (!insertId) {
       generateError(BOOKING_NOT_CREATED, 500);
     }
+
+    const data = await findOneBooking(insertId, req.auth.id);
+
+    await sendMail(BOOKING_CREATED, templateContent(data), "booking");
 
     res.json({ message: BOOKING_CREATED, data: value });
   } catch (error) {
@@ -80,6 +85,10 @@ const update = async (req, res, next) => {
       generateError(BOOKING_NOT_UPDATED, 500);
     }
 
+    const data = await findOneBooking(req.params.id, req.auth.id);
+
+    await sendMail(BOOKING_UPDATED, templateContent(data), "booking");
+
     res.json({ message: BOOKING_UPDATED });
   } catch (error) {
     next(error);
@@ -99,6 +108,16 @@ const remove = async (req, res, next) => {
     next(error);
   }
 };
+
+const templateContent = (data) => ({
+  fullName: data.first_name + " " + data.last_name,
+  email: data.email,
+  spaceName: data.name,
+  spaceAddress: data.address,
+  price: data.price,
+  startDate: new Date(data.start_date).toLocaleString(),
+  endDate: new Date(data.end_date).toLocaleString(),
+});
 
 module.exports = {
   findAll,

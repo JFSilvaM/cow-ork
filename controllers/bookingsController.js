@@ -55,7 +55,7 @@ const create = async (req, res, next) => {
     }
 
     const insertId = await createBooking(value, req.auth.id);
-
+    console.log(insertId);
     if (!insertId) {
       generateError(BOOKING_NOT_CREATED, 500);
     }

@@ -2,7 +2,7 @@ const pool = require("../database/getPool")();
 
 const findAllSpaces = async (queryParams) => {
   const query =
-    "SELECT sp.*, st.name as type_name, JSON_ARRAYAGG(se.name) AS service_names FROM spaces sp INNER JOIN space_types st ON sp.type_id = st.id INNER JOIN space_services ss ON sp.id = ss.space_id INNER JOIN services se ON ss.service_id = se.id WHERE sp.name LIKE ? AND sp.address LIKE ? AND sp.price BETWEEN ? AND ? AND st.name LIKE ? AND se.name LIKE ? GROUP BY sp.id";
+    "SELECT sp.*, st.name as type_name, JSON_ARRAYAGG(se.name) AS service_names, ROUND(AVG(sr.rating), 0) AS rating FROM spaces sp INNER JOIN space_types st ON sp.type_id = st.id INNER JOIN space_services ss ON sp.id = ss.space_id INNER JOIN services se ON ss.service_id = se.id INNER JOIN space_ratings sr ON sp.id = sr.space_id WHERE sp.name LIKE ? AND sp.address LIKE ? AND sp.price BETWEEN ? AND ? AND st.name LIKE ? AND se.name LIKE ? GROUP BY sp.id";
 
   const [rows] = await pool.query(query, [
     queryParams.name || "%",
@@ -18,7 +18,7 @@ const findAllSpaces = async (queryParams) => {
 
 const findOneSpace = async (id) => {
   const query =
-    "SELECT sp.*, st.name AS type_name FROM spaces sp INNER JOIN space_types st ON sp.type_id = st.id WHERE sp.id = ?";
+    "SELECT sp.*, st.name AS type_name, ROUND(AVG(sr.rating), 0) AS rating FROM spaces sp INNER JOIN space_types st ON sp.type_id = st.id INNER JOIN space_ratings sr ON sp.id = sr.space_id WHERE sp.id = ?";
 
   const [[row]] = await pool.query(query, [id]);
 

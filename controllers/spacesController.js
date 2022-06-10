@@ -49,11 +49,7 @@ const findOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { error, value } = spaceValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await spaceValidation(req.body);
 
     if (req.files) {
       const fileName = await uploadFile(
@@ -79,11 +75,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = spaceValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await spaceValidation(req.body);
 
     if (req.files) {
       const fileName = await uploadFile(

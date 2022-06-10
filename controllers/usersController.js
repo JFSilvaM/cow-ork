@@ -46,11 +46,7 @@ const findOne = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = userValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await userValidation(req.body);
 
     if (req.files) {
       const fileName = await uploadFile(

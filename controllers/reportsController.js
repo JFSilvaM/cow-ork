@@ -48,11 +48,7 @@ const findOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { error, value } = reportValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await reportValidation(req.body);
 
     const insertId = await createReport(value, req.auth.id);
 
@@ -68,11 +64,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = reportValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await reportValidation(req.body);
 
     const affectedRows = await updateReport(value, req.params.id, req.auth.id);
 

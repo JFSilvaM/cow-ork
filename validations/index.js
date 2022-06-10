@@ -1,32 +1,38 @@
 const Joi = require("joi");
 const messages = require("../messages/messages.json");
 
-const bookingValidation = (body) => {
+const bookingValidation = async (body) => {
   const schema = Joi.object({
     space_id: Joi.number().min(1).required().messages({
       "number.empty": messages.SPACE_ID_REQUIRED,
       "any.required": messages.SPACE_ID_REQUIRED,
       "number.min": messages.SPACE_ID_MIN_LENGTH,
     }),
-    // TODO: validate dates
-    start_date: Joi.date().required().messages({
+    start_date: Joi.date().iso().required().messages({
       "date.empty": messages.BOOKING_START_DATE_REQUIRED,
+      "date.format": messages.BOOKING_DATE_FORMAT,
       "any.required": messages.BOOKING_START_DATE_REQUIRED,
     }),
-    end_date: Joi.date().required().messages({
-      "date.empty": messages.BOOKING_END_DATE_REQUIRED,
-      "any.required": messages.BOOKING_END_DATE_REQUIRED,
-    }),
+    end_date: Joi.date()
+      .iso()
+      .greater(Joi.ref("start_date"))
+      .required()
+      .messages({
+        "date.empty": messages.BOOKING_END_DATE_REQUIRED,
+        "date.format": messages.BOOKING_DATE_FORMAT,
+        "date.greater": messages.BOOKING_END_DATE_GREATER,
+        "any.required": messages.BOOKING_END_DATE_REQUIRED,
+      }),
     is_paid: Joi.number().valid(0, 1).required().messages({
       "any.required": messages.BOOKING_IS_PAID_REQUIRED,
       "any.only": messages.BOOKING_IS_PAID_VALID,
     }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const reportCategoryValidation = (body) => {
+const reportCategoryValidation = async (body) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.REPORT_CATEGORY_NAME_REQUIRED,
@@ -36,10 +42,10 @@ const reportCategoryValidation = (body) => {
     }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const reportValidation = (body) => {
+const reportValidation = async (body) => {
   const schema = Joi.object({
     space_id: Joi.number().min(1).required().messages({
       "number.empty": messages.SPACE_ID_REQUIRED,
@@ -66,10 +72,10 @@ const reportValidation = (body) => {
       }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const serviceValidation = (body) => {
+const serviceValidation = async (body) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.SERVICE_NAME_REQUIRED,
@@ -79,10 +85,10 @@ const serviceValidation = (body) => {
     }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const spaceValidation = (body) => {
+const spaceValidation = async (body) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.SPACE_NAME_REQUIRED,
@@ -124,10 +130,10 @@ const spaceValidation = (body) => {
     }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const spaceTypeValidation = (body) => {
+const spaceTypeValidation = async (body) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.SPACE_TYPE_NAME_REQUIRED,
@@ -137,10 +143,10 @@ const spaceTypeValidation = (body) => {
     }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const userValidation = (body) => {
+const userValidation = async (body) => {
   const schema = Joi.object({
     first_name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.FIRST_NAME_REQUIRED,
@@ -187,10 +193,10 @@ const userValidation = (body) => {
       }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const loginValidation = (body) => {
+const loginValidation = async (body) => {
   const schema = Joi.object({
     email: Joi.string().min(3).max(100).email().required().messages({
       "string.empty": messages.EMAIL_REQUIRED,
@@ -207,10 +213,10 @@ const loginValidation = (body) => {
     }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
-const registerValidation = (body) => {
+const registerValidation = async (body) => {
   const schema = Joi.object({
     first_name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.FIRST_NAME_REQUIRED,
@@ -246,7 +252,7 @@ const registerValidation = (body) => {
       }),
   });
 
-  return schema.validate(body);
+  return await schema.validateAsync(body);
 };
 
 module.exports = {

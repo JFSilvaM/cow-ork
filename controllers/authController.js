@@ -24,11 +24,7 @@ const { HOST, PORT } = process.env;
 
 const login = async (req, res, next) => {
   try {
-    const { error, value } = loginValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await loginValidation(req.body);
 
     const user = await findUserByEmail(value.email);
 
@@ -66,11 +62,7 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { error, value } = registerValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await registerValidation(req.body);
 
     const user = await findUserByEmail(value.email);
 

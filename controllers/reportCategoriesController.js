@@ -32,11 +32,7 @@ const findAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { error, value } = reportCategoryValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await reportCategoryValidation(req.body);
 
     const insertId = await createReportCategory(value);
 
@@ -52,11 +48,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = reportCategoryValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await reportCategoryValidation(req.body);
 
     const affectedRows = await updateReportCategory(value, req.params.id);
 

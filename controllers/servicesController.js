@@ -32,11 +32,7 @@ const findAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { error, value } = serviceValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await serviceValidation(req.body);
 
     const insertId = await createService(value);
 
@@ -52,11 +48,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { error, value } = serviceValidation(req.body);
-
-    if (error) {
-      generateError(error.details[0].message, 400);
-    }
+    const value = await serviceValidation(req.body);
 
     const affectedRows = await updateService(value, req.params.id);
 

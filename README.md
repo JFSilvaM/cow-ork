@@ -7,6 +7,7 @@
     - [Accesibles por usuarios anónimos](#accesibles-por-usuarios-anónimos)
     - [Accesibles por usuarios registrados y administradores](#accesibles-por-usuarios-registrados-y-administradores)
     - [Accesibles por administradores](#accesibles-por-administradores)
+  - [Estructura de la base de datos](#estructura-de-la-base-de-datos)
   - [Autores](#autores)
 
 ## Instalación y uso
@@ -125,6 +126,10 @@ npm run dev
 <strong>PUT</strong>    <em>/api/space_types/:id</em>
 <strong>DELETE</strong> <em>/api/space_types/:id</em>
 </pre>
+
+## Estructura de la base de datos
+
+![DB_Structure](/docs/cow-ork_db.png)
 
 ## Autores
 

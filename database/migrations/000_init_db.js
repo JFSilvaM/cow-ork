@@ -116,7 +116,7 @@ const migrate = async () => {
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             space_id INT NOT NULL,
             user_id INT NOT NULL,
-            rating INT NOT NULL,
+            rating INT NOT NULL DEFAULT 0,
             FOREIGN KEY (space_id) REFERENCES spaces(id) ON DELETE CASCADE,
             FOREIGN KEY (user_id) REFERENCES users(id)
         );

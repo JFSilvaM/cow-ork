@@ -67,8 +67,10 @@
   "USER_NOT_FOUND": "No se encontró ningún usuario",
   "USER_NOT_FOUND_BY_ID": "No se encontró el usuario especificado",
 
+  "BOOKING_DATE_NOT_AVAILABLE": "La fecha seleccionada no está disponible",
   "BOOKING_DATE_FORMAT": "Formato de fecha no válido",
   "BOOKING_START_DATE_REQUIRED": "La fecha de inicio de la reserva es requerida",
+  "BOOKING_START_DATE_GREATER": "La fecha de inicio de la reserva debe ser mayor a la fecha actual",
   "BOOKING_END_DATE_REQUIRED": "La fecha de fin de la reserva es requerida",
   "BOOKING_END_DATE_GREATER": "La fecha de fin debe ser mayor a la fecha de inicio",
   "BOOKING_IS_PAID_REQUIRED": "El campo de pago es obligatorio",

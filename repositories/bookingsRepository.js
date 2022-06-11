@@ -55,10 +55,26 @@ const removeBooking = async (id, userId) => {
   return affectedRows;
 };
 
+const validateBooking = async (booking) => {
+  const query =
+    "SELECT id FROM bookings WHERE space_id = ? AND (start_date BETWEEN ? AND ? OR end_date BETWEEN ? AND ?)";
+
+  const [[row]] = await pool.query(query, [
+    booking.space_id,
+    booking.start_date,
+    booking.end_date,
+    booking.start_date,
+    booking.end_date,
+  ]);
+
+  return row;
+};
+
 module.exports = {
   findAllBookings,
   findOneBooking,
   createBooking,
   updateBooking,
   removeBooking,
+  validateBooking,
 };

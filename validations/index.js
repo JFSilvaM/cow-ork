@@ -8,9 +8,10 @@ const bookingValidation = async (body) => {
       "any.required": messages.SPACE_ID_REQUIRED,
       "number.min": messages.SPACE_ID_MIN_LENGTH,
     }),
-    start_date: Joi.date().iso().required().messages({
+    start_date: Joi.date().iso().required().greater("now").messages({
       "date.empty": messages.BOOKING_START_DATE_REQUIRED,
       "date.format": messages.BOOKING_DATE_FORMAT,
+      "date.greater": messages.BOOKING_START_DATE_GREATER,
       "any.required": messages.BOOKING_START_DATE_REQUIRED,
     }),
     end_date: Joi.date()

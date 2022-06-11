@@ -1,12 +1,17 @@
 const jwt = require("jsonwebtoken");
 const { generateError } = require("../lib");
+const {
+  ACCOUNT_NOT_AUTHORIZED,
+  ACCOUNT_LOGIN,
+  ACCOUNT_ALREADY_LOGGED_IN,
+} = require("../messages/messages");
 
 const { JWT_SECRET } = process.env;
 
 const isAdmin = (req, res, next) => {
   try {
     if (!req.auth.is_admin) {
-      generateError("No tienes permisos para realizar esta acción", 403);
+      generateError(ACCOUNT_NOT_AUTHORIZED, 403);
     }
 
     next();
@@ -21,7 +26,7 @@ const isLoggedIn = (req, res, next) => {
     const [tokenType, token] = authorization?.split(" ") || [];
 
     if (tokenType !== "Bearer" || !token) {
-      generateError("Ingresa con tu cuenta para continuar", 401);
+      generateError(ACCOUNT_LOGIN, 401);
     }
 
     req.auth = jwt.verify(token, JWT_SECRET);
@@ -38,7 +43,7 @@ const isGuest = (req, res, next) => {
     const [tokenType, token] = authorization?.split(" ") || [];
 
     if (tokenType === "Bearer" && token) {
-      generateError("Ya estás ingresado en tu cuenta", 403);
+      generateError(ACCOUNT_ALREADY_LOGGED_IN, 403);
     }
 
     next();

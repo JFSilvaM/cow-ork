@@ -1,5 +1,11 @@
 {
   "ACCOUNT_ACTIVATION": "Activación de cuenta",
+  "ACCOUNT_LOGIN": "Ingresa con tu cuenta para continuar",
+  "ACCOUNT_ALREADY_LOGGED_IN": "Ya estás ingresado en tu cuenta",
+  "ACCOUNT_NOT_AUTHORIZED": "No tienes permisos para realizar esta acción",
+
+  "UPLOAD_SIZE_LIMIT_REACHED": "El tamaño máximo de archivo es de 2MB",
+  "UPLOAD_EXTENSION_NOT_ALLOWED": "Extensión de archivo no válida, solo se acepta .jpg, .jpeg o .png",
 
   "USER_ACTIVATION": "El usuario necesita ser activado",
   "USER_INVALID_CREDENTIALS": "Email o contraseña incorrectos",

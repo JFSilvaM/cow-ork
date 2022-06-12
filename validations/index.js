@@ -109,6 +109,9 @@ const spaceValidation = async (body) => {
       "string.min": messages.SPACE_ADDRESS_MIN_LENGTH,
       "string.max": messages.SPACE_ADDRESS_MAX_LENGTH,
     }),
+    image: Joi.any().required().messages({
+      "any.required": messages.SPACE_IMAGE_REQUIRED,
+    }),
     price: Joi.number().min(1).max(1000).required().messages({
       "number.empty": messages.SPACE_PRICE_REQUIRED,
       "any.required": messages.SPACE_PRICE_REQUIRED,
@@ -167,8 +170,7 @@ const userValidation = async (body) => {
       "string.min": messages.USER_BIO_MIN_LENGTH,
       "string.max": messages.USER_BIO_MAX_LENGTH,
     }),
-    avatar: Joi.string().required().messages({
-      "string.empty": messages.USER_AVATAR_REQUIRED,
+    avatar: Joi.any().required().messages({
       "any.required": messages.USER_AVATAR_REQUIRED,
     }),
     email: Joi.string().min(3).max(100).email().required().messages({

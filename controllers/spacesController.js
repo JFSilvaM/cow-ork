@@ -52,11 +52,7 @@ const create = async (req, res, next) => {
     const value = await spaceValidation(req.body);
 
     if (req.files) {
-      const fileName = await uploadFile(
-        req.files.space_image,
-        req.auth.id,
-        "spaces"
-      );
+      const fileName = await uploadFile(req.files.image, req.auth.id, "spaces");
 
       value.image = fileName;
     }
@@ -78,11 +74,7 @@ const update = async (req, res, next) => {
     const value = await spaceValidation(req.body);
 
     if (req.files) {
-      const fileName = await uploadFile(
-        req.files.space_image,
-        req.auth.id,
-        "spaces"
-      );
+      const fileName = await uploadFile(req.files.image, req.auth.id, "spaces");
 
       value.image = fileName;
     }

@@ -40,7 +40,7 @@ const create = async (req, res, next) => {
       generateError(SERVICE_NOT_CREATED, 500);
     }
 
-    res.json({ SERVICE_CREATED, data: value });
+    res.json({ message: SERVICE_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -56,7 +56,7 @@ const update = async (req, res, next) => {
       generateError(SERVICE_NOT_UPDATED, 500);
     }
 
-    res.json({ SERVICE_UPDATED });
+    res.json({ message: SERVICE_UPDATED });
   } catch (error) {
     next(error);
   }
@@ -70,7 +70,7 @@ const remove = async (req, res, next) => {
       generateError(SERVICE_NOT_DELETED, 500);
     }
 
-    res.json({ SERVICE_DELETED });
+    res.json({ message: SERVICE_DELETED });
   } catch (error) {
     next(error);
   }

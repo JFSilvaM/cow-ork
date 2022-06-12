@@ -1,3 +1,5 @@
+const { HOST, PORT, STRIPE_API_SECRET } = process.env;
+const stripe = require("stripe")(STRIPE_API_SECRET);
 const { generateError } = require("../lib");
 const {
   findAllBookings,
@@ -69,7 +71,29 @@ const create = async (req, res, next) => {
 
     await sendMail(BOOKING_CREATED, templateContent(data), "booking");
 
-    res.json({ message: BOOKING_CREATED, data: value });
+    const daysReserved =
+      (data.end_date - data.start_date) / (1000 * 60 * 60 * 24);
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "eur",
+            product_data: {
+              name: data.name,
+            },
+            unit_amount: data.price * 100,
+          },
+          quantity: 1 * daysReserved,
+        },
+      ],
+      mode: "payment",
+      success_url: `http://${HOST}:${PORT}/api/bookings/success`,
+      cancel_url: `http://${HOST}:${PORT}/api/bookings/canceled`,
+    });
+
+    res.json({ message: BOOKING_CREATED, data: session });
   } catch (error) {
     next(error);
   }
@@ -115,6 +139,22 @@ const remove = async (req, res, next) => {
   }
 };
 
+const checkoutSuccess = async (req, res, next) => {
+  try {
+    res.json({ message: BOOKING_CREATED });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const checkoutCanceled = async (req, res, next) => {
+  try {
+    res.json({ message: BOOKING_NOT_CREATED });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const templateContent = (data) => ({
   fullName: data.first_name + " " + data.last_name,
   email: data.email,
@@ -131,4 +171,6 @@ module.exports = {
   create,
   update,
   remove,
+  checkoutSuccess,
+  checkoutCanceled,
 };

@@ -40,7 +40,7 @@ const create = async (req, res, next) => {
       generateError(SPACE_TYPE_NOT_CREATED, 500);
     }
 
-    res.json({ SPACE_TYPE_CREATED, data: value });
+    res.json({ message: SPACE_TYPE_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -56,7 +56,7 @@ const update = async (req, res, next) => {
       generateError(SPACE_TYPE_NOT_UPDATED, 500);
     }
 
-    res.json({ SPACE_TYPE_UPDATED });
+    res.json({ message: SPACE_TYPE_UPDATED });
   } catch (error) {
     next(error);
   }
@@ -70,7 +70,7 @@ const remove = async (req, res, next) => {
       generateError(SPACE_TYPE_NOT_DELETED, 500);
     }
 
-    res.json({ SPACE_TYPE_DELETED });
+    res.json({ message: SPACE_TYPE_DELETED });
   } catch (error) {
     next(error);
   }

@@ -190,9 +190,8 @@ const userValidation = async (body) => {
       .valid(Joi.ref("password"))
       .required()
       .messages({
-        "string.empty": messages.PASSWORD_CONFIRMATION_REQUIRED,
         "any.required": messages.PASSWORD_CONFIRMATION_REQUIRED,
-        "string.valid": messages.PASSWORD_CONFIRMATION_VALID,
+        "any.only": messages.PASSWORD_CONFIRMATION_VALID,
       }),
   });
 

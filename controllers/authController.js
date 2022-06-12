@@ -72,7 +72,6 @@ const register = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(value.password, 10);
 
-    // TODO: Las posibilidades de que los UUIDS colisionen son muy bajas, pero sería ideal asegurarse de que no se repitan
     const activationCode = uuidv4();
 
     const newUser = await createUser({

@@ -40,7 +40,7 @@ const create = async (req, res, next) => {
       generateError(REPORT_CATEGORY_NOT_CREATED, 500);
     }
 
-    res.json({ REPORT_CATEGORY_CREATED, data: value });
+    res.json({ message: REPORT_CATEGORY_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -56,7 +56,7 @@ const update = async (req, res, next) => {
       generateError(REPORT_CATEGORY_NOT_UPDATED, 500);
     }
 
-    res.json({ REPORT_CATEGORY_UPDATED });
+    res.json({ message: REPORT_CATEGORY_UPDATED });
   } catch (error) {
     next(error);
   }
@@ -70,7 +70,7 @@ const remove = async (req, res, next) => {
       generateError(REPORT_CATEGORY_NOT_DELETED, 500);
     }
 
-    res.json({ REPORT_CATEGORY_DELETED });
+    res.json({ message: REPORT_CATEGORY_DELETED });
   } catch (error) {
     next(error);
   }

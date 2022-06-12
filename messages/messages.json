@@ -105,6 +105,7 @@
   "SPACE_ADDRESS_REQUIRED": "La dirección del espacio es requerida",
   "SPACE_ADDRESS_MIN_LENGTH": "La dirección del espacio debe tener al menos 3 caracteres",
   "SPACE_ADDRESS_MAX_LENGTH": "La dirección del espacio debe tener como máximo 250 caracteres",
+  "SPACE_IMAGE_REQUIRED": "La imagen del espacio es requerida",
   "SPACE_PRICE_REQUIRED": "El precio del espacio es requerido",
   "SPACE_PRICE_MIN_LENGTH": "El precio del espacio debe ser al menos 1€",
   "SPACE_PRICE_MAX_LENGTH": "El precio del espacio debe ser como máximo 1000€",

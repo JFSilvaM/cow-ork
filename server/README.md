@@ -18,7 +18,7 @@ Instalar las dependencias:
 npm install
 ```
 
-Copiar el archivo `server/.env.example` y renombrarlo a `server/.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos, adicionalmente, será necesaria una cuenta en [Mailjet](https://www.mailjet.com/) y [Stripe](https://stripe.com/), para ajustar las variables de entorno según correspondan.
+Copiar el archivo `server/.env.example` y renombrarlo a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos, adicionalmente, será necesaria una cuenta en [Mailjet](https://www.mailjet.com/) y [Stripe](https://stripe.com/), para ajustar las variables de entorno según correspondan.
 
 ```
 HOST=localhost

@@ -137,7 +137,7 @@ npm start
 
 ## Estructura de la base de datos
 
-![DB_Structure](/docs/cow-ork_db.png)
+![DB_Structure](/server/docs/cow-ork_db.png)
 
 ## Autores
 

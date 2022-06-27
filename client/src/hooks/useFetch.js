@@ -21,9 +21,7 @@ export default function useFetch(path) {
       } catch (error) {
         setError(error);
       } finally {
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
       }
     };
 

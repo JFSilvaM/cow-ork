@@ -41,25 +41,25 @@ export default function SearchBox({ data }) {
       <section className="my-6 grid grid-cols-4 gap-4">
         {filteredResults.length > 0 ? (
           filteredResults.map((result) => (
-            <article className="border p-2" key={result.id}>
-              <h4>
-                <Link to={`spaces/${result.id}`}>{result.name}</Link>
-              </h4>
+            <Link to={`spaces/${result.id}`} key={result.id}>
+              <article className="border p-2">
+                <h4>{result.name}</h4>
 
-              <img src={result.image} alt={result.name} />
+                <img src={result.image} alt={result.name} />
 
-              <p>{result.description}</p>
+                <p>{result.description}</p>
 
-              <StarRating rating={result.rating} />
+                <StarRating rating={result.rating} />
 
-              <p>{result.price}€</p>
+                <p>{result.price}€</p>
 
-              <div className="flex gap-2">
-                {result.service_names.map((service) => (
-                  <p key={service}>{service}</p>
-                ))}
-              </div>
-            </article>
+                <div className="flex gap-2">
+                  {result.service_names.map((service) => (
+                    <p key={service}>{service}</p>
+                  ))}
+                </div>
+              </article>
+            </Link>
           ))
         ) : (
           <p>No existe ningún resultado</p>

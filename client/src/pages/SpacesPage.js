@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner";
 import useFetch from "../hooks/useFetch";
 
 export default function SpacesPage() {
-  const { data: spaces, loading, error } = useFetch("/spacs");
+  const { data: spaces, loading, error } = useFetch("/spaces");
 
   if (loading) {
     return <Spinner />;

@@ -10,41 +10,48 @@ import SpaceTypesPage from "./pages/SpaceTypesPage";
 import SpacesPage from "./pages/SpacesPage";
 import UsersPage from "./pages/UsersPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <nav>Nav</nav>
+      <div className="flex h-screen flex-col">
+        <Navbar />
 
-      <main className="container mx-auto my-6">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/bookings" element={<BookingsPage />} />
-          {/* <Route path="/bookings/:id" element={<BookingsIdPage />} /> */}
-          <Route path="/report_categories" element={<ReportCategoriesPage />} />
-          {/* <Route
+        <main className="container mx-auto flex-grow px-3 md:px-0">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/bookings" element={<BookingsPage />} />
+            {/* <Route path="/bookings/:id" element={<BookingsIdPage />} /> */}
+            <Route
+              path="/report_categories"
+              element={<ReportCategoriesPage />}
+            />
+            {/* <Route
             path="/report_categories/:id"
             element={<ReportCategoriesIdPage />}
           /> */}
-          <Route path="/reports" element={<ReportsPage />} />
-          {/* <Route path="/reports/:id" element={<ReportsIdPage />} /> */}
-          <Route path="/services" element={<ServicesPage />} />
-          {/* <Route path="/services/:id" element={<ServicesIdPage />} /> */}
-          <Route path="/space_types" element={<SpaceTypesPage />} />
-          {/* <Route path="/space_types/:id" element={<SpaceTypesIdPage />} /> */}
+            <Route path="/reports" element={<ReportsPage />} />
+            {/* <Route path="/reports/:id" element={<ReportsIdPage />} /> */}
+            <Route path="/services" element={<ServicesPage />} />
+            {/* <Route path="/services/:id" element={<ServicesIdPage />} /> */}
+            <Route path="/space_types" element={<SpaceTypesPage />} />
+            {/* <Route path="/space_types/:id" element={<SpaceTypesIdPage />} /> */}
 
-          <Route path="/spaces" element={<SpacesPage />} />
-          {/* <Route path="/spaces/:id" element={<SpacesIdPage />} /> */}
+            <Route path="/spaces" element={<SpacesPage />} />
+            {/* <Route path="/spaces/:id" element={<SpacesIdPage />} /> */}
 
-          <Route path="/users" element={<UsersPage />} />
-          {/* <Route path="/users/:id" element={<UsersIdPage />} /> */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
+            <Route path="/users" element={<UsersPage />} />
+            {/* <Route path="/users/:id" element={<UsersIdPage />} /> */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
 
-      <footer>&copy; 2022 | Cow-Ork</footer>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

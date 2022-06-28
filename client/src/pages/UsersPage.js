@@ -1,4 +1,5 @@
 import Alert from "../components/Alert";
+import Avatar from "../components/Avatar";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
 import useFetch from "../hooks/useFetch";
@@ -22,11 +23,12 @@ export default function UsersPage() {
     <section>
       {users.map((user) => (
         <article key={user.id}>
+          <Avatar src={`/images/avatars/${user.avatar}`} />
           <Typography>{user.first_name}</Typography>
           <Typography>{user.last_name}</Typography>
           <Typography>{user.email}</Typography>
           <Typography>{user.bio}</Typography>
-          <Typography>{user.avatar}</Typography>
+
           <Typography>{user.is_admin}</Typography>
           <Typography>{user.is_active}</Typography>
           <Typography>{user.created_at}</Typography>

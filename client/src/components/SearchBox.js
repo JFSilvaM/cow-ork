@@ -45,7 +45,7 @@ export default function SearchBox({ data }) {
               <article className="border p-2">
                 <h4>{result.name}</h4>
 
-                <img src={result.image} alt={result.name} />
+                <img src={`/images/spaces/${result.image}`} alt={result.name} />
 
                 <p>{result.description}</p>
 

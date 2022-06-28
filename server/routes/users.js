@@ -4,6 +4,8 @@ const { auth } = require("../middlewares");
 
 router.route("/").get(auth.isLoggedIn, auth.isAdmin, usersController.findAll);
 
+router.route("/profile").get(auth.isLoggedIn, usersController.findProfile);
+
 router
   .route("/:id")
   .get(auth.isLoggedIn, usersController.findOne)

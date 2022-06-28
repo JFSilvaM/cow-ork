@@ -13,6 +13,8 @@ import RequireAuth from "./components/RequireAuth";
 import ServicesPage from "./pages/ServicesPage";
 import SpaceTypesPage from "./pages/SpaceTypesPage";
 import UsersPage from "./pages/UsersPage";
+import SpacesIdPage from "./pages/SpacesIdPage";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
   return (
@@ -25,10 +27,11 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            {/* <Route path="/spaces/:id" element={<SpacesPage />} /> */}
+            <Route path="/spaces/:id" element={<SpacesIdPage />} />
 
             <Route path="/" element={<RequireAuth />}>
               <Route path="/bookings" element={<BookingsPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route
                 path="/report_categories"
                 element={<ReportCategoriesPage />}

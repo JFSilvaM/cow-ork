@@ -30,6 +30,20 @@ const findAll = async (req, res, next) => {
   }
 };
 
+const findProfile = async (req, res, next) => {
+  try {
+    const data = await findOneUser(req.auth.id);
+
+    if (!data) {
+      generateError(USER_NOT_FOUND_BY_ID, 404);
+    }
+
+    res.json({ data });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const findOne = async (req, res, next) => {
   try {
     const data = await findOneUser(req.params.id);
@@ -85,6 +99,7 @@ const remove = async (req, res, next) => {
 
 module.exports = {
   findAll,
+  findProfile,
   findOne,
   update,
   remove,

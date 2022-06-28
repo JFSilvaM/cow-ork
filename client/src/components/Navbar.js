@@ -17,14 +17,14 @@ export default function Navbar() {
   }, [darkMode]);
 
   return (
-    <nav className="sticky top-0 border-b bg-white shadow">
+    <nav className="sticky top-0 bg-white shadow dark:bg-gray-800 dark:shadow-white">
       <ul className="container mx-auto flex items-center justify-between p-3">
-        <li>
+        <li className="dark:text-white">
           <Link to={"/"}>Logo</Link>
         </li>
 
         <li>
-          <ul className="flex items-center gap-5">
+          <ul className="flex items-center gap-2">
             <li
               className="cursor-pointer"
               onClick={() => {
@@ -35,10 +35,10 @@ export default function Navbar() {
               {darkMode ? <SunIcon /> : <MoonIcon />}
             </li>
 
-            <li>
+            <li onClick={() => {}}>
               <Link to={"/login"}>
                 <Typography
-                  className="rounded bg-indigo-500 px-3 py-2 text-white"
+                  className="rounded bg-indigo-500 px-5 py-2 text-white hover:bg-indigo-600  active:bg-indigo-700 dark:bg-emerald-500 hover:dark:bg-emerald-600 active:dark:bg-emerald-700"
                   size="sm"
                 >
                   Log In / Sign Up

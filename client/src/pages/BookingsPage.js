@@ -22,6 +22,12 @@ export default function BookingsPage() {
     <section>
       {bookings.map((booking) => (
         <article key={booking.id}>
+          <Typography>{booking.name}</Typography>
+          <Typography>{booking.address}</Typography>
+          <Typography>{booking.price}</Typography>
+          <Typography>{booking.is_clean}</Typography>
+          <Typography>{booking.is_paid}</Typography>
+          <Typography>{booking.created_at}</Typography>
           <Typography>{booking.start_date}</Typography>
           <Typography>{booking.end_date}</Typography>
         </article>

@@ -1,59 +1,82 @@
 import { useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import Alert from "../components/Alert";
+import Button from "../components/Button";
+import { useAuth } from "../contexts/AuthContext";
+import fetchEndpoint from "../helpers/fetchEndpoint";
 
 export default function LoginPage() {
-  const [fields, setFields] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { token, setToken } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-  const handleChange = (e) => {
-    setFields({
-      ...fields,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(fields);
+    try {
+      const data = await fetchEndpoint("/auth/login", null, "POST", {
+        email,
+        password,
+      });
+
+      setError("");
+      setToken(data.token);
+      navigate(from, { replace: true });
+    } catch (error) {
+      setError(error);
+    }
   };
 
   return (
-    <section className="flex justify-center">
-      <form
-        className="flex flex-col items-center gap-3 rounded-lg border-2 p-5"
-        onSubmit={handleSubmit}
-      >
-        <label>
-          E-mail:
-          <input
-            type="text"
-            name="email"
-            value={fields.email}
-            onChange={handleChange}
-            className="mx-3 rounded px-1 ring-2"
-          />
-        </label>
-
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={fields.password}
-            onChange={handleChange}
-            className="mx-3 rounded px-1 ring-2"
-          />
-        </label>
-
-        <button
-          type="submit"
-          className="w-fit cursor-pointer rounded border-2 border-indigo-400 px-3"
+    <>
+      {token && <Navigate to={from} />}
+      <section className="flex justify-center">
+        <form
+          className="flex flex-col items-center gap-3 rounded-lg border-2 p-5"
+          onSubmit={handleSubmit}
         >
-          Ingresar
-        </button>
-      </form>
-    </section>
+          <label>
+            E-mail:
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mx-3 rounded px-1 ring-2"
+            />
+          </label>
+
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mx-3 rounded px-1 ring-2"
+            />
+          </label>
+
+          <Button
+            className="w-fit cursor-pointer"
+            color="primary"
+            shape="rounded"
+            size="sm"
+          >
+            Ingresar
+          </Button>
+
+          {error && (
+            <Alert color="error" icon="error">
+              {error.message}
+            </Alert>
+          )}
+        </form>
+      </section>
+    </>
   );
 }

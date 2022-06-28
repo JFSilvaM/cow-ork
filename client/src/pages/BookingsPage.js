@@ -1,5 +1,6 @@
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
+import Typography from "../components/Typography";
 import useFetch from "../hooks/useFetch";
 
 export default function BookingsPage() {
@@ -21,8 +22,8 @@ export default function BookingsPage() {
     <section>
       {bookings.map((booking) => (
         <article key={booking.id}>
-          <h2>{booking.start_date}</h2>
-          <p>{booking.end_date}</p>
+          <Typography>{booking.start_date}</Typography>
+          <Typography>{booking.end_date}</Typography>
         </article>
       ))}
     </section>

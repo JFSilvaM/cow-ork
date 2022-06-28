@@ -13,17 +13,17 @@ const variants = {
   },
   flat: {
     primary:
-      "bg-indigo-200 text-indigo-800 dark:bg-emerald-200 dark:text-emerald-800 font-bold",
-    secondary: "bg-slate-200 text-slate-800 font-bold",
-    success: "bg-green-200 text-green-800 font-bold",
-    error: "bg-red-200 text-red-800 font-bold",
+      "bg-indigo-100 text-indigo-800 dark:bg-emerald-100 dark:text-emerald-800 font-bold",
+    secondary: "bg-slate-100 text-slate-800 font-bold",
+    success: "bg-green-100 text-green-800 font-bold",
+    error: "bg-red-100 text-red-800 font-bold",
   },
   outlined: {
     primary:
-      "bg-indigo-200 text-indigo-800 border border-indigo-800 dark:bg-emerald-200 dark:text-emerald-800 dark:border-emerald-800 font-bold",
-    secondary: "bg-slate-200 text-slate-800 border border-slate-800 font-bold",
-    success: "bg-green-200 text-green-800  border border-green-800 font-bold",
-    error: "bg-red-200 text-red-800 border border-red-800 font-bold",
+      "bg-indigo-100 text-indigo-800 border border-indigo-800 dark:bg-emerald-100 dark:text-emerald-800 dark:border-emerald-800 font-bold",
+    secondary: "bg-slate-100 text-slate-800 border border-slate-800 font-bold",
+    success: "bg-green-100 text-green-800  border border-green-800 font-bold",
+    error: "bg-red-100 text-red-800 border border-red-800 font-bold",
   },
 };
 

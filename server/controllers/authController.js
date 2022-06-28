@@ -28,8 +28,11 @@ const login = async (req, res, next) => {
 
     const user = await findUserByEmail(value.email);
 
-    // Generamos el mismo error tanto si no se encuentra al usuario como si no está activado
-    if (!user || !user.is_active) {
+    if (!user) {
+      generateError(USER_INVALID_CREDENTIALS, 401);
+    }
+
+    if (!user.is_active) {
       generateError(USER_ACTIVATION, 400);
     }
 

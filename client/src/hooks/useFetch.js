@@ -1,23 +1,19 @@
 import { useState, useEffect, useMemo } from "react";
-
-const BASE_URL = "http://localhost:3001/api";
+import { useAuth } from "../contexts/AuthContext";
+import fetchEndpoint from "../helpers/fetchEndpoint";
 
 export default function useFetch(path) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { token } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(BASE_URL + path);
-        const json = await res.json();
+        const json = await fetchEndpoint(path, token);
 
-        if (!res.ok || json.status === "error") {
-          throw new Error(json.message || res.statusText);
-        }
-
-        setData(json.data);
+        setData(json);
       } catch (error) {
         setError(error);
       } finally {
@@ -26,7 +22,7 @@ export default function useFetch(path) {
     };
 
     fetchData();
-  }, [path]);
+  }, [path, token]);
 
   return useMemo(() => ({ data, loading, error }), [data, loading, error]);
 }

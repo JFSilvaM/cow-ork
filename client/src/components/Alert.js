@@ -14,8 +14,8 @@ const variants = {
     error: "bg-red-800 text-white font-bold fill-current",
   },
   outlined: {
-    success: "bg-green-200 border border-green-800 text-green-800 fill-current",
-    error: "bg-red-200 border border-red-800 text-red-800 fill-current",
+    success: "bg-green-100 border border-green-800 text-green-800 fill-current",
+    error: "bg-red-100 border border-red-800 text-red-800 fill-current",
   },
 };
 

@@ -11,7 +11,6 @@ import ReportCategoriesPage from "./pages/ReportCategoriesPage";
 import ReportsPage from "./pages/ReportsPage";
 import RequireAuth from "./components/RequireAuth";
 import ServicesPage from "./pages/ServicesPage";
-import SpacesPage from "./pages/SpacesPage";
 import SpaceTypesPage from "./pages/SpaceTypesPage";
 import UsersPage from "./pages/UsersPage";
 
@@ -22,29 +21,26 @@ export default function App() {
         <div className="flex h-screen flex-col">
           <Navbar />
 
-          <main className="container mx-auto flex-grow px-3 md:px-0">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/spaces" element={<SpacesPage />} />
-              {/* <Route path="/spaces/:id" element={<SpacesPage />} /> */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            {/* <Route path="/spaces/:id" element={<SpacesPage />} /> */}
 
-              <Route path="/" element={<RequireAuth />}>
-                <Route path="/bookings" element={<BookingsPage />} />
-                <Route
-                  path="/report_categories"
-                  element={<ReportCategoriesPage />}
-                />
-                <Route path="/reports" element={<ReportsPage />} />
-                <Route path="/services" element={<ServicesPage />} />
-                <Route path="/space_types" element={<SpaceTypesPage />} />
-                <Route path="/users" element={<UsersPage />} />
-              </Route>
+            <Route path="/" element={<RequireAuth />}>
+              <Route path="/bookings" element={<BookingsPage />} />
+              <Route
+                path="/report_categories"
+                element={<ReportCategoriesPage />}
+              />
+              <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/space_types" element={<SpaceTypesPage />} />
+              <Route path="/users" element={<UsersPage />} />
+            </Route>
 
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </main>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
 
           <Footer />
         </div>

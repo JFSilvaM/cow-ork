@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
-import Button from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
+import Typography from "../components/Typography";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -32,51 +33,52 @@ export default function LoginPage() {
   };
 
   return (
-    <>
+    <main className="container mx-auto flex flex-grow items-center justify-center px-3 md:px-0">
       {token && <Navigate to={from} />}
-      <section className="flex justify-center">
-        <form
-          className="flex flex-col items-center gap-3 rounded-lg border-2 p-5"
-          onSubmit={handleSubmit}
-        >
-          <label>
-            E-mail:
-            <input
-              type="text"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mx-3 rounded px-1 ring-2"
-            />
-          </label>
+      <form className="flex w-full justify-center" onSubmit={handleSubmit}>
+        <fieldset className="flex flex-col items-center gap-7 rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">
+          <legend className="px-3 dark:text-white">
+            <Typography size="xl">Log In</Typography>
+          </legend>
 
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mx-3 rounded px-1 ring-2"
-            />
-          </label>
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-mail"
+            className="mx-3 h-10 w-full rounded px-1 ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500"
+          />
 
-          <Button
-            className="w-fit cursor-pointer"
-            color="primary"
-            shape="rounded"
-            size="sm"
-          >
-            Ingresar
-          </Button>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className="mx-3 h-10 w-full rounded px-1 ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500"
+          />
+
+          <div className="flex gap-5">
+            <button className="w-fit rounded bg-indigo-500 px-5 py-2 text-white hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 active:bg-indigo-700 dark:bg-emerald-500 hover:dark:bg-emerald-600 focus:dark:ring-emerald-300 active:dark:bg-emerald-700">
+              <Typography>Ingresar</Typography>
+            </button>
+
+            <Link
+              to={"/register"}
+              className="w-fit rounded px-5 py-2 underline underline-offset-2 dark:text-white"
+            >
+              <Typography>Sign Up</Typography>
+            </Link>
+          </div>
 
           {error && (
             <Alert color="error" icon="error">
               {error.message}
             </Alert>
           )}
-        </form>
-      </section>
-    </>
+        </fieldset>
+      </form>
+    </main>
   );
 }

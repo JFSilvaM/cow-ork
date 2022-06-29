@@ -6,15 +6,15 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
 import NotFoundPage from "./pages/NotFoundPage";
+import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import ReportCategoriesPage from "./pages/ReportCategoriesPage";
 import ReportsPage from "./pages/ReportsPage";
 import RequireAuth from "./components/RequireAuth";
 import ServicesPage from "./pages/ServicesPage";
+import SpacesIdPage from "./pages/SpacesIdPage";
 import SpaceTypesPage from "./pages/SpaceTypesPage";
 import UsersPage from "./pages/UsersPage";
-import SpacesIdPage from "./pages/SpacesIdPage";
-import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
   return (
@@ -37,12 +37,12 @@ export default function App() {
               </Route>
 
               <Route path="/" element={<RequireAuth admin />}>
+                <Route path="/bookings/all" element={<BookingsPage />} />
+                <Route path="/reports/all" element={<ReportsPage />} />
                 <Route
                   path="/report_categories"
                   element={<ReportCategoriesPage />}
                 />
-                <Route path="/bookings/all" element={<BookingsPage />} />
-                <Route path="/reports/all" element={<ReportsPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/space_types" element={<SpaceTypesPage />} />
                 <Route path="/users" element={<UsersPage />} />

@@ -38,12 +38,13 @@ export default function DateCalendar({
     <div className="absolute z-10 mt-2 w-full">
       <div className="flex flex-col items-center justify-center rounded-t bg-indigo-600 py-2 dark:bg-emerald-600">
         <div className="mb-2 flex w-full items-center justify-between border-b border-indigo-200 px-2 pb-2 text-gray-200 dark:border-emerald-200">
-          <button
+          <span
             className="rounded-full p-1"
             onClick={() => handleMonthChange(subMonths(date, 1))}
+            role="button"
           >
             <ChevronLeftIcon />
-          </button>
+          </span>
 
           <div className="">
             <p className="text-center font-bold">
@@ -53,12 +54,13 @@ export default function DateCalendar({
             </p>
           </div>
 
-          <button
+          <span
             className="rounded-full p-1"
             onClick={() => handleMonthChange(addMonths(date, 1))}
+            role="button"
           >
             <ChevronRightIcon />
-          </button>
+          </span>
         </div>
 
         <div className="grid grid-cols-7 items-center justify-center gap-4 px-2">

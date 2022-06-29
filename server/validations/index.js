@@ -98,7 +98,6 @@ const spaceValidation = async (body) => {
       "string.max": messages.SPACE_NAME_MAX_LENGTH,
     }),
     description: Joi.string().min(3).max(250).required().messages({
-      "string.empty": messages.SPACE_DESCRIPTION_REQUIRED,
       "any.required": messages.SPACE_DESCRIPTION_REQUIRED,
       "string.min": messages.SPACE_DESCRIPTION_MIN_LENGTH,
       "string.max": messages.SPACE_DESCRIPTION_MAX_LENGTH,
@@ -169,9 +168,6 @@ const userValidation = async (body) => {
       "any.required": messages.USER_BIO_REQUIRED,
       "string.min": messages.USER_BIO_MIN_LENGTH,
       "string.max": messages.USER_BIO_MAX_LENGTH,
-    }),
-    avatar: Joi.any().required().messages({
-      "any.required": messages.USER_AVATAR_REQUIRED,
     }),
     email: Joi.string().min(3).max(100).email().required().messages({
       "string.empty": messages.EMAIL_REQUIRED,

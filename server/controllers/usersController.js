@@ -77,7 +77,7 @@ const update = async (req, res, next) => {
       generateError(USER_NOT_UPDATED, 500);
     }
 
-    res.json({ message: USER_UPDATED });
+    res.json({ data: { status: "ok", message: USER_UPDATED } });
   } catch (error) {
     next(error);
   }

@@ -109,7 +109,7 @@ export default function ProfilePage() {
             setValue={setPasswordConfirmation}
           />
 
-          <Input id="bio" name="bio" multiline value={bio} setValue={setBio} />
+          <Input id="bio" name="bio" value={bio} setValue={setBio} multiline />
 
           <Avatar size="xxxl" src={`/images/avatars/${avatar}`} />
           <Input id="avatar" name="avatar" type="file" />

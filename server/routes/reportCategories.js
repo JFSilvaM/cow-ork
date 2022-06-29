@@ -4,7 +4,7 @@ const { auth } = require("../middlewares");
 
 router
   .route("/")
-  .get(auth.isLoggedIn, auth.isAdmin, reportCategoriesController.findAll)
+  .get(auth.isLoggedIn, reportCategoriesController.findAll)
   .post(auth.isLoggedIn, auth.isAdmin, reportCategoriesController.create);
 
 router

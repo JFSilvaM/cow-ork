@@ -29,14 +29,13 @@ const findOneReport = async (id, userId) => {
 
 const createReport = async (report, userId) => {
   const query =
-    "INSERT INTO reports (space_id, user_id, category_id, description, status) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO reports (space_id, user_id, category_id, description) VALUES (?, ?, ?, ?)";
 
   const [{ insertId }] = await pool.query(query, [
     report.space_id,
     userId,
     report.category_id,
     report.description,
-    report.status,
   ]);
 
   return insertId;

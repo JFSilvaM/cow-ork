@@ -1,4 +1,4 @@
-const { HOST, PORT, STRIPE_API_SECRET } = process.env;
+const { HOST, STRIPE_API_SECRET } = process.env;
 const stripe = require("stripe")(STRIPE_API_SECRET);
 const { generateError } = require("../lib");
 const {
@@ -100,12 +100,12 @@ const create = async (req, res, next) => {
             },
             unit_amount: data.price * 100,
           },
-          quantity: 1 * daysReserved,
+          quantity: daysReserved,
         },
       ],
       mode: "payment",
-      success_url: `http://${HOST}:${PORT}/api/bookings/success`,
-      cancel_url: `http://${HOST}:${PORT}/api/bookings/canceled`,
+      success_url: `http://${HOST}:3000/bookings`,
+      cancel_url: `http://${HOST}:3000/spaces`,
     });
 
     res.json({ message: BOOKING_CREATED, data: session });

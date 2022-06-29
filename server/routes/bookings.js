@@ -7,8 +7,6 @@ router
   .get(auth.isLoggedIn, bookingsController.findAllById)
   .post(auth.isLoggedIn, bookingsController.create);
 
-router.get("/success", bookingsController.checkoutSuccess);
-router.get("/canceled", bookingsController.checkoutCanceled);
 router.get("/all", auth.isLoggedIn, bookingsController.findAll);
 
 router

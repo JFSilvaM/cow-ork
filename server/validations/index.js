@@ -64,13 +64,9 @@ const reportValidation = async (body) => {
       "string.min": messages.REPORT_DESCRIPTION_MIN_LENGTH,
       "string.max": messages.REPORT_DESCRIPTION_MAX_LENGTH,
     }),
-    status: Joi.string()
-      .valid("PENDING", "OPEN", "CLOSED")
-      .required()
-      .messages({
-        "any.required": messages.REPORT_STATUS_REQUIRED,
-        "any.only": messages.REPORT_STATUS_VALID,
-      }),
+    status: Joi.string().valid("PENDING", "OPEN", "CLOSED").messages({
+      "any.only": messages.REPORT_STATUS_VALID,
+    }),
   });
 
   return await schema.validateAsync(body);

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Card from "./Card";
 import StarRating from "./StarRating";
 
 export default function SearchBox({ data }) {

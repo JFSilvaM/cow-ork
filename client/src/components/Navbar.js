@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import MoonIcon from "./icons/MoonIcon";
 import SunIcon from "./icons/SunIcon";
 import Button from "./Button";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") === "true"
   );
+  const { token, setToken } = useAuth();
 
   useEffect(() => {
     document.documentElement.classList.add(darkMode ? "dark" : "light");
@@ -16,17 +18,16 @@ export default function Navbar() {
     document.body.classList.remove(darkMode ? "bg-white" : "bg-gray-800");
   }, [darkMode]);
 
-  const logOut = async function () {
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
-
   return (
     <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800 dark:shadow-white">
       <ul className="container mx-auto flex items-center justify-between py-3">
         <li className="dark:text-white">
-          <Link to={"/"}>
-            <img src="cow-ork_logo.png" alt="Cow-Ork logo" width="150" />
+          <Link to="/">
+            <img
+              src="/images/cow-ork_logo.png"
+              alt="Cow-Ork logo"
+              width="150"
+            />
           </Link>
         </li>
 
@@ -42,23 +43,21 @@ export default function Navbar() {
               {darkMode ? <SunIcon /> : <MoonIcon />}
             </li>
 
-            <li>
-              <Button shape="rounded" size="sm" onClick={() => logOut()}>
-                Cerrar sesión
-              </Button>
-            </li>
-
-            <li>
-              <Button shape="rounded" size="sm">
-                <Link to={"/login"}>Iniciar sesión</Link>
-              </Button>
-            </li>
-
-            <li>
-              <Button shape="rounded" size="sm">
-                <Link to={"/register"}>Registrarse</Link>
-              </Button>
-            </li>
+            {token ? (
+              <li>
+                <Button shape="rounded" size="sm" onClick={() => setToken("")}>
+                  Cerrar sesión
+                </Button>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login">
+                  <Button shape="rounded" size="sm">
+                    Iniciar sesión
+                  </Button>
+                </Link>
+              </li>
+            )}
           </ul>
         </li>
       </ul>

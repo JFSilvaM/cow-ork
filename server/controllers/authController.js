@@ -96,8 +96,10 @@ const register = async (req, res, next) => {
     );
 
     res.json({
-      status: "success",
-      message: USER_REGISTERED,
+      data: {
+        status: "success",
+        message: USER_REGISTERED,
+      },
     });
   } catch (error) {
     next(error);
@@ -113,8 +115,10 @@ const activate = async (req, res, next) => {
     }
 
     res.json({
-      status: "success",
-      message: USER_ACTIVATED,
+      data: {
+        status: "success",
+        message: USER_ACTIVATED,
+      },
     });
   } catch (error) {
     next(error);

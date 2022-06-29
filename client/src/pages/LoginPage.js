@@ -72,17 +72,24 @@ export default function LoginPage() {
           />
         </label>
 
-        <div className="flex justify-center gap-5">
+        <div className="mb-2">
           <Button shape="rounded" size="sm">
             Iniciar sesión
           </Button>
-
-          <Link to={"/register"}>
-            <Button shape="rounded" variant="flat" size="sm">
-              Registrarse
-            </Button>
-          </Link>
         </div>
+
+        <Typography
+          align="center"
+          className="text-slate-700 dark:text-slate-100"
+        >
+          ¿No tienes cuenta?{" "}
+          <Link
+            to="/register"
+            className="text-indigo-600 dark:text-emerald-600"
+          >
+            Regístrate
+          </Link>
+        </Typography>
 
         {error && (
           <div className="flex justify-center pt-5">

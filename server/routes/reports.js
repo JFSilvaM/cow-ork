@@ -4,8 +4,10 @@ const { auth } = require("../middlewares");
 
 router
   .route("/")
-  .get(auth.isLoggedIn, reportsController.findAll)
+  .get(auth.isLoggedIn, reportsController.findAllById)
   .post(auth.isLoggedIn, reportsController.create);
+
+router.route("/all").get(auth.isLoggedIn, reportsController.findAll);
 
 router
   .route("/:id")

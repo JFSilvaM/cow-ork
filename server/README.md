@@ -115,6 +115,10 @@ npm start
 <strong>GET</strong>    <em>/api/users</em>
 <strong>DELETE</strong> <em>/api/users/:id</em>
 
+<strong>GET</strong>    <em>/api/reports/all</em>
+
+<strong>GET</strong>    <em>/api/bookings/all</em>
+
 <strong>POST</strong>   <em>/api/spaces</em>
 <strong>PUT</strong>    <em>/api/spaces/:id</em>
 <strong>DELETE</strong> <em>/api/spaces/:id</em>

@@ -1,6 +1,15 @@
 const pool = require("../database/getPool")();
 
-const findAllBookings = async (id) => {
+const findAllBookings = async () => {
+  const query =
+    "SELECT bo.id, us.first_name, us.last_name, sp.name, sp.address, sp.price, sp.is_clean, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id ORDER BY bo.created_at DESC";
+
+  const [rows] = await pool.query(query);
+
+  return rows;
+};
+
+const findAllBookingsById = async (id) => {
   const query =
     "SELECT bo.id, us.first_name, us.last_name, sp.name, sp.address, sp.price, sp.is_clean, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.user_id = ? ORDER BY bo.created_at DESC";
 
@@ -72,6 +81,7 @@ const validateBooking = async (booking) => {
 
 module.exports = {
   findAllBookings,
+  findAllBookingsById,
   findOneBooking,
   createBooking,
   updateBooking,

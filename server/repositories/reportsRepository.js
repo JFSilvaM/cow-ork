@@ -1,6 +1,15 @@
 const pool = require("../database/getPool")();
 
-const findAllReports = async (userId) => {
+const findAllReports = async () => {
+  const query =
+    "SELECT re.id, ca.name category_name, re.description, sp.name space_name, re.status, us.first_name, us.last_name, us.email, re.created_at, re.updated_at FROM reports re INNER JOIN spaces sp ON re.space_id = sp.id INNER JOIN users us ON re.user_id = us.id INNER JOIN report_categories ca ON re.category_id = ca.id ORDER BY re.created_at DESC";
+
+  const [rows] = await pool.query(query);
+
+  return rows;
+};
+
+const findAllReportsById = async (userId) => {
   const query =
     "SELECT re.id, ca.name category_name, re.description, sp.name space_name, re.status, us.first_name, us.last_name, us.email, re.created_at, re.updated_at FROM reports re INNER JOIN spaces sp ON re.space_id = sp.id INNER JOIN users us ON re.user_id = us.id INNER JOIN report_categories ca ON re.category_id = ca.id WHERE re.user_id = ? ORDER BY re.created_at DESC";
 
@@ -59,6 +68,7 @@ const removeReport = async (id, userId) => {
 
 module.exports = {
   findAllReports,
+  findAllReportsById,
   findOneReport,
   createReport,
   updateReport,

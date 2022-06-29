@@ -1,6 +1,7 @@
 const { generateError } = require("../lib");
 const {
   findAllReports,
+  findAllReportsById,
   findOneReport,
   createReport,
   updateReport,
@@ -20,7 +21,21 @@ const { reportValidation } = require("../validations");
 
 const findAll = async (req, res, next) => {
   try {
-    const data = await findAllReports(req.auth.id);
+    const data = await findAllReports();
+
+    if (data.length === 0) {
+      generateError(REPORT_NOT_FOUND, 404);
+    }
+
+    res.json({ data });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const findAllById = async (req, res, next) => {
+  try {
+    const data = await findAllReportsById(req.auth.id);
 
     if (data.length === 0) {
       generateError(REPORT_NOT_FOUND, 404);
@@ -94,6 +109,7 @@ const remove = async (req, res, next) => {
 
 module.exports = {
   findAll,
+  findAllById,
   findOne,
   create,
   update,

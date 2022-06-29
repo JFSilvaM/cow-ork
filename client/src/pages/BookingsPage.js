@@ -1,10 +1,12 @@
+import { useLocation } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
 import useFetch from "../hooks/useFetch";
 
 export default function BookingsPage() {
-  const { data: bookings, loading, error } = useFetch("/bookings");
+  const location = useLocation();
+  const { data: bookings, loading, error } = useFetch(location.pathname);
 
   if (loading) {
     return <Spinner />;

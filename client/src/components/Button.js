@@ -6,14 +6,15 @@ const sizes = {
 
 const variants = {
   filled: {
-    primary: "bg-indigo-800 text-white dark:bg-emerald-800 font-bold",
+    primary:
+      "bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 dark:bg-emerald-500 hover:dark:bg-emerald-600 active:dark:bg-emerald-700 text-white font-bold",
     secondary: "bg-slate-800 text-white dark:bg-slate-600 font-bold",
     success: "bg-green-800 text-white font-bold",
     error: "bg-red-800 text-white font-bold",
   },
   flat: {
     primary:
-      "bg-indigo-100 text-indigo-800 dark:bg-emerald-100 dark:text-emerald-800 font-bold",
+      "bg-indigo-100 hover:bg-indigo-200 active:bg-indigo-300 text-indigo-800 dark:bg-emerald-100 hover:dark:bg-emerald-200 active:dark:bg-emerald-300 dark:text-emerald-800 font-bold",
     secondary: "bg-slate-100 text-slate-800 font-bold",
     success: "bg-green-100 text-green-800 font-bold",
     error: "bg-red-100 text-red-800 font-bold",

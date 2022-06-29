@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
+import Button from "../components/Button";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -33,22 +34,33 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="container mx-auto flex flex-grow items-center justify-center px-3 md:px-0">
+    <form className="flex w-full justify-center" onSubmit={handleSubmit}>
       {token && <Navigate to={from} />}
-      <form className="flex w-full justify-center" onSubmit={handleSubmit}>
-        <fieldset className="flex flex-col items-center gap-7 rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">
-          <legend className="px-3 dark:text-white">
-            <Typography size="xl">Log In</Typography>
-          </legend>
+
+      <fieldset className="rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">
+        <legend className="px-3 dark:text-white">
+          <Typography size="xxl">Iniciar sesión</Typography>
+        </legend>
+
+        <label className="mb-5 block">
+          <span className="block text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
+            E-mail
+          </span>
 
           <input
-            type="text"
+            type="email"
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail"
-            className="mx-3 h-10 w-full rounded px-1 ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
+        </label>
+
+        <label className="mb-5 block">
+          <span className="block text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white">
+            Contraseña
+          </span>
 
           <input
             type="password"
@@ -56,29 +68,30 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="mx-3 h-10 w-full rounded px-1 ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
+        </label>
 
-          <div className="flex gap-5">
-            <button className="w-fit rounded bg-indigo-500 px-5 py-2 text-white hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 active:bg-indigo-700 dark:bg-emerald-500 hover:dark:bg-emerald-600 focus:dark:ring-emerald-300 active:dark:bg-emerald-700">
-              <Typography>Ingresar</Typography>
-            </button>
+        <div className="flex justify-center gap-5">
+          <Button shape="rounded" size="sm">
+            Iniciar sesión
+          </Button>
 
-            <Link
-              to={"/register"}
-              className="w-fit rounded px-5 py-2 underline underline-offset-2 dark:text-white"
-            >
-              <Typography>Sign Up</Typography>
-            </Link>
-          </div>
+          <Link to={"/register"}>
+            <Button shape="rounded" variant="flat" size="sm">
+              Registrarse
+            </Button>
+          </Link>
+        </div>
 
-          {error && (
+        {error && (
+          <div className="flex justify-center pt-5">
             <Alert color="error" icon="error">
               {error.message}
             </Alert>
-          )}
-        </fieldset>
-      </form>
-    </main>
+          </div>
+        )}
+      </fieldset>
+    </form>
   );
 }

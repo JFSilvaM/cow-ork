@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Typography from "./Typography";
 import MoonIcon from "./icons/MoonIcon";
 import SunIcon from "./icons/SunIcon";
-import { useEffect, useState } from "react";
+import Button from "./Button";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(
@@ -16,11 +16,18 @@ export default function Navbar() {
     document.body.classList.remove(darkMode ? "bg-white" : "bg-gray-800");
   }, [darkMode]);
 
+  const logOut = async function () {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
-    <nav className="sticky top-0 bg-white shadow dark:bg-gray-800 dark:shadow-white">
-      <ul className="container mx-auto flex items-center justify-between p-3">
+    <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800 dark:shadow-white">
+      <ul className="container mx-auto flex items-center justify-between py-3">
         <li className="dark:text-white">
-          <Link to={"/"}>Logo</Link>
+          <Link to={"/"}>
+            <img src="cow-ork_logo.png" alt="Cow-Ork logo" width="150" />
+          </Link>
         </li>
 
         <li>
@@ -35,15 +42,22 @@ export default function Navbar() {
               {darkMode ? <SunIcon /> : <MoonIcon />}
             </li>
 
-            <li onClick={() => {}}>
-              <Link to={"/login"}>
-                <Typography
-                  className="rounded bg-indigo-500 px-5 py-2 text-white hover:bg-indigo-600  active:bg-indigo-700 dark:bg-emerald-500 hover:dark:bg-emerald-600 active:dark:bg-emerald-700"
-                  size="sm"
-                >
-                  Log In / Sign Up
-                </Typography>
-              </Link>
+            <li>
+              <Button shape="rounded" size="sm" onClick={() => logOut()}>
+                Cerrar sesión
+              </Button>
+            </li>
+
+            <li>
+              <Button shape="rounded" size="sm">
+                <Link to={"/login"}>Iniciar sesión</Link>
+              </Button>
+            </li>
+
+            <li>
+              <Button shape="rounded" size="sm">
+                <Link to={"/register"}>Registrarse</Link>
+              </Button>
             </li>
           </ul>
         </li>

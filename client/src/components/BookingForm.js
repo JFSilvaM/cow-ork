@@ -44,20 +44,25 @@ export default function BookingForm({ spaceId }) {
   return (
     token && (
       <article>
-        <form onSubmit={handleSubmit}>
-          <DatePicker
-            id="start_date"
-            name="start_date"
-            value={startDate}
-            setSelectedDate={setStartDate}
-          />
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center gap-2"
+        >
+          <div className="flex gap-2">
+            <DatePicker
+              id="start_date"
+              name="start_date"
+              value={startDate}
+              setSelectedDate={setStartDate}
+            />
 
-          <DatePicker
-            id="end_date"
-            name="end_date"
-            value={endDate}
-            setSelectedDate={setEndDate}
-          />
+            <DatePicker
+              id="end_date"
+              name="end_date"
+              value={endDate}
+              setSelectedDate={setEndDate}
+            />
+          </div>
 
           <Button size="sm" shape="rounded">
             Reservar

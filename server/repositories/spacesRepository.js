@@ -46,7 +46,7 @@ const findOneSpace = async (id) => {
 
 const createSpace = async (space) => {
   const query =
-    "INSERT INTO spaces (name, description, address, image, price, capacity, is_clean, type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO spaces (name, description, address, image, price, capacity, type_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   const [{ insertId }] = await pool.query(query, [
     space.name,
@@ -55,9 +55,15 @@ const createSpace = async (space) => {
     space.image || "default.png",
     space.price,
     space.capacity,
-    space.is_clean,
     space.type_id,
   ]);
+
+  const insertServices =
+    "INSERT INTO space_services (space_id, service_id) VALUES ?";
+
+  const services = space.services.map((serviceId) => [insertId, serviceId]);
+
+  await pool.query(insertServices, [services]);
 
   return insertId;
 };

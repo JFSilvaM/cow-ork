@@ -89,18 +89,16 @@ const spaceValidation = async (body) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required().messages({
       "string.empty": messages.SPACE_NAME_REQUIRED,
-      "any.required": messages.SPACE_NAME_REQUIRED,
       "string.min": messages.SPACE_NAME_MIN_LENGTH,
       "string.max": messages.SPACE_NAME_MAX_LENGTH,
     }),
     description: Joi.string().min(3).max(250).required().messages({
-      "any.required": messages.SPACE_DESCRIPTION_REQUIRED,
+      "string.empty": messages.SPACE_DESCRIPTION_REQUIRED,
       "string.min": messages.SPACE_DESCRIPTION_MIN_LENGTH,
       "string.max": messages.SPACE_DESCRIPTION_MAX_LENGTH,
     }),
     address: Joi.string().min(3).max(250).required().messages({
       "string.empty": messages.SPACE_ADDRESS_REQUIRED,
-      "any.required": messages.SPACE_ADDRESS_REQUIRED,
       "string.min": messages.SPACE_ADDRESS_MIN_LENGTH,
       "string.max": messages.SPACE_ADDRESS_MAX_LENGTH,
     }),
@@ -118,14 +116,14 @@ const spaceValidation = async (body) => {
       "any.required": messages.SPACE_CAPACITY_REQUIRED,
       "number.min": messages.SPACE_CAPACITY_MIN_LENGTH,
     }),
-    is_clean: Joi.number().required().valid(0, 1).messages({
-      "any.required": messages.SPACE_IS_CLEAN_REQUIRED,
-      "any.only": messages.SPACE_IS_CLEAN_VALID,
-    }),
     type_id: Joi.number().min(1).required().messages({
       "number.empty": messages.TYPE_ID_REQUIRED,
       "any.required": messages.TYPE_ID_REQUIRED,
       "number.min": messages.TYPE_ID_MIN_LENGTH,
+    }),
+    services: Joi.array().items(Joi.number()).min(1).required().messages({
+      "array.empty": messages.SPACE_SERVICES_REQUIRED,
+      "array.min": messages.SPACE_SERVICES_MIN_LENGTH,
     }),
   });
 

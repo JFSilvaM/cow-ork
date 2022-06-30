@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./contexts/AuthContext";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import BookingsPage from "./pages/BookingsPage";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
@@ -12,10 +13,10 @@ import ReportCategoriesPage from "./pages/ReportCategoriesPage";
 import ReportsPage from "./pages/ReportsPage";
 import RequireAuth from "./components/RequireAuth";
 import ServicesPage from "./pages/ServicesPage";
+import SpaceCreatePage from "./pages/SpaceCreatePage";
 import SpacesIdPage from "./pages/SpacesIdPage";
 import SpaceTypesPage from "./pages/SpaceTypesPage";
 import UsersPage from "./pages/UsersPage";
-import SpaceCreatePage from "./pages/SpaceCreatePage";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
               </Route>
 
               <Route path="/" element={<RequireAuth admin />}>
+                <Route path="/dashboard" element={<AdminDashboardPage />} />
                 <Route path="/bookings/all" element={<BookingsPage />} />
                 <Route path="/reports/all" element={<ReportsPage />} />
                 <Route

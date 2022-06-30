@@ -35,21 +35,21 @@ const migrate = async () => {
     await pool.query(`
         CREATE TABLE services (
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(100) NOT NULL
+            name VARCHAR(100) NOT NULL UNIQUE
         );
     `);
 
     await pool.query(`
         CREATE TABLE report_categories (
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(100) NOT NULL
+            name VARCHAR(100) NOT NULL UNIQUE
         );
     `);
 
     await pool.query(`
         CREATE TABLE space_types (
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(100) NOT NULL
+            name VARCHAR(100) NOT NULL UNIQUE
         );
     `);
 

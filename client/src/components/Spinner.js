@@ -9,10 +9,8 @@ const sizes = {
 
 export default function Spinner({ size = "md" }) {
   return (
-    <div className="m-auto">
-      <div className={sizes[size]}>
-        <SpinnerIcon />
-      </div>
+    <div className={`${sizes[size]} m-auto`}>
+      <SpinnerIcon />
     </div>
   );
 }

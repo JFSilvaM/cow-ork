@@ -34,7 +34,10 @@ export default function LoginPage() {
   };
 
   return (
-    <form className="flex w-full justify-center" onSubmit={handleSubmit}>
+    <form
+      className="flex w-full items-center justify-center"
+      onSubmit={handleSubmit}
+    >
       {token && <Navigate to={from} />}
 
       <fieldset className="rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">

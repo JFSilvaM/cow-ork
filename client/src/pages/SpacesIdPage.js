@@ -24,8 +24,8 @@ export default function SpacesIdPage() {
   }
 
   return (
-    <section className="flex w-full flex-col items-center">
-      <article className="flex w-full flex-col justify-center gap-5 lg:w-3/4">
+    <section className="flex w-full flex-col items-center px-3 lg:px-0">
+      <article className="flex w-full flex-col justify-center gap-5 dark:text-white lg:w-3/4">
         <Typography as="h4" size="xxxl">
           {space.name}
         </Typography>
@@ -37,7 +37,7 @@ export default function SpacesIdPage() {
         />
 
         <div className="flex flex-row justify-between gap-3">
-          <div className="flex w-full flex-col gap-3 divide-y-2 divide-dashed">
+          <div className="flex w-full flex-col gap-3 divide-y-2 divide-dashed dark:divide-gray-400">
             <Typography>{space.description}</Typography>
 
             <Typography>{space.address}</Typography>
@@ -58,13 +58,13 @@ export default function SpacesIdPage() {
           </div>
 
           <aside className="flex h-full flex-col gap-3">
-            <div className="flex flex-col gap-5 rounded-2xl py-5 px-3 shadow">
+            <div className="flex flex-col gap-5 rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
               <Typography>{space.price}€</Typography>
 
               <BookingForm spaceId={id} />
             </div>
 
-            <div className="rounded-2xl py-5 px-3 shadow">
+            <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
               <Typography className="flex justify-center pb-5" size="xl">
                 Reporte
               </Typography>

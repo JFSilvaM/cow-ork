@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 import StarRating from "./StarRating";
 
 export default function SearchBox({ data }) {
@@ -30,8 +31,9 @@ export default function SearchBox({ data }) {
 
   return (
     <div className="my-6 flex w-full flex-col gap-5">
+      {/* <Spinner /> */}
       <input
-        className="rounded-md bg-gray-100 p-2"
+        className="rounded-md bg-gray-200 p-2 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
         type="text"
         placeholder="Buscar..."
         value={search}
@@ -80,61 +82,9 @@ export default function SearchBox({ data }) {
             </Link>
           ))
         ) : (
-          <p>No existe ningún resultado</p>
+          <p className="px-2">No existe ningún resultado</p>
         )}
       </section>
     </div>
-
-    // <div className="my-6 flex w-full flex-col">
-    //   <input
-    //     className="rounded-md bg-gray-100 p-2"
-    //     type="text"
-    //     placeholder="Buscar..."
-    //     value={search}
-    //     onChange={handleChange}
-    //   />
-
-    //   <section className="flex w-full flex-wrap py-7">
-    //     {filteredResults.length > 0 ? (
-    //       filteredResults.map((result) => (
-    //         <Link to={`spaces/${result.id}`} key={result.id}>
-    //           <article className="h-96 w-72 rounded-3xl p-2 shadow-xl transition-all duration-500 ease-in-out hover:bg-gray-800 hover:shadow-none">
-    //             <div className="relative">
-    //               <div className="h-56 overflow-hidden rounded-2xl">
-    //                 <img
-    //                   className="h-full object-cover"
-    //                   src={`/images/spaces/${result.image}`}
-    //                   alt={result.name}
-    //                 />
-    //               </div>
-
-    //               <div className="absolute top-0 left-0 right-0 flex flex-row">
-    //                 <div className="flex h-10 w-full items-center justify-between rounded-t-2xl bg-gray-500 bg-opacity-20 px-2 shadow">
-    //                   <h4>{result.name}</h4>
-
-    //                   <p>{result.price}€</p>
-    //                 </div>
-    //               </div>
-    //             </div>
-
-    //             <div className="flex flex-col gap-2 py-3 hover:text-white">
-    //               <p className="truncate">{result.description}</p>
-
-    //               <StarRating rating={result.rating} />
-
-    //               <div className="flex flex-row flex-wrap gap-1">
-    //                 {result.service_names.map((service) => (
-    //                   <p key={service}>#{service}</p>
-    //                 ))}
-    //               </div>
-    //             </div>
-    //           </article>
-    //         </Link>
-    //       ))
-    //     ) : (
-    //       <p>No existe ningún resultado</p>
-    //     )}
-    //   </section>
-    // </div>
   );
 }

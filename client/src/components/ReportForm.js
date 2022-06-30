@@ -50,21 +50,24 @@ export default function ReportForm({ spaceId }) {
   return (
     token && (
       <article>
-        <form onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
           <Input
             id="description"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             multiline
+            placeholder="Información del reporte"
+            className="h-20 rounded-md border p-2"
           />
 
           <select
             id="report_category"
             name="report_category"
             onChange={(e) => setCategoryId(e.target.value)}
+            className="h-10 rounded-md px-2"
           >
-            <option value="">Selecciona una categoria</option>
+            <option value="">Selecciona la categoria</option>
             {categories.map((category) => (
               <option value={category.id} key={category.id}>
                 {category.name}
@@ -72,9 +75,11 @@ export default function ReportForm({ spaceId }) {
             ))}
           </select>
 
-          <Button size="sm" shape="rounded">
-            Reportar
-          </Button>
+          <div className="flex justify-center">
+            <Button size="sm" shape="rounded">
+              Reportar
+            </Button>
+          </div>
         </form>
 
         {errorMessage && (

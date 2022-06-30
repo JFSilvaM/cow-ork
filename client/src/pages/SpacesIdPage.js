@@ -24,38 +24,56 @@ export default function SpacesIdPage() {
   }
 
   return (
-    <main className="container mx-auto px-3 dark:text-white md:px-0">
-      <section className="flex items-center justify-between">
-        <article>
-          <Typography as="h4" size="xxl">
-            {space.name}
-          </Typography>
+    <section className="flex w-full flex-col items-center">
+      <article className="flex w-full flex-col justify-center gap-5 lg:w-3/4">
+        <Typography as="h4" size="xxxl">
+          {space.name}
+        </Typography>
 
-          <img src={`/images/spaces/${space.image}`} alt={space.name} />
+        <img
+          className="rounded-2xl object-cover"
+          src={`/images/spaces/${space.image}`}
+          alt={space.name}
+        />
 
-          <Typography>{space.description}</Typography>
-          <Typography>{space.address}</Typography>
-          <Typography>{space.capacity}</Typography>
-          <Typography>{space.is_clean}</Typography>
-          <Typography>{space.type_name}</Typography>
+        <div className="flex flex-row justify-between gap-3">
+          <div className="flex w-full flex-col gap-3 divide-y-2 divide-dashed">
+            <Typography>{space.description}</Typography>
 
-          <StarRating rating={space.rating} />
+            <Typography>{space.address}</Typography>
 
-          <Typography>{space.price}€</Typography>
+            <StarRating rating={space.rating} />
 
-          <div className="flex gap-2">
-            {space.service_names.map((service) => (
-              <p key={service}>{service}</p>
-            ))}
+            <Typography>{space.capacity}</Typography>
+
+            <Typography>{space.is_clean}</Typography>
+
+            <Typography>{space.type_name}</Typography>
+
+            <div className="flex gap-2">
+              {space.service_names.map((service) => (
+                <p key={service}>{service}</p>
+              ))}
+            </div>
           </div>
-        </article>
 
-        <aside className="flex flex-col gap-2 self-start">
-          <ReportForm spaceId={id} />
+          <aside className="flex h-full flex-col gap-3">
+            <div className="flex flex-col gap-5 rounded-2xl py-5 px-3 shadow">
+              <Typography>{space.price}€</Typography>
 
-          <BookingForm spaceId={id} />
-        </aside>
-      </section>
-    </main>
+              <BookingForm spaceId={id} />
+            </div>
+
+            <div className="rounded-2xl py-5 px-3 shadow">
+              <Typography className="flex justify-center pb-5" size="xl">
+                Reporte
+              </Typography>
+
+              <ReportForm spaceId={id} />
+            </div>
+          </aside>
+        </div>
+      </article>
+    </section>
   );
 }

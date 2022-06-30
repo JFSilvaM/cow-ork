@@ -24,7 +24,7 @@ export default function App() {
         <div className="flex h-screen flex-col">
           <Navbar />
 
-          <main className="container relative mx-auto flex flex-grow items-center px-3 md:px-0">
+          <main className="container relative mx-auto flex flex-grow items-center py-5">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />

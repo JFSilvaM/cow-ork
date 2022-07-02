@@ -66,8 +66,12 @@ export default function ReportForm({ spaceId }) {
             name="report_category"
             onChange={(e) => setCategoryId(e.target.value)}
             className="h-10 rounded-md px-2"
+            defaultValue=""
+            required
           >
-            <option value="">Selecciona la categoria</option>
+            <option value="" disabled>
+              Selecciona la categoria
+            </option>
             {categories.map((category) => (
               <option value={category.id} key={category.id}>
                 {category.name}

@@ -12,6 +12,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ReportCategoriesPage from "./pages/ReportCategoriesPage";
 import ReportsPage from "./pages/ReportsPage";
 import RequireAuth from "./components/RequireAuth";
+import RequireGuest from "./components/RequireGuest";
 import ServicesPage from "./pages/ServicesPage";
 import SpaceCreatePage from "./pages/SpaceCreatePage";
 import SpacesIdPage from "./pages/SpacesIdPage";
@@ -28,9 +29,12 @@ export default function App() {
           <main className="container relative mx-auto flex flex-grow py-5">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
               <Route path="/spaces/:id" element={<SpacesIdPage />} />
+
+              <Route path="/" element={<RequireGuest />}>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+              </Route>
 
               <Route path="/" element={<RequireAuth />}>
                 <Route path="/bookings" element={<BookingsPage />} />

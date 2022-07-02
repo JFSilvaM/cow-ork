@@ -44,8 +44,6 @@ export default function RegisterPage() {
       className="flex w-full items-center justify-center"
       onSubmit={handleSubmit}
     >
-      {/* {token && <Navigate to={from} />} */}
-
       <fieldset className="rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">
         <legend className="px-3 dark:text-white">
           <Typography size="xxl">Registrarse</Typography>

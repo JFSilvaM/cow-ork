@@ -97,6 +97,7 @@ export default function RegisterPage() {
           <Input
             id="email"
             name="email"
+            type="email"
             value={email}
             setValue={setEmail}
             placeholder="E-mail"
@@ -115,6 +116,7 @@ export default function RegisterPage() {
           <Input
             id="password"
             name="password"
+            type="password"
             value={password}
             setValue={setPassword}
             placeholder="Contraseña"
@@ -131,8 +133,9 @@ export default function RegisterPage() {
           </Typography>
 
           <Input
-            id="password"
+            id="password_confirmation"
             name="password_confirmation"
+            type="password"
             value={passwordConfirmation}
             setValue={setPasswordConfirmation}
             placeholder="Confirmar contraseña"

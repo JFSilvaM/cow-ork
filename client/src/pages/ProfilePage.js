@@ -135,6 +135,7 @@ export default function ProfilePage() {
               <Input
                 id="email"
                 name="email"
+                type="email"
                 value={email}
                 setValue={setEmail}
                 className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"

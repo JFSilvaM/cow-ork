@@ -55,6 +55,7 @@ export default function LoginPage() {
           <Input
             id="email"
             name="email"
+            type="email"
             value={email}
             setValue={setEmail}
             placeholder="E-mail"
@@ -73,6 +74,7 @@ export default function LoginPage() {
           <Input
             id="password"
             name="password"
+            type="password"
             value={password}
             setValue={setPassword}
             placeholder="Password"

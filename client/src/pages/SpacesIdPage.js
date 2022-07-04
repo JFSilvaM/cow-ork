@@ -38,38 +38,42 @@ export default function SpacesIdPage() {
           alt={space.name}
         />
 
-        <div className="flex flex-row justify-between gap-3">
-          <div className="flex w-full flex-col gap-3 divide-y-2 divide-dashed dark:divide-gray-400">
-            <Typography>{space.description}</Typography>
+        <div className="flex flex-col justify-between gap-3 lg:flex-row">
+          <div className="flex w-full flex-col divide-y-2 divide-dashed dark:divide-gray-400">
+            <Typography className="pb-2">{space.description}</Typography>
 
-            <Typography>{space.address}</Typography>
+            <Typography className="py-2">{space.address}</Typography>
 
-            <StarRating rating={space.rating} />
+            <StarRating className="py-2" rating={space.rating} />
 
-            <Typography>{space.capacity}</Typography>
+            <Typography className="py-2">{space.capacity}</Typography>
 
-            <Typography>{space.is_clean}</Typography>
+            <Typography className="py-2">{space.is_clean}</Typography>
 
-            <Typography>{space.type_name}</Typography>
+            <Typography className="py-2">{space.type_name}</Typography>
 
             <div className="flex gap-2">
               {space.service_names.map((service) => (
-                <p key={service}>{service}</p>
+                <p className="pt-2" key={service}>
+                  {service}
+                </p>
               ))}
             </div>
           </div>
 
           {token && (
             <aside className="flex h-full flex-col gap-3">
-              <div className="flex flex-col gap-5 rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
-                <Typography>{space.price}€</Typography>
+              <div className="flex flex-col rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
+                <Typography className="flex justify-center pb-5" size="xl">
+                  Reservar
+                </Typography>
 
                 <BookingForm spaceId={id} />
               </div>
 
               <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
                 <Typography className="flex justify-center pb-5" size="xl">
-                  Reporte
+                  Reportar
                 </Typography>
 
                 <ReportForm spaceId={id} />

@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800 dark:shadow-white">
-      <ul className="container mx-auto flex items-center justify-between py-3">
+      <ul className="container mx-auto flex items-center justify-between py-3 px-2">
         <li className="dark:text-white">
           <Link to="/">
             <img

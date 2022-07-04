@@ -4,6 +4,7 @@ import Avatar from "../components/Avatar";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
+import Typography from "../components/Typography";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
@@ -74,61 +75,144 @@ export default function ProfilePage() {
   };
 
   return (
-    <section>
-      <article className="flex flex-col space-y-4 border p-2">
-        <form onSubmit={handleSubmit}>
-          <Input
-            id="first_name"
-            name="first_name"
-            value={firstName}
-            setValue={setFirstName}
-          />
+    <section className="flex w-full items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full flex-col items-center justify-center gap-5 dark:text-white"
+      >
+        <div className="flex w-full justify-evenly gap-5">
+          <div className="flex flex-col items-center justify-center gap-3">
+            <Avatar size="xxxxl" src={`/images/avatars/${avatar}`} />
 
-          <Input
-            id="last_name"
-            name="last_name"
-            value={lastName}
-            setValue={setLastName}
-          />
+            <Input id="avatar" name="avatar" type="file" />
+          </div>
 
-          <Input id="email" name="email" value={email} setValue={setEmail} />
+          <div className="flex w-full flex-col">
+            <div className="flex w-2/4 gap-3">
+              <label className="block">
+                <Typography
+                  as="span"
+                  className="block text-slate-700 dark:text-white"
+                >
+                  Nombre
+                </Typography>
 
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            setValue={setPassword}
-          />
+                <Input
+                  id="first_name"
+                  name="first_name"
+                  value={firstName}
+                  setValue={setFirstName}
+                  className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                />
+              </label>
 
-          <Input
-            id="password_confirmation"
-            name="password_confirmation"
-            type="password"
-            value={passwordConfirmation}
-            setValue={setPasswordConfirmation}
-          />
+              <label className="block">
+                <Typography
+                  as="span"
+                  className="block text-slate-700 dark:text-white"
+                >
+                  Apellidos
+                </Typography>
 
-          <Input id="bio" name="bio" value={bio} setValue={setBio} multiline />
+                <Input
+                  id="last_name"
+                  name="last_name"
+                  value={lastName}
+                  setValue={setLastName}
+                  className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                />
+              </label>
+            </div>
 
-          <Avatar size="xxxl" src={`/images/avatars/${avatar}`} />
-          <Input id="avatar" name="avatar" type="file" />
+            <label className="block">
+              <Typography
+                as="span"
+                className="block text-slate-700 dark:text-white"
+              >
+                E-mail
+              </Typography>
 
-          <Button size="sm" shape="rounded">
-            Actualizar
-          </Button>
-        </form>
-        {successMessage && (
-          <Alert color="success" icon="success">
-            {successMessage.message}
-          </Alert>
-        )}
-        {errorMessage && (
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
-        )}
-      </article>
+              <Input
+                id="email"
+                name="email"
+                value={email}
+                setValue={setEmail}
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              />
+            </label>
+
+            <label className="block">
+              <Typography
+                as="span"
+                className="block text-slate-700 dark:text-white"
+              >
+                Contraseña
+              </Typography>
+
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                value={password}
+                setValue={setPassword}
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              />
+            </label>
+
+            <label className="block">
+              <Typography
+                as="span"
+                className="block text-slate-700 dark:text-white"
+              >
+                Confirmar contraseña
+              </Typography>
+
+              <Input
+                id="password_confirmation"
+                name="password_confirmation"
+                type="password"
+                value={passwordConfirmation}
+                setValue={setPasswordConfirmation}
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              />
+            </label>
+
+            <label className="block">
+              <Typography
+                as="span"
+                className="block text-slate-700 dark:text-white"
+              >
+                Biografía
+              </Typography>
+
+              <Input
+                id="bio"
+                name="bio"
+                value={bio}
+                setValue={setBio}
+                multiline
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              />
+            </label>
+          </div>
+        </div>
+
+        <Button size="sm" shape="rounded">
+          Actualizar
+        </Button>
+      </form>
+
+      {successMessage && (
+        <Alert color="success" icon="success">
+          {successMessage.message}
+        </Alert>
+      )}
+
+      {errorMessage && (
+        <Alert color="error" icon="error">
+          {errorMessage.message}
+        </Alert>
+      )}
     </section>
   );
 }

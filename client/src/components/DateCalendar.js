@@ -46,7 +46,7 @@ export default function DateCalendar({
             <ChevronLeftIcon />
           </span>
 
-          <div className="">
+          <div>
             <p className="text-center font-bold">
               {`${format(date, "MMMM", {
                 locale: es,
@@ -63,7 +63,7 @@ export default function DateCalendar({
           </span>
         </div>
 
-        <div className="grid grid-cols-7 items-center justify-center gap-4 px-2">
+        <div className="grid grid-cols-7 items-center justify-center gap-3 px-2">
           {dayNames.map((day) => (
             <div
               key={day}
@@ -85,7 +85,7 @@ export default function DateCalendar({
         ).map((week, i) => (
           <div
             key={i}
-            className="grid grid-cols-7 items-center justify-center gap-4 text-sm"
+            className="grid grid-cols-7 items-center justify-center gap-3 text-sm"
           >
             {eachDayOfInterval({
               start: startOfWeek(week, { locale: es }),

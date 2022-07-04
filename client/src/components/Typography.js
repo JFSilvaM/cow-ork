@@ -9,6 +9,18 @@ const sizes = {
   xxxxl: "text-4xl",
 };
 
+const weights = {
+  thin: "font-thin",
+  extralight: "font-extralight",
+  light: "font-light",
+  normal: "font-normal",
+  medium: "font-medium",
+  semibold: "font-semibold",
+  bold: "font-bold",
+  extrabold: "font-extrabold",
+  black: "font-black",
+};
+
 const alignments = {
   left: "text-left",
   center: "text-center",
@@ -19,13 +31,19 @@ const alignments = {
 export default function Typography({
   as = "p",
   size = "md",
+  weight = "normal",
   align = "left",
   children,
   ...props
 }) {
   const CustomTag = as;
 
-  props.className = [sizes[size], alignments[align], props.className]
+  props.className = [
+    sizes[size],
+    weights[weight],
+    alignments[align],
+    props.className,
+  ]
     .join(" ")
     .trim();
 

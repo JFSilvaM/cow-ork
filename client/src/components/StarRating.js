@@ -8,7 +8,7 @@ export default function StarRating({ rating }) {
           <StarIcon
             className={`${
               i < rating ? "fill-yellow-400" : "fill-yellow-100"
-            } h-8 w-8 stroke-black`}
+            } h-7 w-7 stroke-black`}
           />
         </button>
       ))}

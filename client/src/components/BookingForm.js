@@ -47,7 +47,7 @@ export default function BookingForm({ spaceId }) {
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-2"
       >
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <DatePicker
             id="start_date"
             name="start_date"

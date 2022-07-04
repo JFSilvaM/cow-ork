@@ -5,11 +5,13 @@ import ReportForm from "../components/ReportForm";
 import Spinner from "../components/Spinner";
 import StarRating from "../components/StarRating";
 import Typography from "../components/Typography";
+import { useAuth } from "../contexts/AuthContext";
 import useFetch from "../hooks/useFetch";
 
 export default function SpacesIdPage() {
   const { id } = useParams("id");
   const { data: space, loading, error } = useFetch(`/spaces/${id}`);
+  const { token } = useAuth();
 
   if (loading) {
     return <Spinner />;
@@ -57,21 +59,23 @@ export default function SpacesIdPage() {
             </div>
           </div>
 
-          <aside className="flex h-full flex-col gap-3">
-            <div className="flex flex-col gap-5 rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
-              <Typography>{space.price}€</Typography>
+          {token && (
+            <aside className="flex h-full flex-col gap-3">
+              <div className="flex flex-col gap-5 rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
+                <Typography>{space.price}€</Typography>
 
-              <BookingForm spaceId={id} />
-            </div>
+                <BookingForm spaceId={id} />
+              </div>
 
-            <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
-              <Typography className="flex justify-center pb-5" size="xl">
-                Reporte
-              </Typography>
+              <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
+                <Typography className="flex justify-center pb-5" size="xl">
+                  Reporte
+                </Typography>
 
-              <ReportForm spaceId={id} />
-            </div>
-          </aside>
+                <ReportForm spaceId={id} />
+              </div>
+            </aside>
+          )}
         </div>
       </article>
     </section>

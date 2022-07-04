@@ -39,7 +39,7 @@ export default function ReportForm({ spaceId }) {
     return <Spinner />;
   }
 
-  if (token && error) {
+  if (error) {
     return (
       <Alert color="error" icon="error">
         Error: {error.message}
@@ -48,52 +48,50 @@ export default function ReportForm({ spaceId }) {
   }
 
   return (
-    token && (
-      <article>
-        <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-          <Input
-            id="description"
-            name="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            multiline
-            placeholder="Información del reporte"
-            className="h-20 rounded-md border p-2"
-          />
+    <article>
+      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+        <Input
+          id="description"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          multiline
+          placeholder="Información del reporte"
+          className="h-20 rounded-md border p-2"
+        />
 
-          <select
-            id="report_category"
-            name="report_category"
-            onChange={(e) => setCategoryId(e.target.value)}
-            className="h-10 rounded-md px-2"
-            defaultValue=""
-            required
-          >
-            <option value="" disabled>
-              Selecciona la categoria
+        <select
+          id="report_category"
+          name="report_category"
+          onChange={(e) => setCategoryId(e.target.value)}
+          className="h-10 rounded-md px-2"
+          defaultValue=""
+          required
+        >
+          <option value="" disabled>
+            Selecciona la categoria
+          </option>
+          {categories.map((category) => (
+            <option value={category.id} key={category.id}>
+              {category.name}
             </option>
-            {categories.map((category) => (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          ))}
+        </select>
 
-          <div className="flex justify-center">
-            <Button size="sm" shape="rounded">
-              Reportar
-            </Button>
-          </div>
-        </form>
+        <div className="flex justify-center">
+          <Button size="sm" shape="rounded">
+            Reportar
+          </Button>
+        </div>
+      </form>
 
-        {errorMessage && (
-          <div className="flex justify-center pt-5">
-            <Alert color="error" icon="error">
-              {errorMessage}
-            </Alert>
-          </div>
-        )}
-      </article>
-    )
+      {errorMessage && (
+        <div className="flex justify-center pt-5">
+          <Alert color="error" icon="error">
+            {errorMessage}
+          </Alert>
+        </div>
+      )}
+    </article>
   );
 }

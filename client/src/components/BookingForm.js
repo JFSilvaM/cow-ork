@@ -42,41 +42,39 @@ export default function BookingForm({ spaceId }) {
   };
 
   return (
-    token && (
-      <article>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center gap-2"
-        >
-          <div className="flex gap-2">
-            <DatePicker
-              id="start_date"
-              name="start_date"
-              value={startDate}
-              setSelectedDate={setStartDate}
-            />
+    <article>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-2"
+      >
+        <div className="flex gap-2">
+          <DatePicker
+            id="start_date"
+            name="start_date"
+            value={startDate}
+            setSelectedDate={setStartDate}
+          />
 
-            <DatePicker
-              id="end_date"
-              name="end_date"
-              value={endDate}
-              setSelectedDate={setEndDate}
-            />
-          </div>
+          <DatePicker
+            id="end_date"
+            name="end_date"
+            value={endDate}
+            setSelectedDate={setEndDate}
+          />
+        </div>
 
-          <Button size="sm" shape="rounded">
-            Reservar
-          </Button>
-        </form>
+        <Button size="sm" shape="rounded">
+          Reservar
+        </Button>
+      </form>
 
-        {errorMessage && (
-          <div className="flex justify-center pt-5">
-            <Alert color="error" icon="error">
-              {errorMessage}
-            </Alert>
-          </div>
-        )}
-      </article>
-    )
+      {errorMessage && (
+        <div className="flex justify-center pt-5">
+          <Alert color="error" icon="error">
+            {errorMessage}
+          </Alert>
+        </div>
+      )}
+    </article>
   );
 }

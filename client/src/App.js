@@ -18,6 +18,7 @@ import SpaceCreatePage from "./pages/SpaceCreatePage";
 import SpacesIdPage from "./pages/SpacesIdPage";
 import SpaceTypesPage from "./pages/SpaceTypesPage";
 import UsersPage from "./pages/UsersPage";
+import SpaceEditPage from "./pages/SpaceEditPage";
 
 export default function App() {
   return (
@@ -52,6 +53,7 @@ export default function App() {
                 />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/spaces/new" element={<SpaceCreatePage />} />
+                <Route path="/spaces/:id/edit" element={<SpaceEditPage />} />
                 <Route path="/space_types" element={<SpaceTypesPage />} />
                 <Route path="/users" element={<UsersPage />} />
               </Route>

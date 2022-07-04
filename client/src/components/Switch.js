@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Switch({ disabled = false, checked, ...props }) {
   const [toggle, setToggle] = useState(checked);
+
+  useEffect(() => {
+    setToggle(checked);
+  }, [checked]);
 
   return (
     <label className={`relative h-8 w-14 ${disabled ? "opacity-75" : ""}`}>

@@ -117,14 +117,16 @@ const spaceValidation = async (body) => {
       "number.min": messages.SPACE_CAPACITY_MIN_LENGTH,
     }),
     type_id: Joi.number().min(1).required().messages({
+      "number.base": messages.TYPE_ID_REQUIRED,
       "number.empty": messages.TYPE_ID_REQUIRED,
-      "any.required": messages.TYPE_ID_REQUIRED,
+      "number.required": messages.TYPE_ID_REQUIRED,
       "number.min": messages.TYPE_ID_MIN_LENGTH,
     }),
     services: Joi.array().items(Joi.number()).min(1).required().messages({
       "array.empty": messages.SPACE_SERVICES_REQUIRED,
       "array.min": messages.SPACE_SERVICES_MIN_LENGTH,
     }),
+    is_clean: Joi.number().valid(0, 1).required(),
   });
 
   return await schema.validateAsync(body);

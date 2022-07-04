@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Nunito Sans", sans-serif;
+  }
+}
+
+@layer components {
+  .slider {
+    @apply absolute inset-0 cursor-pointer rounded-3xl;
+  }
+
+  .slider:before {
+    @apply absolute left-1 bottom-1 h-6 w-6 rounded-full bg-white transition duration-500 content-[''];
+  }
+
+  input:checked + .slider:before {
+    @apply translate-x-6;
+  }
+}

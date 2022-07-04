@@ -3,7 +3,7 @@ const pool = require("../database/getPool")();
 const findAllSpaces = async (queryParams) => {
   const query = `
     SELECT sp.*, st.name as type_name, IFNULL(ROUND(AVG(sr.rating), 0), 0) AS rating FROM (
-      SELECT sp.*, JSON_ARRAYAGG(se.name) AS service_names FROM spaces sp
+      SELECT sp.*, JSON_ARRAYAGG(se.id) AS service_ids, JSON_ARRAYAGG(se.name) AS service_names FROM spaces sp
       INNER JOIN space_services ss ON sp.id = ss.space_id
       INNER JOIN services se ON ss.service_id = se.id
       GROUP BY sp.id
@@ -29,7 +29,7 @@ const findAllSpaces = async (queryParams) => {
 const findOneSpace = async (id) => {
   const query = `
     SELECT sp.*, st.name as type_name, IFNULL(ROUND(AVG(sr.rating), 0), 0) AS rating FROM (
-      SELECT sp.*, JSON_ARRAYAGG(se.name) AS service_names FROM spaces sp
+      SELECT sp.*, JSON_ARRAYAGG(se.id) AS service_ids, JSON_ARRAYAGG(se.name) AS service_names FROM spaces sp
       INNER JOIN space_services ss ON sp.id = ss.space_id
       INNER JOIN services se ON ss.service_id = se.id
       GROUP BY sp.id
@@ -83,6 +83,17 @@ const updateSpace = async (space, id) => {
     space.type_id,
     id,
   ]);
+
+  const deleteServices = "DELETE FROM space_services WHERE space_id = ?";
+
+  await pool.query(deleteServices, [id]);
+
+  const insertServices =
+    "INSERT INTO space_services (space_id, service_id) VALUES ?";
+
+  const services = space.services.map((serviceId) => [id, serviceId]);
+
+  await pool.query(insertServices, [services]);
 
   return affectedRows;
 };

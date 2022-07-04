@@ -7,7 +7,6 @@ import Alert from "./Alert";
 import Button from "./Button";
 import Input from "./Input";
 import Spinner from "./Spinner";
-import Typography from "./Typography";
 
 export default function DashboardForm({ fetchUrl }) {
   const [value, setValue] = useState("");
@@ -40,6 +39,46 @@ export default function DashboardForm({ fetchUrl }) {
       const newNames = await fetchEndpoint(fetchUrl, token);
 
       setValues(newNames);
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
+  const handleEdit = async (e, id) => {
+    e.preventDefault();
+
+    try {
+      const body = { name: value };
+      const data = await fetchEndpoint(`${fetchUrl}/${id}`, token, "PUT", body);
+
+      if (data?.status === "error") {
+        throw new Error(data.message);
+      }
+
+      const values = await fetchEndpoint(fetchUrl, token);
+
+      setValues(values);
+      setValue("");
+      setErrorMessage("");
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+
+    try {
+      const data = await fetchEndpoint(`${fetchUrl}/${id}`, token, "DELETE");
+
+      if (data?.status === "error") {
+        throw new Error(data.message);
+      }
+
+      const values = await fetchEndpoint(fetchUrl, token);
+
+      setValues(values);
+      setErrorMessage("");
     } catch (error) {
       setErrorMessage(error);
     }
@@ -81,17 +120,11 @@ export default function DashboardForm({ fetchUrl }) {
       <ul>
         {values &&
           values.map((v) => (
-            <li key={v.id} className="flex">
-              <Typography>{v.name}</Typography>
-              <AdminTools
-                fetchUrl={fetchUrl}
-                id={v.id}
-                value={value}
-                setValue={setValue}
-                setValues={setValues}
-                setErrorMessage={setErrorMessage}
-              />
-            </li>
+            <AdminTools
+              value={v}
+              handleEdit={(e) => handleEdit(e, v.id)}
+              handleDelete={(e) => handleDelete(e, v.id)}
+            />
           ))}
       </ul>
     </article>

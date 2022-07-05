@@ -41,7 +41,7 @@ export default function SearchBox({ data }) {
         {filteredResults.length > 0 ? (
           filteredResults.map((result) => (
             <Link
-              className="2xl:1/6 mb-3 w-full px-2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+              className="2xl:1/6 mb-3 w-full px-2 focus:outline-none sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
               to={`spaces/${result.id}`}
               key={result.id}
             >

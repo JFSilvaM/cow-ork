@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
+import formatDate from "../helpers/formatDate";
 import useFetch from "../hooks/useFetch";
 
 export default function BookingsPage() {
@@ -29,9 +30,9 @@ export default function BookingsPage() {
           <Typography>{booking.price}</Typography>
           <Typography>{booking.is_clean}</Typography>
           <Typography>{booking.is_paid}</Typography>
-          <Typography>{booking.created_at}</Typography>
-          <Typography>{booking.start_date}</Typography>
-          <Typography>{booking.end_date}</Typography>
+          <Typography>{formatDate(booking.created_at)}</Typography>
+          <Typography>{formatDate(booking.start_date)}</Typography>
+          <Typography>{formatDate(booking.end_date)}</Typography>
         </article>
       ))}
     </section>

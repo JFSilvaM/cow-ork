@@ -55,6 +55,7 @@ export default function ProfilePage() {
         password,
         password_confirmation: passwordConfirmation,
         bio,
+        avatar: avatar || "default.png",
       };
 
       const data = await fetchEndpoint(

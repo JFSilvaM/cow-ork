@@ -185,6 +185,9 @@ const userValidation = async (body) => {
         "any.required": messages.PASSWORD_CONFIRMATION_REQUIRED,
         "any.only": messages.PASSWORD_CONFIRMATION_VALID,
       }),
+    avatar: Joi.any().required().messages({
+      "any.required": messages.USER_AVATAR_REQUIRED,
+    }),
   });
 
   return await schema.validateAsync(body);
@@ -204,6 +207,23 @@ const loginValidation = async (body) => {
       "any.required": messages.PASSWORD_REQUIRED,
       "string.min": messages.PASSWORD_MIN_LENGTH,
       "string.max": messages.PASSWORD_MAX_LENGTH,
+    }),
+  });
+
+  return await schema.validateAsync(body);
+};
+
+const spaceRatingValidation = async (body) => {
+  const schema = Joi.object({
+    space_id: Joi.number().required().messages({
+      "number.base": messages.EMAIL_REQUIRED,
+      "number.required": messages.EMAIL_REQUIRED,
+    }),
+    rating: Joi.number().min(1).max(5).required().messages({
+      "number.base": messages.PASSWORD_REQUIRED,
+      "number.required": messages.PASSWORD_REQUIRED,
+      "number.min": messages.PASSWORD_REQUIRED,
+      "number.max": messages.PASSWORD_REQUIRED,
     }),
   });
 
@@ -254,6 +274,7 @@ module.exports = {
   reportCategoryValidation,
   reportValidation,
   serviceValidation,
+  spaceRatingValidation,
   spaceValidation,
   spaceTypeValidation,
   userValidation,

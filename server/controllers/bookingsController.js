@@ -154,22 +154,6 @@ const remove = async (req, res, next) => {
   }
 };
 
-const checkoutSuccess = async (req, res, next) => {
-  try {
-    res.json({ message: BOOKING_CREATED });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const checkoutCanceled = async (req, res, next) => {
-  try {
-    res.json({ message: BOOKING_NOT_CREATED });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const templateContent = (data) => ({
   fullName: data.first_name + " " + data.last_name,
   email: data.email,
@@ -187,6 +171,4 @@ module.exports = {
   create,
   update,
   remove,
-  checkoutSuccess,
-  checkoutCanceled,
 };

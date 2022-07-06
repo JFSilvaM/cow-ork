@@ -4,18 +4,38 @@ import BookingIcon from "./icons/BookingIcons";
 import ReportIcon from "./icons/ReportIcon";
 import LogoutIcon from "./icons/LogoutIcon";
 import { Link } from "react-router-dom";
+import Avatar from "./Avatar";
+import { useEffect, useState } from "react";
+import fetchEndpoint from "../helpers/fetchEndpoint";
 
 export default function Dropdown() {
-  const { setToken } = useAuth();
+  const { token, setToken } = useAuth();
+  const [fullName, setFullName] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!token) {
+        return;
+      }
+
+      const data = await fetchEndpoint("/users/profile", token);
+
+      if (data?.status === "error") {
+        console.error(data.message);
+      }
+
+      setFullName(`${data.first_name} ${data.last_name}`);
+      setAvatar(data.avatar);
+    };
+
+    fetchUser();
+  }, [token, setToken]);
 
   return (
     <Menu>
       <Menu.Button className="focus:outline-none">
-        <img
-          src="images/avatars/default.png"
-          alt="Avatar del usuario"
-          className="w-12 rounded-full border p-1  hover:opacity-90"
-        />
+        <Avatar src={`/images/avatars/${avatar}`} alt="Avatar" />
       </Menu.Button>
 
       <Transition
@@ -38,7 +58,7 @@ export default function Dropdown() {
                       : "dark:text-white"
                   } flex w-full items-center gap-2 rounded-md p-5`}
                 >
-                  Nombre de usuario
+                  {fullName}
                 </Link>
               )}
             </Menu.Item>

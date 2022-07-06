@@ -34,8 +34,12 @@ export default function Dropdown() {
 
   return (
     <Menu>
-      <Menu.Button className="focus:outline-none">
-        <Avatar src={`/images/avatars/${avatar}`} alt="Avatar" />
+      <Menu.Button className="h-12 w-12 overflow-hidden rounded-full border-2 border-indigo-500 bg-white focus:outline-none dark:border-emerald-500">
+        <Avatar
+          src={`/images/avatars/${avatar}`}
+          alt="Avatar"
+          className="h-full w-full"
+        />
       </Menu.Button>
 
       <Transition
@@ -46,33 +50,35 @@ export default function Dropdown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-1 w-72 divide-y divide-gray-100 rounded-md bg-white p-5 text-slate-700 shadow-2xl ring-1 ring-gray-200 focus:outline-none dark:bg-gray-700">
-          <div className="pb-1">
+        <Menu.Items className="absolute right-0 ml-2 mt-1 w-72 divide-y divide-gray-100 rounded-md bg-white p-5 text-slate-800 shadow-2xl ring-1 ring-gray-200 focus:outline-none dark:bg-gray-700">
+          <div className="pb-2">
             <Menu.Item>
               {({ active }) => (
                 <Link
                   to="/profile"
                   className={`${
                     active
-                      ? "bg-gray-500 bg-opacity-10 dark:bg-gray-500 dark:text-white"
-                      : "dark:text-white"
-                  } flex w-full items-center gap-2 rounded-md p-5`}
+                      ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
+                      : "dark:text-slate-200"
+                  } flex w-full items-center justify-center gap-5 rounded-md p-3`}
                 >
+                  <Avatar src={`/images/avatars/${avatar}`} alt="Avatar" />
+
                   {fullName}
                 </Link>
               )}
             </Menu.Item>
           </div>
 
-          <div className="py-1">
+          <div className="py-2">
             <Menu.Item>
               {({ active }) => (
                 <Link
                   to="/bookings"
                   className={`${
                     active
-                      ? "bg-gray-500 bg-opacity-10 dark:bg-gray-500 dark:text-white"
-                      : "dark:text-white"
+                      ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
+                      : "dark:text-slate-200"
                   } flex w-full items-center gap-2 rounded-md p-2`}
                 >
                   <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
@@ -89,8 +95,8 @@ export default function Dropdown() {
                   to="/reports"
                   className={`${
                     active
-                      ? "bg-gray-500 bg-opacity-10 dark:bg-gray-500 dark:text-white"
-                      : "dark:text-white"
+                      ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
+                      : "dark:text-slate-200"
                   } flex w-full items-center gap-2 rounded-md p-2`}
                 >
                   <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
@@ -102,14 +108,14 @@ export default function Dropdown() {
             </Menu.Item>
           </div>
 
-          <div className="pt-1">
+          <div className="pt-2">
             <Menu.Item>
               {({ active }) => (
                 <button
                   className={`${
                     active
-                      ? "bg-gray-500 bg-opacity-10 dark:bg-gray-500 dark:text-white"
-                      : "dark:text-white"
+                      ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
+                      : "dark:text-slate-200"
                   } flex w-full items-center gap-2 rounded-md p-2`}
                   onClick={() => setToken("")}
                 >

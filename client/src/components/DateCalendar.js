@@ -37,7 +37,7 @@ export default function DateCalendar({
   return (
     <div className="absolute z-10 mt-2 w-full">
       <div className="flex flex-col items-center justify-center rounded-t bg-indigo-600 py-2 dark:bg-emerald-600">
-        <div className="mb-2 flex w-full items-center justify-between border-b border-indigo-200 px-2 pb-2 text-gray-200 dark:border-emerald-200">
+        <div className="mb-2 flex w-full items-center justify-between border-b border-indigo-200 px-2 pb-2 text-slate-200 dark:border-emerald-200">
           <span
             className="rounded-full p-1"
             onClick={() => handleMonthChange(subMonths(date, 1))}
@@ -67,7 +67,7 @@ export default function DateCalendar({
           {dayNames.map((day) => (
             <div
               key={day}
-              className="h-6 w-6 text-center font-bold text-gray-200"
+              className="h-6 w-6 text-center font-bold text-slate-200"
             >
               {day}
             </div>
@@ -98,7 +98,7 @@ export default function DateCalendar({
                   day.getDate() === selectedDate.getDate()
                     ? "rounded-full bg-indigo-600 font-bold text-white dark:bg-emerald-600"
                     : day.getMonth() === date.getMonth()
-                    ? "text-black"
+                    ? "text-slate-800"
                     : "text-gray-400"
                 }`}
                 aria-label={day}

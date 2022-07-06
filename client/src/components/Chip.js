@@ -12,7 +12,7 @@ const colors = {
 export default function Chip({ children, color }) {
   return (
     <div className={`rounded-full ${colors[color]} p-[2px]`}>
-      <div className="px-3 text-sm text-white">{children}</div>
+      <div className="px-3 text-sm text-slate-800">{children}</div>
     </div>
   );
 }

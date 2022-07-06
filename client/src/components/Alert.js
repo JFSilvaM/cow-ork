@@ -40,7 +40,7 @@ export default function Alert({
   return (
     isOpen && (
       <div
-        className={`flex w-96 justify-between rounded px-4 py-2 ${variants[variant][color]}`}
+        className={`flex w-full justify-between rounded px-4 py-2 ${variants[variant][color]}`}
         role="alert"
       >
         <div className="flex items-center">

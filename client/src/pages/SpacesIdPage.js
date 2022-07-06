@@ -73,7 +73,7 @@ export default function SpacesIdPage() {
 
   return (
     <section className="flex w-full flex-col items-center px-3 lg:px-0">
-      <article className="flex w-full flex-col justify-center gap-5 dark:text-white lg:w-3/4">
+      <article className="flex w-full flex-col justify-center gap-5 dark:text-slate-200 lg:w-3/4">
         <Typography as="h4" size="xxxl">
           {space.name}
         </Typography>
@@ -118,7 +118,7 @@ export default function SpacesIdPage() {
 
           {token && (
             <aside className="flex h-full flex-col gap-3">
-              <div className="flex flex-col rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
+              <div className="flex flex-col rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-slate-800">
                 <Typography className="flex justify-center pb-5" size="xl">
                   Reservar
                 </Typography>
@@ -126,7 +126,7 @@ export default function SpacesIdPage() {
                 <BookingForm spaceId={id} />
               </div>
 
-              <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-black">
+              <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-slate-800">
                 <Typography className="flex justify-center pb-5" size="xl">
                   Reportar
                 </Typography>

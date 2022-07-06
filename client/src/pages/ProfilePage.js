@@ -76,25 +76,24 @@ export default function ProfilePage() {
   };
 
   return (
-    <section className="flex w-full items-center">
+    <section className="flex w-full items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="flex w-full flex-col items-center justify-center gap-5 dark:text-white"
+        className="flex w-full flex-col items-center gap-5 text-slate-800 dark:text-slate-200"
       >
-        <div className="flex w-full justify-evenly gap-5">
-          <div className="flex flex-col items-center justify-center gap-3">
-            <Avatar size="xxxxl" src={`/images/avatars/${avatar}`} />
+        <div className="flex w-full flex-col gap-5 px-3 md:w-fit md:flex-row md:gap-10">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <div className="border-2 p-2">
+              <Avatar size="xxxxl" src={`/images/avatars/${avatar}`} />
+            </div>
 
             <Input id="avatar" name="avatar" type="file" />
           </div>
 
-          <div className="flex w-full flex-col">
-            <div className="flex w-2/4 gap-3">
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 md:flex-row">
               <label className="block">
-                <Typography
-                  as="span"
-                  className="block text-slate-700 dark:text-white"
-                >
+                <Typography as="span" className="block">
                   Nombre
                 </Typography>
 
@@ -103,15 +102,12 @@ export default function ProfilePage() {
                   name="first_name"
                   value={firstName}
                   setValue={setFirstName}
-                  className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-600 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
                 />
               </label>
 
               <label className="block">
-                <Typography
-                  as="span"
-                  className="block text-slate-700 dark:text-white"
-                >
+                <Typography as="span" className="block">
                   Apellidos
                 </Typography>
 
@@ -120,16 +116,13 @@ export default function ProfilePage() {
                   name="last_name"
                   value={lastName}
                   setValue={setLastName}
-                  className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-600 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
                 />
               </label>
             </div>
 
             <label className="block">
-              <Typography
-                as="span"
-                className="block text-slate-700 dark:text-white"
-              >
+              <Typography as="span" className="block">
                 E-mail
               </Typography>
 
@@ -139,15 +132,12 @@ export default function ProfilePage() {
                 type="email"
                 value={email}
                 setValue={setEmail}
-                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-600 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
               />
             </label>
 
             <label className="block">
-              <Typography
-                as="span"
-                className="block text-slate-700 dark:text-white"
-              >
+              <Typography as="span" className="block">
                 Contraseña
               </Typography>
 
@@ -157,15 +147,12 @@ export default function ProfilePage() {
                 type="password"
                 value={password}
                 setValue={setPassword}
-                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-600 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
               />
             </label>
 
             <label className="block">
-              <Typography
-                as="span"
-                className="block text-slate-700 dark:text-white"
-              >
+              <Typography as="span" className="block">
                 Confirmar contraseña
               </Typography>
 
@@ -175,15 +162,12 @@ export default function ProfilePage() {
                 type="password"
                 value={passwordConfirmation}
                 setValue={setPasswordConfirmation}
-                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-600 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
               />
             </label>
 
             <label className="block">
-              <Typography
-                as="span"
-                className="block text-slate-700 dark:text-white"
-              >
+              <Typography as="span" className="block">
                 Biografía
               </Typography>
 
@@ -193,28 +177,30 @@ export default function ProfilePage() {
                 value={bio}
                 setValue={setBio}
                 multiline
-                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-600 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
               />
             </label>
+
+            <div className="flex flex-col items-end gap-2">
+              <Button size="sm" shape="rounded">
+                Actualizar
+              </Button>
+
+              {successMessage && (
+                <Alert color="success" icon="success" duration="5">
+                  {successMessage.message}
+                </Alert>
+              )}
+
+              {errorMessage && (
+                <Alert color="error" icon="error">
+                  {errorMessage.message}
+                </Alert>
+              )}
+            </div>
           </div>
         </div>
-
-        <Button size="sm" shape="rounded">
-          Actualizar
-        </Button>
       </form>
-
-      {successMessage && (
-        <Alert color="success" icon="success">
-          {successMessage.message}
-        </Alert>
-      )}
-
-      {errorMessage && (
-        <Alert color="error" icon="error">
-          {errorMessage.message}
-        </Alert>
-      )}
     </section>
   );
 }

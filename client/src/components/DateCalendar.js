@@ -6,7 +6,6 @@ import {
   endOfMonth,
   endOfWeek,
   format,
-  getYear,
   startOfMonth,
   startOfWeek,
   subMonths,
@@ -17,16 +16,16 @@ import ChevronLeftIcon from "./icons/ChevronLeftIcon";
 import ChevronRightIcon from "./icons/ChevronRightIcon";
 
 export default function DateCalendar({
-  selectedDate,
+  selectedDateRef,
   setSelectedDate,
   setIsCalendarOpen,
 }) {
-  const [date, setDate] = useState(selectedDate);
+  const [date, setDate] = useState(selectedDateRef);
 
   const dayNames = ["L", "M", "X", "J", "V", "S", "D"];
 
   const handleDayChange = (date) => {
-    setSelectedDate(new Date(date));
+    setSelectedDate(date);
     setIsCalendarOpen(false);
   };
 
@@ -48,9 +47,9 @@ export default function DateCalendar({
 
           <div>
             <p className="text-center font-bold">
-              {`${format(date, "MMMM", {
+              {`${format(date, "MMMM yyyy", {
                 locale: es,
-              }).toUpperCase()} ${getYear(date)}`}
+              }).toUpperCase()}`}
             </p>
           </div>
 
@@ -94,8 +93,8 @@ export default function DateCalendar({
               <div
                 key={j}
                 className={`flex h-6 w-6 cursor-pointer items-center justify-center text-center ${
-                  day.getMonth() === selectedDate.getMonth() &&
-                  day.getDate() === selectedDate.getDate()
+                  day.getMonth() === selectedDateRef.getMonth() &&
+                  day.getDate() === selectedDateRef.getDate()
                     ? "rounded-full bg-indigo-600 font-bold text-white dark:bg-emerald-600"
                     : day.getMonth() === date.getMonth()
                     ? "text-slate-800"

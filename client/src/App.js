@@ -9,16 +9,15 @@ import Navbar from "./components/Navbar";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
-import ReportCategoriesPage from "./pages/ReportCategoriesPage";
 import ReportsPage from "./pages/ReportsPage";
 import RequireAuth from "./components/RequireAuth";
 import RequireGuest from "./components/RequireGuest";
-import ServicesPage from "./pages/ServicesPage";
 import SpaceCreatePage from "./pages/SpaceCreatePage";
 import SpacesIdPage from "./pages/SpacesIdPage";
-import SpaceTypesPage from "./pages/SpaceTypesPage";
 import UsersPage from "./pages/UsersPage";
 import SpaceEditPage from "./pages/SpaceEditPage";
+import BookingEditPage from "./pages/BookingEditPage";
+import ReportEditPage from "./pages/ReportEditPage";
 
 export default function App() {
   return (
@@ -45,16 +44,15 @@ export default function App() {
 
               <Route path="/" element={<RequireAuth admin />}>
                 <Route path="/dashboard" element={<AdminDashboardPage />} />
-                <Route path="/bookings/all" element={<BookingsPage />} />
-                <Route path="/reports/all" element={<ReportsPage />} />
                 <Route
-                  path="/report_categories"
-                  element={<ReportCategoriesPage />}
+                  path="/bookings/:id/edit"
+                  element={<BookingEditPage />}
                 />
-                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/bookings/all" element={<BookingsPage />} />
+                <Route path="/reports/:id:/edit" element={<ReportEditPage />} />
+                <Route path="/reports/all" element={<ReportsPage />} />
                 <Route path="/spaces/new" element={<SpaceCreatePage />} />
                 <Route path="/spaces/:id/edit" element={<SpaceEditPage />} />
-                <Route path="/space_types" element={<SpaceTypesPage />} />
                 <Route path="/users" element={<UsersPage />} />
               </Route>
 

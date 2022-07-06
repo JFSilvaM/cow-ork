@@ -66,8 +66,6 @@ export default function SpaceEditPage() {
         is_clean: isClean ? 1 : 0,
       };
 
-      console.log(body);
-
       const data = await fetchEndpoint(`/spaces/${id}`, token, "PUT", body);
 
       if (data?.status === "error") {

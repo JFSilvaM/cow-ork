@@ -31,7 +31,7 @@ export default function SearchBox({ data }) {
   return (
     <section className="my-3 flex w-full flex-col gap-5">
       <input
-        className="mx-2 rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+        className="mx-2 rounded-md bg-gray-200 p-2 px-3 shadow-sm placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
         placeholder="Buscar..."
         value={search}
         onChange={handleChange}

@@ -25,7 +25,7 @@ export default function DatePicker({ setSelectedDate, value, ...props }) {
   return (
     <div className="relative w-fit" ref={calendarRef}>
       <input
-        className="cursor-pointer appearance-none rounded border-2 border-gray-200 bg-gray-200 py-2 px-4 text-center text-gray-600 focus:border-gray-400 focus:bg-white focus:outline-none"
+        className="cursor-pointer appearance-none rounded border-2 border-gray-200 bg-gray-200 py-2 px-4 text-center text-slate-800 focus:border-gray-400 focus:bg-white focus:outline-none"
         type="text"
         value={value}
         onClick={() => setIsCalendarOpen(true)}

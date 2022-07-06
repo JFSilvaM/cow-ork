@@ -40,14 +40,14 @@ export default function LoginPage() {
       onSubmit={handleSubmit}
     >
       <fieldset className="rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">
-        <legend className="px-3 dark:text-white">
+        <legend className="px-3 text-slate-800 dark:text-slate-200">
           <Typography size="xxl">Iniciar sesión</Typography>
         </legend>
 
         <label className="mb-5 block">
           <Typography
             as="span"
-            className="block text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white"
+            className="block text-slate-800 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-slate-200"
           >
             E-mail
           </Typography>
@@ -59,14 +59,14 @@ export default function LoginPage() {
             value={email}
             setValue={setEmail}
             placeholder="E-mail"
-            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 
         <label className="mb-5 block">
           <Typography
             as="span"
-            className="block text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-white"
+            className="block text-slate-800 after:ml-0.5 after:text-red-500 after:content-['*'] dark:text-slate-200"
           >
             Contraseña
           </Typography>
@@ -78,7 +78,7 @@ export default function LoginPage() {
             value={password}
             setValue={setPassword}
             placeholder="Password"
-            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 
@@ -90,7 +90,7 @@ export default function LoginPage() {
 
         <Typography
           align="center"
-          className="text-slate-700 dark:text-slate-100"
+          className="text-slate-800 dark:text-slate-200"
         >
           ¿No tienes cuenta?{" "}
           <Link

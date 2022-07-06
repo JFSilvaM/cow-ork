@@ -145,5 +145,12 @@
   "CATEGORY_ID_REQUIRED": "El id de la categoría es requerido",
   "CATEGORY_ID_MIN_LENGTH": "El id de la categoría debe ser mayor que 1",
   "TYPE_ID_REQUIRED": "El id del tipo de espacio es requerido",
-  "TYPE_ID_MIN_LENGTH": "El id del tipo de espacio debe ser mayor que 1"
+  "TYPE_ID_MIN_LENGTH": "El id del tipo de espacio debe ser mayor que 1",
+
+  "RATING_REQUIRED": "La puntuación es requerida",
+  "RATING_MIN_LENGTH": "La puntuación mínima es de 1",
+  "RATING_MAX_LENGTH": "La puntuación máxima es de 5",
+  "RATING_NOT_FOUND": "La puntuación no existe",
+  "RATING_UPDATED": "La puntuación ha sido actualizada",
+  "RATING_NOT_UPDATED": "La puntuación no ha sido actualizada"
 }

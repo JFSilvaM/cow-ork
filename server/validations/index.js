@@ -216,14 +216,14 @@ const loginValidation = async (body) => {
 const spaceRatingValidation = async (body) => {
   const schema = Joi.object({
     space_id: Joi.number().required().messages({
-      "number.base": messages.EMAIL_REQUIRED,
-      "number.required": messages.EMAIL_REQUIRED,
+      "number.base": messages.SPACE_ID_REQUIRED,
+      "number.required": messages.SPACE_ID_REQUIRED,
     }),
     rating: Joi.number().min(1).max(5).required().messages({
-      "number.base": messages.PASSWORD_REQUIRED,
-      "number.required": messages.PASSWORD_REQUIRED,
-      "number.min": messages.PASSWORD_REQUIRED,
-      "number.max": messages.PASSWORD_REQUIRED,
+      "number.base": messages.RATING_REQUIRED,
+      "number.required": messages.RATING_REQUIRED,
+      "number.min": messages.RATING_MIN_LENGTH,
+      "number.max": messages.RATING_MAX_LENGTH,
     }),
   });
 

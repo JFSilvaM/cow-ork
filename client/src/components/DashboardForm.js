@@ -7,6 +7,7 @@ import Alert from "./Alert";
 import Button from "./Button";
 import Input from "./Input";
 import Spinner from "./Spinner";
+import Typography from "./Typography";
 
 export default function DashboardForm({ fetchUrl }) {
   const [value, setValue] = useState("");
@@ -98,12 +99,13 @@ export default function DashboardForm({ fetchUrl }) {
 
   return (
     <article>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mb-4 flex px-2">
         <Input
           id="name"
           name="name"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          className="mr-2 w-full"
         />
 
         <Button size="sm" shape="rounded">
@@ -112,19 +114,27 @@ export default function DashboardForm({ fetchUrl }) {
       </form>
 
       {errorMessage && (
-        <Alert color="error" icon="error">
-          {errorMessage.message}
-        </Alert>
+        <aside className="mb-4 px-2">
+          <Alert color="error" icon="error">
+            {errorMessage.message}
+          </Alert>
+        </aside>
       )}
 
       <ul>
         {values &&
           values.map((v) => (
-            <AdminTools
-              value={v}
-              handleEdit={(e) => handleEdit(e, v.id)}
-              handleDelete={(e) => handleDelete(e, v.id)}
-            />
+            <li
+              key={v.id}
+              className="flex items-center justify-between rounded p-2 hover:bg-slate-100 dark:hover:bg-slate-700"
+            >
+              <Typography>{v.name}</Typography>
+
+              <AdminTools
+                handleEdit={(e) => handleEdit(e, v.id)}
+                handleDelete={(e) => handleDelete(e, v.id)}
+              />
+            </li>
           ))}
       </ul>
     </article>

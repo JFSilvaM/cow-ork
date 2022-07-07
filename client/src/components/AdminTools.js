@@ -1,20 +1,30 @@
+import Button from "./Button";
 import DeleteIcon from "./icons/DeleteIcon";
 import EditIcon from "./icons/EditIcon";
-import Typography from "./Typography";
 
-export default function AdminTools({ value, handleDelete, handleEdit }) {
+export default function AdminTools({ handleDelete, handleEdit }) {
   return (
-    <li key={value.id} className="flex">
-      <Typography>{value.name}</Typography>
+    <aside className="flex space-x-2">
+      <Button
+        variant="flat"
+        size="xs"
+        shape="rounded"
+        title="Editar"
+        onClick={handleEdit}
+      >
+        <EditIcon />
+      </Button>
 
-      <section className="flex space-x-2">
-        <button title="Editar" onClick={handleEdit}>
-          <EditIcon />
-        </button>
-        <button title="Borrar" onClick={handleDelete}>
-          <DeleteIcon />
-        </button>
-      </section>
-    </li>
+      <Button
+        variant="flat"
+        color="error"
+        size="xs"
+        shape="rounded"
+        title="Borrar"
+        onClick={handleDelete}
+      >
+        <DeleteIcon />
+      </Button>
+    </aside>
   );
 }

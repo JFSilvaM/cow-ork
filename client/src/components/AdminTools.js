@@ -4,7 +4,7 @@ import EditIcon from "./icons/EditIcon";
 
 export default function AdminTools({ handleDelete, handleEdit }) {
   return (
-    <aside className="flex gap-3">
+    <aside className="flex space-x-2">
       <Button
         variant="flat"
         size="xs"

@@ -1,4 +1,8 @@
-const color = "text-slate-800 dark:text-slate-200";
+const colors = {
+  base: "text-slate-800 dark:text-slate-200",
+  muted: "text-slate-500 dark:text-slate-600",
+  primary: "text-indigo-800 dark:text-emerald-800",
+};
 
 const sizes = {
   xs: "text-xs",
@@ -32,6 +36,7 @@ const alignments = {
 
 export default function Typography({
   as = "p",
+  color = "base",
   size = "md",
   weight = "normal",
   align = "left",
@@ -41,7 +46,7 @@ export default function Typography({
   const CustomTag = as;
 
   props.className = [
-    color,
+    colors[color] || color,
     sizes[size],
     weights[weight],
     alignments[align],

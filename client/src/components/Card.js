@@ -4,41 +4,37 @@ import Chip from "../components/Chip";
 
 export default function Card({ space }) {
   return (
-    <article className="h-full rounded-3xl p-2 shadow-xl transition-all duration-500 ease-in-out hover:bg-gray-800 hover:text-slate-200 hover:shadow-none dark:bg-gray-700 dark:text-slate-200 dark:hover:bg-white dark:hover:text-slate-800">
-      <div className="relative">
-        <div className="overflow-hidden rounded-2xl">
-          <img
-            className="h-72 w-full object-cover sm:h-56"
-            src={`/images/spaces/${space.image}`}
-            alt={space.name}
-          />
-        </div>
-
-        <div className="absolute top-0 left-0 right-0 flex flex-row">
-          <div className="flex h-10 w-full items-center justify-between rounded-t-2xl bg-gray-500 bg-opacity-20 px-2 text-slate-800 shadow">
-            <Typography>{space.name}</Typography>
-
-            <Typography size="sm" weight="bold">
-              {space.price}€
-            </Typography>
-          </div>
-        </div>
+    <article className="h-full rounded shadow transition-all duration-500 ease-in-out hover:bg-slate-100 hover:shadow-none dark:bg-gray-700 dark:text-slate-200 dark:hover:bg-slate-700">
+      <div className="overflow-hidden rounded">
+        <img
+          className="h-72 w-full object-cover sm:h-56"
+          src={`/images/spaces/${space.image}`}
+          alt={space.name}
+        />
       </div>
 
-      <div className="flex flex-col gap-2 py-3">
-        <Typography size="sm" className="truncate">
+      <div className="flex flex-col gap-3 p-3">
+        <div className="flex flex-row">
+          <div className="flex w-full items-center justify-between text-slate-800">
+            <Typography as="h4" size="xxl">
+              {space.name}
+            </Typography>
+
+            <Typography size="xxl">{space.price}€</Typography>
+          </div>
+        </div>
+
+        <Typography size="sm" className="truncate italic text-slate-500">
           {space.description}
         </Typography>
 
-        <div className="flex justify-center">
+        <div className="flex">
           <StarRating rating={space.rating} />
         </div>
 
-        <div className="flex flex-row flex-wrap justify-center gap-1">
+        <div className="flex flex-row flex-wrap gap-2">
           {space.service_names.map((service) => (
-            <Chip color="indigoEmerald" key={service}>
-              {service}
-            </Chip>
+            <Chip key={service}>{service}</Chip>
           ))}
         </div>
       </div>

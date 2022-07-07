@@ -40,7 +40,7 @@ export default function Alert({
   return (
     isOpen && (
       <div
-        className={`flex max-w-fit justify-between rounded px-4 py-2 ${variants[variant][color]}`}
+        className={`flex h-fit max-w-fit justify-between rounded px-4 py-2 ${variants[variant][color]}`}
         role="alert"
       >
         <div className="flex items-center">

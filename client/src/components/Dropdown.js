@@ -90,7 +90,7 @@ export default function Dropdown() {
                     <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
                       <DashboardIcon />
                     </div>
-                    Tablero
+                    Administración
                   </Link>
                 )}
               </Menu.Item>

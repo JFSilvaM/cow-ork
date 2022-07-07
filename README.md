@@ -12,8 +12,9 @@ Instalar las dependencias:
 npm install
 ```
 
-Copiar el archivo `server/.env.example` y renombrarlo a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos, adicionalmente, será necesaria una cuenta en [Mailjet](https://www.mailjet.com/) y [Stripe](https://stripe.com/), para ajustar las variables de entorno según correspondan.
+Copiar los archivos `server/.env.example` y `client/.env.example` y renombrar ambos a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos, adicionalmente, será necesaria una cuenta en [Mailjet](https://www.mailjet.com/) y [Stripe](https://stripe.com/), para ajustar las variables de entorno según correspondan.
 
+### server/.env.example
 ```
 HOST=localhost
 PORT=3001
@@ -32,6 +33,12 @@ MAILJET_SENDER_NAME=cow-ork
 MAILJET_SENDER_EMAIL=admin@cow-ork.com
 
 STRIPE_API_SECRET=
+```
+
+### client/.env.example
+```
+REACT_APP_SERVER_API=http://localhost:3001/api
+REACT_APP_STRIPE_PUBLIC_KEY=
 ```
 
 Inicializar la base de datos:

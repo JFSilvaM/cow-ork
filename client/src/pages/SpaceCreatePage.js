@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import Spinner from "../components/Spinner";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
+import Typography from "../components/Typography";
 
 export default function SpaceCreatePage() {
   const { data: spaceTypes, loading, error } = useFetch("/space_types");
@@ -69,76 +70,141 @@ export default function SpaceCreatePage() {
   }
 
   return (
-    <article>
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-        <Input
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          id="description"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          multiline
-        />
+    <article className="flex w-full justify-center px-3 text-slate-800 dark:text-slate-200">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full flex-col gap-5 lg:w-3/4"
+      >
+        <Typography
+          as="h4"
+          size="xxxl"
+          weight="bold"
+          className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
+        >
+          Crear espacio
+        </Typography>
 
-        <Input
-          id="address"
-          name="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Nombre:
+            </Typography>
 
-        <Input
-          id="price"
-          name="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          type="number"
-        />
+            <Input
+              id="name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            />
+          </div>
 
-        <Input
-          id="capacity"
-          name="capacity"
-          value={capacity}
-          onChange={(e) => setCapacity(e.target.value)}
-          type="number"
-        />
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Descripción:
+            </Typography>
 
-        <Input
-          id="image"
-          name="image"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          type="file"
-        />
+            <Input
+              id="description"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              multiline
+              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            />
+          </div>
 
-        <div className="flex space-x-2">
-          {services &&
-            services.map((service) => (
-              <label key={service.id} className="flex flex-wrap">
-                <Input
-                  type="checkbox"
-                  name="services"
-                  value={service.id}
-                  onChange={handleServiceChange}
-                />
-                <span className="ml-2">{service.name}</span>
-              </label>
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Dirección:
+            </Typography>
+
+            <Input
+              id="address"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Precio:
+            </Typography>
+
+            <Input
+              id="price"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              type="number"
+              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Capacidad:
+            </Typography>
+
+            <Input
+              id="capacity"
+              name="capacity"
+              value={capacity}
+              onChange={(e) => setCapacity(e.target.value)}
+              type="number"
+              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            />
+          </div>
+
+          <div className="flex gap-2">
+            <Typography as="span" size="xl">
+              Imagen:
+            </Typography>
+
+            <Input
+              id="image"
+              name="image"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              type="file"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Servicios:
+            </Typography>
+
+            <div className="flex flex-col flex-wrap">
+              {services &&
+                services.map((service) => (
+                  <label key={service.id} className="flex gap-2">
+                    <Input
+                      type="checkbox"
+                      name="services"
+                      value={service.id}
+                      onChange={handleServiceChange}
+                    />
+
+                    <Typography as="span">{service.name}</Typography>
+                  </label>
+                ))}
+            </div>
+          </div>
+
+          {/* Hacer lo siguiente, y después más. ¡¡ÁNIMO BRO!! */}
+
+          <select onChange={(e) => setSpaceTypeId(e.target.value)}>
+            <option value="">Selecciona el tipo de espacio</option>
+            {spaceTypes.map((spaceType) => (
+              <option key={spaceType.id} value={spaceType.id}>
+                {spaceType.name}
+              </option>
             ))}
+          </select>
         </div>
-
-        <select onChange={(e) => setSpaceTypeId(e.target.value)}>
-          <option value="">Selecciona el tipo de espacio</option>
-          {spaceTypes.map((spaceType) => (
-            <option key={spaceType.id} value={spaceType.id}>
-              {spaceType.name}
-            </option>
-          ))}
-        </select>
 
         <Button size="sm" shape="rounded">
           Añadir espacio

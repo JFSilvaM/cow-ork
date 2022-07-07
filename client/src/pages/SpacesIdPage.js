@@ -123,7 +123,7 @@ export default function SpacesIdPage() {
                   Reservar
                 </Typography>
 
-                <BookingForm spaceId={id} />
+                <BookingForm spaceId={id} price={space.price} />
               </div>
 
               <div className="rounded-2xl py-5 px-3 shadow dark:bg-gray-400 dark:text-slate-800">

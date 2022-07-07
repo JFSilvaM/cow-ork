@@ -7,6 +7,7 @@ import useFetch from "../hooks/useFetch";
 export default function ReportsPage() {
   const location = useLocation();
   const { data: reports, loading, error } = useFetch(location.pathname);
+  const pathname = location.pathname;
 
   if (loading) {
     return <Spinner />;
@@ -29,7 +30,7 @@ export default function ReportsPage() {
           weight="bold"
           className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
         >
-          Mis reportes
+          {pathname === "/reports" ? "Mis reportes" : "Todos los reportes"}
         </Typography>
 
         {reports.map((report) => (

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
@@ -11,6 +11,7 @@ import ErrorIcon from "../components/icons/ErrorIcon";
 export default function BookingsPage() {
   const location = useLocation();
   const { data: bookings, loading, error } = useFetch(location.pathname);
+  const pathname = location.pathname;
 
   if (loading) {
     return <Spinner />;
@@ -33,7 +34,7 @@ export default function BookingsPage() {
           weight="bold"
           className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
         >
-          Mis reservas
+          {pathname === "/bookings" ? "Mis reservas" : "Todas las reservas"}
         </Typography>
 
         {bookings.map((booking) => (

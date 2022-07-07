@@ -1,5 +1,3 @@
-const BASE_URL = "http://localhost:3001/api";
-
 export default async function fetchEndpoint(
   path,
   token = null,
@@ -15,7 +13,10 @@ export default async function fetchEndpoint(
     body: body && JSON.stringify(body),
   };
 
-  const res = await fetch(BASE_URL + path, fetchOptions);
+  const res = await fetch(
+    process.env.REACT_APP_SERVER_API + path,
+    fetchOptions
+  );
   const json = await res.json();
 
   if (!res.ok || json.status === "error") {

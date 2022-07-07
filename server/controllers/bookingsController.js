@@ -1,4 +1,4 @@
-const { HOST, STRIPE_API_SECRET } = process.env;
+const { STRIPE_API_SECRET } = process.env;
 const stripe = require("stripe")(STRIPE_API_SECRET);
 const { generateError } = require("../lib");
 const {
@@ -70,12 +70,6 @@ const create = async (req, res, next) => {
   try {
     const value = await bookingValidation(req.body);
 
-    const result = await validateBooking(value);
-
-    if (result) {
-      generateError(BOOKING_DATE_NOT_AVAILABLE, 400);
-    }
-
     const insertId = await createBooking(value, req.auth.id);
 
     if (!insertId) {
@@ -86,29 +80,7 @@ const create = async (req, res, next) => {
 
     await sendMail(BOOKING_CREATED, templateContent(data), "booking");
 
-    const daysReserved =
-      (data.end_date - data.start_date) / (1000 * 60 * 60 * 24);
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "eur",
-            product_data: {
-              name: data.name,
-            },
-            unit_amount: data.price * 100,
-          },
-          quantity: daysReserved,
-        },
-      ],
-      mode: "payment",
-      success_url: `http://${HOST}:3000/bookings`,
-      cancel_url: `http://${HOST}:3000/spaces`,
-    });
-
-    res.json({ message: BOOKING_CREATED, data: session });
+    res.json({ message: BOOKING_CREATED });
   } catch (error) {
     next(error);
   }
@@ -154,6 +126,28 @@ const remove = async (req, res, next) => {
   }
 };
 
+const payment = async (req, res, next) => {
+  try {
+    const value = await bookingValidation(req.body);
+
+    const result = await validateBooking(value);
+
+    if (result) {
+      generateError(BOOKING_DATE_NOT_AVAILABLE, 400);
+    }
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: value.amount,
+      currency: "eur",
+      payment_method_types: ["card"],
+    });
+
+    res.json({ client_secret: paymentIntent.client_secret });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const templateContent = (data) => ({
   fullName: data.first_name + " " + data.last_name,
   email: data.email,
@@ -171,4 +165,5 @@ module.exports = {
   create,
   update,
   remove,
+  payment,
 };

@@ -1,37 +1,73 @@
-import { format, parse } from "date-fns";
+import { format, parse, differenceInDays } from "date-fns";
 import { useState } from "react";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
 import DatePicker from "../components/DatePicker";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
-export default function BookingForm({ spaceId }) {
+export default function BookingForm({ spaceId, price }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { token } = useAuth();
 
+  const elements = useElements();
+  const stripe = useStripe();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      if (!stripe || !elements) {
+        return;
+      }
+
+      const startDateParsed = parse(startDate, "dd-MM-yyyy", new Date());
+      const endDateParsed = parse(endDate, "dd-MM-yyyy", new Date());
+      const daysDiff = differenceInDays(endDateParsed, startDateParsed);
+      const amount = Math.round(price * daysDiff * 100);
+
       const body = {
         space_id: spaceId,
-        start_date: format(
-          parse(startDate, "dd-MM-yyyy", new Date()),
-          "yyyy-MM-dd"
-        ),
-        end_date: format(
-          parse(endDate, "dd-MM-yyyy", new Date()),
-          "yyyy-MM-dd"
-        ),
-        is_paid: 1,
+        start_date: format(startDateParsed, "yyyy-MM-dd"),
+        end_date: format(endDateParsed, "yyyy-MM-dd"),
+        amount,
       };
+
+      const paymentIntent = await fetch(
+        `${process.env.REACT_APP_SERVER_API}/bookings/payment_intent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        }
+      ).then((res) => res.json());
+
+      if (paymentIntent?.status === "error") {
+        throw new Error(paymentIntent.message);
+      }
+
+      const result = await stripe.confirmCardPayment(
+        paymentIntent.client_secret,
+        {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        }
+      );
+
+      if (result?.error) {
+        throw new Error(result.error.message);
+      }
 
       const data = await fetchEndpoint("/bookings", token, "POST", body);
 
-      if (data.error) {
+      if (data?.error) {
         throw new Error(data.error);
       }
 
@@ -47,23 +83,27 @@ export default function BookingForm({ spaceId }) {
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-2"
       >
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <DatePicker
-            id="start_date"
-            name="start_date"
-            value={startDate}
-            setSelectedDate={setStartDate}
-          />
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <DatePicker
+              id="start_date"
+              name="start_date"
+              value={startDate}
+              setSelectedDate={setStartDate}
+            />
 
-          <DatePicker
-            id="end_date"
-            name="end_date"
-            value={endDate}
-            setSelectedDate={setEndDate}
-          />
+            <DatePicker
+              id="end_date"
+              name="end_date"
+              value={endDate}
+              setSelectedDate={setEndDate}
+            />
+          </div>
+
+          <CardElement />
         </div>
 
-        <Button size="sm" shape="rounded">
+        <Button size="sm" shape="rounded" disabled={!stripe || !elements}>
           Reservar
         </Button>
       </form>

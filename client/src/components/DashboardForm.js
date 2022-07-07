@@ -98,14 +98,14 @@ export default function DashboardForm({ fetchUrl }) {
   }
 
   return (
-    <article>
-      <form onSubmit={handleSubmit} className="mb-4 flex px-2">
+    <article className="flex flex-col gap-3">
+      <form onSubmit={handleSubmit} className="flex gap-2">
         <Input
           id="name"
           name="name"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="mr-2 w-full"
+          className="w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:text-slate-800 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
         />
 
         <Button size="sm" shape="rounded">
@@ -121,13 +121,10 @@ export default function DashboardForm({ fetchUrl }) {
         </aside>
       )}
 
-      <ul>
+      <ul className="flex flex-col gap-4">
         {values &&
           values.map((v) => (
-            <li
-              key={v.id}
-              className="flex items-center justify-between rounded p-2 hover:bg-slate-100 dark:hover:bg-slate-700"
-            >
+            <li key={v.id} className="flex items-center gap-3 sm:px-10">
               <Typography>{v.name}</Typography>
 
               <AdminTools

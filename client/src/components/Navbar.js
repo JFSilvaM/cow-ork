@@ -5,6 +5,7 @@ import SunIcon from "./icons/SunIcon";
 import Button from "./Button";
 import { useAuth } from "../contexts/AuthContext";
 import Dropdown from "./Dropdown";
+import Avatar from "./Avatar";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(
@@ -25,11 +26,7 @@ export default function Navbar() {
       <ul className="container mx-auto flex items-center justify-between py-3 px-2">
         <li>
           <Link to="/" className="focus:outline-none">
-            <img
-              src="/images/cow-ork_logo.png"
-              alt="Cow-Ork logo"
-              width="150"
-            />
+            <Avatar src="/images/cow-ork_logo.png" alt="Cow-Ork logo" />
           </Link>
         </li>
 

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import decodeToken from "../helpers/decodeToken";
 import Typography from "./Typography";
+import AddIcon from "./icons/AddIcon";
 
 export default function Dropdown() {
   const { token, setToken } = useAuth();
@@ -38,7 +39,7 @@ export default function Dropdown() {
 
   return (
     <Menu>
-      <Menu.Button className="h-12 w-12 overflow-hidden rounded-full border-2 border-indigo-500 bg-white focus:outline-none dark:border-emerald-500">
+      <Menu.Button className="h-12 w-12 overflow-hidden rounded-full bg-white focus:outline-none">
         <Avatar
           src={`/images/avatars/${avatar}`}
           alt="Avatar"
@@ -68,9 +69,14 @@ export default function Dropdown() {
                     : "dark:text-slate-200"
                 } flex w-full items-center justify-center gap-5 rounded-md border p-4 shadow`}
               >
-                <Avatar src={`/images/avatars/${avatar}`} alt="Avatar" />
-
-                {fullName}
+                <Typography
+                  as="h4"
+                  size="xl"
+                  weight="bold"
+                  className="truncate"
+                >
+                  {fullName}
+                </Typography>
               </Link>
             )}
           </Menu.Item>
@@ -90,7 +96,25 @@ export default function Dropdown() {
                     <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
                       <DashboardIcon />
                     </div>
-                    Administración
+                    <Typography>Administración</Typography>
+                  </Link>
+                )}
+              </Menu.Item>
+
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to="/spaces/new"
+                    className={`${
+                      active
+                        ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
+                        : "dark:text-slate-200"
+                    } my-2 flex w-full items-center gap-2 rounded-md px-2 py-1`}
+                  >
+                    <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
+                      <AddIcon />
+                    </div>
+                    <Typography>Crear espacio</Typography>
                   </Link>
                 )}
               </Menu.Item>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminTools from "../components/AdminTools";
 import Alert from "../components/Alert";
@@ -10,7 +10,6 @@ import MapIcon from "../components/icons/MapIcon";
 import UserGroupIcon from "../components/icons/UserGroupIcon";
 import ReportForm from "../components/ReportForm";
 import Spinner from "../components/Spinner";
-import StarRating from "../components/StarRating";
 import Typography from "../components/Typography";
 import { useAuth } from "../contexts/AuthContext";
 import decodeToken from "../helpers/decodeToken";
@@ -21,52 +20,9 @@ export default function SpacesIdPage() {
   const { id } = useParams("id");
   const { data: space, loading, error } = useFetch(`/spaces/${id}`);
   const { token } = useAuth();
-  const [rating, setRating] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const admin = token && decodeToken(token).is_admin;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (space) {
-      setRating(space.rating);
-    }
-  }, [space]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      if (!token) {
-        return;
-      }
-
-      const body = {
-        space_id: id,
-        rating,
-      };
-
-      const data = await fetchEndpoint(
-        `/space_ratings/${id}`,
-        token,
-        "PUT",
-        body
-      );
-
-      if (data?.status === "error") {
-        throw new Error(data.message);
-      }
-
-      const spaceRating = await fetchEndpoint(`/space_ratings/${id}`, token);
-
-      if (spaceRating?.status === "error") {
-        throw new Error(spaceRating.message);
-      }
-
-      setRating(spaceRating.rating);
-    } catch (error) {
-      setErrorMessage(error);
-    }
-  };
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -116,9 +72,7 @@ export default function SpacesIdPage() {
                 handleDelete={handleDelete}
                 handleEdit={() => navigate(`/spaces/${id}/edit`)}
               />
-            ) : (
-              ""
-            )}
+            ) : null}
 
             <div className="flex flex-col">
               <Typography as="h3" size="xxl">
@@ -201,30 +155,15 @@ export default function SpacesIdPage() {
 
                 <ReportForm spaceId={id} />
               </div>
-
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col items-center rounded-2xl py-5 px-3 shadow dark:bg-gray-500"
-              >
-                <Typography as="h4" className="pb-5" size="xl">
-                  Tu opinión nos importa
-                </Typography>
-
-                <div className="flex flex-col justify-center gap-3">
-                  <StarRating rating={rating} setRating={setRating} />
-
-                  {token && <button className="border">Valorar</button>}
-
-                  {errorMessage && (
-                    <Alert color="error" icon="error">
-                      {errorMessage.message}
-                    </Alert>
-                  )}
-                </div>
-              </form>
             </aside>
           )}
         </div>
+
+        {errorMessage && (
+          <Alert color="error" icon="error">
+            {errorMessage.message}
+          </Alert>
+        )}
       </article>
     </section>
   );

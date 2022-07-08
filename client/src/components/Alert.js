@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import CheckIcon from "./icons/CheckIcon";
-import CloseIcon from "./icons/CloseIcon";
 import ErrorIcon from "./icons/ErrorIcon";
 
 const icons = {
@@ -21,42 +19,20 @@ const variants = {
 
 export default function Alert({
   color = "success",
-  dismissible = false,
   icon,
-  duration,
   variant = "outlined",
   children,
 }) {
-  const [isOpen, setIsOpen] = useState(true);
-
-  useEffect(() => {
-    if (duration) {
-      setTimeout(() => {
-        setIsOpen(false);
-      }, duration * 1000);
-    }
-  });
-
   return (
-    isOpen && (
-      <div
-        className={`flex h-fit justify-between rounded px-4 py-2 ${variants[variant][color]}`}
-        role="alert"
-      >
-        <div className="flex items-center">
-          {icon && <span className="mr-2">{icons[icon]}</span>}
+    <div
+      className={`flex h-fit justify-between rounded px-4 py-2 ${variants[variant][color]}`}
+      role="alert"
+    >
+      <div className="flex items-center">
+        {icon && <span className="mr-2">{icons[icon]}</span>}
 
-          <p className="text-sm">{children}</p>
-        </div>
-
-        {dismissible && (
-          <div className="flex items-center justify-end">
-            <button onClick={() => setIsOpen(false)} title="Cerrar">
-              <CloseIcon />
-            </button>
-          </div>
-        )}
+        <p className="text-sm">{children}</p>
       </div>
-    )
+    </div>
   );
 }

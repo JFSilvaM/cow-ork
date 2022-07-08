@@ -187,7 +187,7 @@ export default function ProfilePage() {
               </Button>
 
               {successMessage && (
-                <Alert color="success" icon="success" duration="5">
+                <Alert color="success" icon="success">
                   {successMessage.message}
                 </Alert>
               )}

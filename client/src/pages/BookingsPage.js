@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
@@ -7,20 +7,17 @@ import useFetch from "../hooks/useFetch";
 import MapIcon from "../components/icons/MapIcon";
 import CheckIcon from "../components/icons/CheckIcon";
 import ErrorIcon from "../components/icons/ErrorIcon";
-import decodeToken from "../helpers/decodeToken";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdminTools from "../components/AdminTools";
 import StarRating from "../components/StarRating";
 
 export default function BookingsPage() {
   const location = useLocation();
   const { data: bookings, loading, error } = useFetch(location.pathname);
-  const { data: spaces } = useFetch(`/spaces`);
   const pathname = location.pathname;
   const { token } = useAuth();
-  const admin = token && decodeToken(token).is_admin;
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -116,14 +113,10 @@ export default function BookingsPage() {
             />
 
             <div className="flex w-full flex-col gap-3 p-5 md:flex-row md:justify-between">
-              {admin && (
-                <div className="flex-1">
-                  <AdminTools
-                    handleDelete={(e) => handleDelete(e, booking.id)}
-                    handleEdit={() => navigate(`/bookings/${booking.id}/edit`)}
-                  />
-                </div>
-              )}
+              <div className="flex-1">
+                <AdminTools handleDelete={(e) => handleDelete(e, booking.id)} />
+              </div>
+
               <div className="flex flex-col gap-3">
                 <div>
                   <Typography size="xxl" weight="bold">

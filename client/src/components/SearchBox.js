@@ -33,7 +33,7 @@ export default function SearchBox({ data }) {
     <section className="flex w-full flex-col">
       <Input placeholder="Buscar..." value={search} onChange={handleChange} />
 
-      <section className="my-3 grid grid-cols-4 gap-4">
+      <section className="my-3 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredResults.length > 0 ? (
           filteredResults.map((result) => (
             <Link to={`spaces/${result.id}`} key={result.id}>

@@ -32,7 +32,7 @@ export default function DatePicker({
   }, [date, setSelectedDate, selectedDateRef]);
 
   return (
-    <div className="relative w-fit" ref={calendarRef}>
+    <div className="relative" ref={calendarRef}>
       <input
         className="cursor-pointer appearance-none rounded border-2 border-gray-200 bg-gray-200 py-2 px-4 text-center text-slate-800 focus:border-gray-400 focus:bg-white focus:outline-none"
         type="text"

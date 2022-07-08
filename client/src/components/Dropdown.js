@@ -227,7 +227,7 @@ export default function Dropdown() {
                     ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
                     : "dark:text-slate-200"
                 } mt-2 flex w-full items-center gap-2 rounded-md px-2 py-1`}
-                onClick={() => setToken("")}
+                onClick={() => setToken("/")}
               >
                 <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
                   <LogoutIcon />

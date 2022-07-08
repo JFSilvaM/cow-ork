@@ -6,6 +6,7 @@ import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
 import Input from "./Input";
 import Spinner from "./Spinner";
+import Typography from "./Typography";
 
 export default function ReportForm({ spaceId }) {
   const [description, setDescription] = useState("");
@@ -48,8 +49,11 @@ export default function ReportForm({ spaceId }) {
   }
 
   return (
-    <article>
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+    <article className="flex w-full">
+      <form
+        className="flex w-full flex-col items-center gap-5 px-5"
+        onSubmit={handleSubmit}
+      >
         <Input
           id="description"
           name="description"
@@ -57,20 +61,21 @@ export default function ReportForm({ spaceId }) {
           onChange={(e) => setDescription(e.target.value)}
           multiline
           placeholder="Información del reporte"
-          className="h-20 rounded-md border p-2"
+          className="h-20 w-full rounded-md border p-2"
         />
 
         <select
           id="report_category"
           name="report_category"
           onChange={(e) => setCategoryId(e.target.value)}
-          className="h-10 rounded-md px-2"
+          className="h-10 w-full rounded-md p-2"
           defaultValue=""
           required
         >
           <option value="" disabled>
             Selecciona la categoria
           </option>
+
           {categories.map((category) => (
             <option value={category.id} key={category.id}>
               {category.name}
@@ -78,11 +83,9 @@ export default function ReportForm({ spaceId }) {
           ))}
         </select>
 
-        <div className="flex justify-center">
-          <Button size="sm" shape="rounded">
-            Reportar
-          </Button>
-        </div>
+        <Button size="sm" shape="rounded">
+          Reportar
+        </Button>
       </form>
 
       {errorMessage && (

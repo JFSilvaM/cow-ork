@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AdminTools from "../components/AdminTools";
 import Alert from "../components/Alert";
+import Modal from "../components/Modal";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
 import { useAuth } from "../contexts/AuthContext";
@@ -15,14 +16,14 @@ export default function ReportsPage() {
   const pathname = location.pathname;
   const { data: reports, loading, error } = useFetch(location.pathname);
   const { token } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
 
     try {
-      // TODO: Add a confirmation message before delete
-
       const data = await fetchEndpoint(`/reports/${id}`, token, "DELETE");
 
       if (data?.status === "error") {
@@ -59,6 +60,13 @@ export default function ReportsPage() {
           {pathname === "/reports" ? "Mis reportes" : "Todos los reportes"}
         </Typography>
 
+        <Modal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedItem={selectedItem}
+          onClick={(e) => handleDelete(e, selectedItem.id)}
+        />
+
         {reports.map((report) => (
           <article
             key={report.id}
@@ -73,7 +81,10 @@ export default function ReportsPage() {
             <div className="flex w-full flex-col gap-5 p-5">
               <div className="flex-1">
                 <AdminTools
-                  handleDelete={(e) => handleDelete(e, report.id)}
+                  handleDelete={() => {
+                    setIsOpen(true);
+                    setSelectedItem(report.id);
+                  }}
                   handleEdit={() => navigate(`/reports/${report.id}/edit`)}
                 />
               </div>

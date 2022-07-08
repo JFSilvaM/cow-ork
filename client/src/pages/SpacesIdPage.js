@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminTools from "../components/AdminTools";
 import Alert from "../components/Alert";
@@ -8,6 +8,7 @@ import CheckIcon from "../components/icons/CheckIcon";
 import ErrorIcon from "../components/icons/ErrorIcon";
 import MapIcon from "../components/icons/MapIcon";
 import UserGroupIcon from "../components/icons/UserGroupIcon";
+import Modal from "../components/Modal";
 import ReportForm from "../components/ReportForm";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
@@ -21,15 +22,21 @@ export default function SpacesIdPage() {
   const { data: space, loading, error } = useFetch(`/spaces/${id}`);
   const { token } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
   const admin = token && decodeToken(token).is_admin;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (space) {
+      setSelectedItem(space);
+    }
+  }, [space]);
 
   const handleDelete = async (e) => {
     e.preventDefault();
 
     try {
-      // TODO: Add a confirmation message before delete
-
       const data = await fetchEndpoint(`/spaces/${id}`, token, "DELETE");
 
       if (data?.status === "error") {
@@ -65,11 +72,18 @@ export default function SpacesIdPage() {
           />
         </div>
 
+        <Modal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedItem={selectedItem.name}
+          onClick={(e) => handleDelete(e, selectedItem.id)}
+        />
+
         <div className="flex flex-col justify-between gap-5 lg:flex-row">
           <div className="flex w-full flex-col gap-3 py-2">
             {admin ? (
               <AdminTools
-                handleDelete={handleDelete}
+                handleDelete={() => setIsOpen(true)}
                 handleEdit={() => navigate(`/spaces/${id}/edit`)}
               />
             ) : null}

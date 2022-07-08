@@ -32,6 +32,14 @@ const variants = {
     error:
       "bg-red-100 text-red-800 border border-red-800 font-bold hover:bg-red-200 active:bg-red-300",
   },
+  link: {
+    primary:
+      "text-indigo-800 dark:text-emerald-200 font-bold bg-transparent hover:underline",
+    secondary:
+      "text-slate-800 dark:text-slate-200 font-bold bg-transparent hover:underline",
+    success: "text-green-800 dark:text-green-200 font-bold bg-transparent",
+    error: "text-red-800 dark:text-red-200 font-bold bg-transparent",
+  },
 };
 
 const shapes = {

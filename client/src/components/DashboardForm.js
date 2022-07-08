@@ -8,10 +8,13 @@ import Button from "./Button";
 import Input from "./Input";
 import Spinner from "./Spinner";
 import Typography from "./Typography";
+import Modal from "./Modal";
 
 export default function DashboardForm({ fetchUrl }) {
   const [value, setValue] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [values, setValues] = useState([]);
+  const [selectedItem, setSelectedItem] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const { data: namesList, loading, error } = useFetch(fetchUrl);
   const { token } = useAuth();
@@ -68,6 +71,7 @@ export default function DashboardForm({ fetchUrl }) {
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
+    setIsOpen(false);
 
     try {
       const data = await fetchEndpoint(`${fetchUrl}/${id}`, token, "DELETE");
@@ -121,6 +125,13 @@ export default function DashboardForm({ fetchUrl }) {
         </aside>
       )}
 
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        selectedItem={selectedItem.name}
+        onClick={(e) => handleDelete(e, selectedItem.id)}
+      />
+
       <ul>
         {values &&
           values.map((v) => (
@@ -132,7 +143,10 @@ export default function DashboardForm({ fetchUrl }) {
 
               <AdminTools
                 handleEdit={(e) => handleEdit(e, v.id)}
-                handleDelete={(e) => handleDelete(e, v.id)}
+                handleDelete={() => {
+                  setIsOpen(true);
+                  setSelectedItem(v);
+                }}
               />
             </li>
           ))}

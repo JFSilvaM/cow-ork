@@ -25,9 +25,6 @@ export default function BookingsPage() {
     e.preventDefault();
 
     try {
-      if (!token) {
-        return;
-      }
       const id = null;
       const body = {
         space_id: id,

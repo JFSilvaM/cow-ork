@@ -14,7 +14,6 @@ import RequireAuth from "./components/RequireAuth";
 import RequireGuest from "./components/RequireGuest";
 import SpaceCreatePage from "./pages/SpaceCreatePage";
 import SpacesIdPage from "./pages/SpacesIdPage";
-import UsersPage from "./pages/UsersPage";
 import SpaceEditPage from "./pages/SpaceEditPage";
 import ReportEditPage from "./pages/ReportEditPage";
 
@@ -48,7 +47,6 @@ export default function App() {
                 <Route path="/reports/all" element={<ReportsPage />} />
                 <Route path="/spaces/new" element={<SpaceCreatePage />} />
                 <Route path="/spaces/:id/edit" element={<SpaceEditPage />} />
-                <Route path="/users" element={<UsersPage />} />
               </Route>
 
               <Route path="*" element={<NotFoundPage />} />

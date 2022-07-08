@@ -23,7 +23,7 @@ export default function SpacesIdPage() {
   const { token } = useAuth();
   const [rating, setRating] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const admin = decodeToken(token).is_admin;
+  const admin = token && decodeToken(token).is_admin;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -102,10 +102,6 @@ export default function SpacesIdPage() {
     <section className="flex w-full flex-col items-center px-2 xl:px-0">
       <article className="flex w-full flex-col gap-5 dark:text-slate-200 xl:w-3/4">
         <div className="flex flex-col gap-2">
-          <Typography as="h4" size="xxl">
-            {space.name}
-          </Typography>
-
           <img
             className="rounded-2xl object-cover"
             src={`/images/spaces/${space.image}`}
@@ -124,22 +120,34 @@ export default function SpacesIdPage() {
               ""
             )}
 
-            <div>
+            <div className="flex flex-col">
+              <Typography as="h3" size="xxl">
+                {space.name}
+              </Typography>
+
               <Typography weight="bold">{space.type_name}</Typography>
 
               <Typography size="sm" className="truncate italic text-slate-500">
                 {space.description}
               </Typography>
+
+              <Typography as="h4" className="mb-2" size="lg">
+                {space.price}€ / día
+              </Typography>
             </div>
 
             <div className="flex items-center gap-2">
-              <MapIcon />
+              <span title="Localización">
+                <MapIcon />
+              </span>
 
               <Typography>{space.address}</Typography>
             </div>
 
             <div className="flex items-center gap-2">
-              <UserGroupIcon />
+              <span title="Capacidad">
+                <UserGroupIcon />
+              </span>
 
               <Typography>{space.capacity}</Typography>
             </div>
@@ -158,9 +166,9 @@ export default function SpacesIdPage() {
               )}
             </div>
 
-            <div className="flex flex-col gap-2">
-              <Typography className="border-b">
-                Servicios que se ofrecen
+            <div className="flex flex-col">
+              <Typography as="h4" className="mb-2" size="lg">
+                Servicios
               </Typography>
 
               <div className="flex flex-row flex-wrap gap-2">
@@ -173,17 +181,22 @@ export default function SpacesIdPage() {
 
           {token && (
             <aside className="flex h-full flex-col gap-3">
-              <div className="flex flex-col items-center rounded-2xl py-5 shadow dark:bg-gray-500">
-                <Typography className="pb-5" size="xl">
-                  Reservar
+              <div className="flex flex-col rounded-2xl py-5 shadow dark:bg-gray-500">
+                <Typography
+                  as="h4"
+                  className="px-5 pb-5"
+                  align="left"
+                  size="xl"
+                >
+                  Fecha de reserva
                 </Typography>
 
                 <BookingForm spaceId={id} price={space.price} />
               </div>
 
               <div className="flex flex-col items-center rounded-2xl py-5 text-slate-800 shadow dark:bg-gray-500">
-                <Typography className="pb-5" size="xl">
-                  Reportar
+                <Typography as="h4" className="pb-5" size="xl">
+                  Reporte de incidencias
                 </Typography>
 
                 <ReportForm spaceId={id} />
@@ -193,7 +206,7 @@ export default function SpacesIdPage() {
                 onSubmit={handleSubmit}
                 className="flex flex-col items-center rounded-2xl py-5 px-3 shadow dark:bg-gray-500"
               >
-                <Typography className="pb-5" size="xl">
+                <Typography as="h4" className="pb-5" size="xl">
                   Tu opinión nos importa
                 </Typography>
 

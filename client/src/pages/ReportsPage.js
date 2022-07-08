@@ -16,7 +16,7 @@ export default function ReportsPage() {
   const pathname = location.pathname;
   const { data: reports, loading, error } = useFetch(location.pathname);
   const { token } = useAuth();
-  const admin = decodeToken(token).is_admin;
+  const admin = token && decodeToken(token).is_admin;
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleDelete = async (e, id) => {

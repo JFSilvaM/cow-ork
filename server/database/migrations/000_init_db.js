@@ -77,7 +77,6 @@ const migrate = async () => {
             user_id INT NOT NULL,
             start_date DATETIME NOT NULL,
             end_date DATETIME NOT NULL,
-            is_paid BOOLEAN NOT NULL DEFAULT FALSE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY (space_id) REFERENCES spaces(id) ON DELETE CASCADE,

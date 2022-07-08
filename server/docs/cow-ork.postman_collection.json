@@ -211,11 +211,6 @@
                   "key": "end_date",
                   "value": "2022-07-10",
                   "type": "text"
-                },
-                {
-                  "key": "is_paid",
-                  "value": "0",
-                  "type": "text"
                 }
               ]
             },
@@ -260,11 +255,6 @@
                 {
                   "key": "end_date",
                   "value": "2022-07-10",
-                  "type": "text"
-                },
-                {
-                  "key": "is_paid",
-                  "value": "0",
                   "type": "text"
                 }
               ]

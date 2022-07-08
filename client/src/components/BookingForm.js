@@ -1,5 +1,5 @@
 import { format, parse, differenceInDays } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
 import DatePicker from "../components/DatePicker";
@@ -12,10 +12,21 @@ export default function BookingForm({ spaceId, price }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [amount, setAmount] = useState(0);
   const { token } = useAuth();
 
   const elements = useElements();
   const stripe = useStripe();
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const startDateParsed = parse(startDate, "dd-MM-yyyy", new Date());
+      const endDateParsed = parse(endDate, "dd-MM-yyyy", new Date());
+      const daysDifference = differenceInDays(endDateParsed, startDateParsed);
+
+      setAmount(Math.round(daysDifference * price * 100));
+    }
+  }, [startDate, endDate, price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,8 +38,6 @@ export default function BookingForm({ spaceId, price }) {
 
       const startDateParsed = parse(startDate, "dd-MM-yyyy", new Date());
       const endDateParsed = parse(endDate, "dd-MM-yyyy", new Date());
-      const daysDiff = differenceInDays(endDateParsed, startDateParsed);
-      const amount = Math.round(price * daysDiff * 100);
 
       const body = {
         space_id: spaceId,
@@ -106,23 +115,23 @@ export default function BookingForm({ spaceId, price }) {
           <Typography className="flex items-center gap-2 self-end">
             Total:
             <Typography weight="bold" size="lg">
-              {price}€
+              {amount > 0 ? (amount / 100).toFixed(2) : price}€
             </Typography>
           </Typography>
         </div>
+
+        {errorMessage && (
+          <div className="mt-2 flex justify-center">
+            <Alert color="error" icon="error">
+              {errorMessage.message}
+            </Alert>
+          </div>
+        )}
 
         <Button size="sm" shape="rounded" disabled={!stripe || !elements}>
           Reservar
         </Button>
       </form>
-
-      {errorMessage && (
-        <div className="flex justify-center pt-5">
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
-        </div>
-      )}
     </article>
   );
 }

@@ -6,7 +6,6 @@ import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
 import Input from "./Input";
 import Spinner from "./Spinner";
-import Typography from "./Typography";
 
 export default function ReportForm({ spaceId }) {
   const [description, setDescription] = useState("");
@@ -83,18 +82,18 @@ export default function ReportForm({ spaceId }) {
           ))}
         </select>
 
+        {errorMessage && (
+          <div className="mt-2 flex justify-center">
+            <Alert color="error" icon="error">
+              {errorMessage}
+            </Alert>
+          </div>
+        )}
+
         <Button size="sm" shape="rounded">
           Reportar
         </Button>
       </form>
-
-      {errorMessage && (
-        <div className="flex justify-center pt-5">
-          <Alert color="error" icon="error">
-            {errorMessage}
-          </Alert>
-        </div>
-      )}
     </article>
   );
 }

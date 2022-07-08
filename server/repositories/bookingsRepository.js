@@ -2,7 +2,7 @@ const pool = require("../database/getPool")();
 
 const findAllBookings = async () => {
   const query =
-    "SELECT bo.id, us.first_name, us.last_name, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id ORDER BY bo.created_at DESC";
+    "SELECT bo.id, us.first_name, us.last_name, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id ORDER BY bo.created_at DESC";
 
   const [rows] = await pool.query(query);
 
@@ -11,7 +11,7 @@ const findAllBookings = async () => {
 
 const findAllBookingsById = async (id) => {
   const query =
-    "SELECT bo.id, us.first_name, us.last_name, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.user_id = ? ORDER BY bo.created_at DESC";
+    "SELECT bo.id, us.first_name, us.last_name, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.user_id = ? ORDER BY bo.created_at DESC";
 
   const [rows] = await pool.query(query, [id]);
 
@@ -25,7 +25,7 @@ const findOneBooking = async (id, userId) => {
 
   if (isAdmin) {
     const query =
-      "SELECT bo.id, us.first_name, us.last_name, us.email, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.id = ?";
+      "SELECT bo.id, us.first_name, us.last_name, us.email, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.id = ?";
 
     const [[row]] = await pool.query(query, [id]);
 
@@ -33,7 +33,7 @@ const findOneBooking = async (id, userId) => {
   }
 
   const query =
-    "SELECT bo.id, us.first_name, us.last_name, us.email, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.id = ? AND bo.user_id = ?";
+    "SELECT bo.id, us.first_name, us.last_name, us.email, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.id = ? AND bo.user_id = ?";
 
   const [[row]] = await pool.query(query, [id, userId]);
 

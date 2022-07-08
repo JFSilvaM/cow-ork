@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
@@ -10,17 +10,57 @@ import ErrorIcon from "../components/icons/ErrorIcon";
 import decodeToken from "../helpers/decodeToken";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminTools from "../components/AdminTools";
+import StarRating from "../components/StarRating";
 
 export default function BookingsPage() {
   const location = useLocation();
   const { data: bookings, loading, error } = useFetch(location.pathname);
+  const { data: spaces } = useFetch(`/spaces`);
   const pathname = location.pathname;
   const { token } = useAuth();
-  const admin = decodeToken(token).is_admin;
+  const admin = token && decodeToken(token).is_admin;
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [rating, setRating] = useState(0);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (!token) {
+        return;
+      }
+      const id = null;
+      const body = {
+        space_id: id,
+        rating,
+      };
+
+      const data = await fetchEndpoint(
+        `/space_ratings/${id}`,
+        token,
+        "PUT",
+        body
+      );
+
+      if (data?.status === "error") {
+        throw new Error(data.message);
+      }
+
+      const spaceRating = await fetchEndpoint(`/space_ratings/${id}`, token);
+
+      if (spaceRating?.status === "error") {
+        throw new Error(spaceRating.message);
+      }
+
+      setRating(spaceRating.rating);
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
@@ -132,15 +172,26 @@ export default function BookingsPage() {
                     </Typography>
                   )}
 
-                  {booking.is_paid === 1 ? (
-                    <Typography weight="bold">
-                      <CheckIcon color="green">Pagado</CheckIcon>
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col items-center rounded-2xl py-5 px-3 shadow dark:bg-gray-500"
+                  >
+                    <Typography as="h4" className="pb-5" size="xl">
+                      Tu opinión nos importa
                     </Typography>
-                  ) : (
-                    <Typography weight="bold">
-                      <ErrorIcon color="orange">Pendiente de pago</ErrorIcon>
-                    </Typography>
-                  )}
+
+                    <div className="flex flex-col justify-center gap-3">
+                      <StarRating rating={rating} setRating={setRating} />
+
+                      {token && <button className="border">Valorar</button>}
+
+                      {errorMessage && (
+                        <Alert color="error" icon="error">
+                          {errorMessage.message}
+                        </Alert>
+                      )}
+                    </div>
+                  </form>
                 </div>
 
                 <Typography className="flex gap-1">

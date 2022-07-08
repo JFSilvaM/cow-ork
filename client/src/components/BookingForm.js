@@ -73,7 +73,7 @@ export default function BookingForm({ spaceId, price }) {
 
       setErrorMessage("");
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
   };
 
@@ -111,7 +111,7 @@ export default function BookingForm({ spaceId, price }) {
       {errorMessage && (
         <div className="flex justify-center pt-5">
           <Alert color="error" icon="error">
-            {errorMessage}
+            {errorMessage.message}
           </Alert>
         </div>
       )}

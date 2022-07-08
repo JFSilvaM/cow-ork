@@ -24,7 +24,7 @@ const bookingValidation = async (body) => {
         "date.greater": messages.BOOKING_END_DATE_GREATER,
         "any.required": messages.BOOKING_END_DATE_REQUIRED,
       }),
-    amount: Joi.number().min(1).required(),
+    amount: Joi.number(),
   });
 
   return await schema.validateAsync(body);

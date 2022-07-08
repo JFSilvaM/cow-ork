@@ -8,6 +8,7 @@ import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import Switch from "../components/Switch";
+import Typography from "../components/Typography";
 
 export default function SpaceEditPage() {
   const { data: spaceTypes, loading, error } = useFetch("/space_types");
@@ -149,7 +150,7 @@ export default function SpaceEditPage() {
                   onChange={handleServiceChange}
                   checked={serviceIds.includes(service.id)}
                 />
-                <span className="ml-2">{service.name}</span>
+                <Typography className="ml-2">{service.name}</Typography>
               </label>
             ))}
         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import AdminTools from "../components/AdminTools";
 import Alert from "../components/Alert";
 import BookingForm from "../components/BookingForm";
 import ReportForm from "../components/ReportForm";
@@ -7,6 +8,7 @@ import Spinner from "../components/Spinner";
 import StarRating from "../components/StarRating";
 import Typography from "../components/Typography";
 import { useAuth } from "../contexts/AuthContext";
+import decodeToken from "../helpers/decodeToken";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
 
@@ -16,6 +18,8 @@ export default function SpacesIdPage() {
   const { token } = useAuth();
   const [rating, setRating] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const admin = decodeToken(token).is_admin;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (space) {
@@ -54,6 +58,24 @@ export default function SpacesIdPage() {
       }
 
       setRating(spaceRating.rating);
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      // TODO: Add a confirmation message before delete
+
+      const data = await fetchEndpoint(`/spaces/${id}`, token, "DELETE");
+
+      if (data?.status === "error") {
+        throw new Error(data.message);
+      }
+
+      navigate("/");
     } catch (error) {
       setErrorMessage(error);
     }
@@ -115,6 +137,15 @@ export default function SpacesIdPage() {
               ))}
             </div>
           </div>
+
+          {admin && (
+            <div className="flex-1">
+              <AdminTools
+                handleDelete={handleDelete}
+                handleEdit={() => navigate(`/spaces/${id}/edit`)}
+              />
+            </div>
+          )}
 
           {token && (
             <aside className="flex h-full flex-col gap-3">

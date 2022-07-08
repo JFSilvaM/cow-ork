@@ -1,13 +1,41 @@
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import AdminTools from "../components/AdminTools";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
+import { useAuth } from "../contexts/AuthContext";
+import decodeToken from "../helpers/decodeToken";
+import fetchEndpoint from "../helpers/fetchEndpoint";
+import formatDate from "../helpers/formatDate";
 import useFetch from "../hooks/useFetch";
 
 export default function ReportsPage() {
   const location = useLocation();
-  const { data: reports, loading, error } = useFetch(location.pathname);
+  const navigate = useNavigate();
   const pathname = location.pathname;
+  const { data: reports, loading, error } = useFetch(location.pathname);
+  const { token } = useAuth();
+  const admin = decodeToken(token).is_admin;
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+
+    try {
+      // TODO: Add a confirmation message before delete
+
+      const data = await fetchEndpoint(`/reports/${id}`, token, "DELETE");
+
+      if (data?.status === "error") {
+        throw new Error(data.message);
+      }
+
+      navigate("/");
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -45,6 +73,15 @@ export default function ReportsPage() {
             />
 
             <div className="flex w-full flex-col gap-5 p-5">
+              {admin && (
+                <div className="flex-1">
+                  <AdminTools
+                    handleDelete={(e) => handleDelete(e, report.id)}
+                    handleEdit={() => navigate(`/reports/${report.id}/edit`)}
+                  />
+                </div>
+              )}
+
               <div className="flex items-end justify-between">
                 <Typography size="xxl" weight="bold">
                   {report.space_name}
@@ -85,12 +122,22 @@ export default function ReportsPage() {
 
                 <Typography>Descripción: {report.description}</Typography>
 
-                <Typography>Fecha del reporte: {report.created_at}</Typography>
+                <Typography>
+                  Fecha del reporte: {formatDate(report.created_at)}
+                </Typography>
               </div>
             </div>
           </article>
         ))}
       </div>
+
+      {errorMessage && (
+        <div className="flex justify-center pt-5">
+          <Alert color="error" icon="error">
+            {errorMessage.message}
+          </Alert>
+        </div>
+      )}
     </section>
   );
 }

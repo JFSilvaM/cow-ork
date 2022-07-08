@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
@@ -7,11 +7,38 @@ import useFetch from "../hooks/useFetch";
 import MapIcon from "../components/icons/MapIcon";
 import CheckIcon from "../components/icons/CheckIcon";
 import ErrorIcon from "../components/icons/ErrorIcon";
+import decodeToken from "../helpers/decodeToken";
+import { useAuth } from "../contexts/AuthContext";
+import fetchEndpoint from "../helpers/fetchEndpoint";
+import { useState } from "react";
+import AdminTools from "../components/AdminTools";
 
 export default function BookingsPage() {
   const location = useLocation();
   const { data: bookings, loading, error } = useFetch(location.pathname);
   const pathname = location.pathname;
+  const { token } = useAuth();
+  const admin = decodeToken(token).is_admin;
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+
+    try {
+      // TODO: Add a confirmation message before delete
+
+      const data = await fetchEndpoint(`/bookings/${id}`, token, "DELETE");
+
+      if (data?.status === "error") {
+        throw new Error(data.message);
+      }
+
+      navigate("/");
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -49,6 +76,14 @@ export default function BookingsPage() {
             />
 
             <div className="flex w-full flex-col gap-3 p-5 md:flex-row md:justify-between">
+              {admin && (
+                <div className="flex-1">
+                  <AdminTools
+                    handleDelete={(e) => handleDelete(e, booking.id)}
+                    handleEdit={() => navigate(`/bookings/${booking.id}/edit`)}
+                  />
+                </div>
+              )}
               <div className="flex flex-col gap-3">
                 <div>
                   <Typography size="xxl" weight="bold">
@@ -117,6 +152,14 @@ export default function BookingsPage() {
           </article>
         ))}
       </div>
+
+      {errorMessage && (
+        <div className="flex justify-center pt-5">
+          <Alert color="error" icon="error">
+            {errorMessage.message}
+          </Alert>
+        </div>
+      )}
     </section>
   );
 }

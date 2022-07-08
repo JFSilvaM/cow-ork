@@ -41,7 +41,6 @@ export default function BookingEditPage() {
           parse(endDate, "dd-MM-yyyy", new Date()),
           "yyyy-MM-dd"
         ),
-        is_paid: 1,
       };
 
       const data = await fetchEndpoint(`/bookings/${id}`, token, "PUT", body);

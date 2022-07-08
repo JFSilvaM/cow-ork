@@ -19,6 +19,19 @@ const findAllBookingsById = async (id) => {
 };
 
 const findOneBooking = async (id, userId) => {
+  const selectUser = "SELECT * FROM users WHERE id = ? AND is_admin = 1";
+
+  const [[isAdmin]] = await pool.query(selectUser, [userId]);
+
+  if (isAdmin) {
+    const query =
+      "SELECT bo.id, us.first_name, us.last_name, us.email, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.id = ?";
+
+    const [[row]] = await pool.query(query, [id]);
+
+    return row;
+  }
+
   const query =
     "SELECT bo.id, us.first_name, us.last_name, us.email, sp.name, sp.address, sp.image, sp.price, sp.is_clean, bo.space_id, bo.is_paid, bo.start_date, bo.end_date, bo.created_at FROM bookings bo INNER JOIN spaces sp ON bo.space_id = sp.id INNER JOIN users us ON bo.user_id = us.id WHERE bo.id = ? AND bo.user_id = ?";
 
@@ -42,6 +55,23 @@ const createBooking = async (booking, userId) => {
 };
 
 const updateBooking = async (booking, id, userId) => {
+  const selectUser = "SELECT * FROM users WHERE id = ? AND is_admin = 1";
+
+  const [[isAdmin]] = await pool.query(selectUser, [userId]);
+
+  if (isAdmin) {
+    const query =
+      "UPDATE bookings SET start_date = ?, end_date = ? WHERE id = ?";
+
+    const [{ affectedRows }] = await pool.query(query, [
+      booking.start_date,
+      booking.end_date,
+      id,
+    ]);
+
+    return affectedRows;
+  }
+
   const query =
     "UPDATE bookings SET start_date = ?, end_date = ? WHERE id = ? AND user_id = ?";
 
@@ -56,6 +86,18 @@ const updateBooking = async (booking, id, userId) => {
 };
 
 const removeBooking = async (id, userId) => {
+  const selectUser = "SELECT * FROM users WHERE id = ? AND is_admin = 1";
+
+  const [[isAdmin]] = await pool.query(selectUser, [userId]);
+
+  if (isAdmin) {
+    const query = "DELETE FROM bookings WHERE id = ?";
+
+    const [{ affectedRows }] = await pool.query(query, [id]);
+
+    return affectedRows;
+  }
+
   const query = "DELETE FROM bookings WHERE id = ? AND user_id = ?";
 
   const [{ affectedRows }] = await pool.query(query, [id, userId]);

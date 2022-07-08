@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
@@ -10,7 +10,6 @@ import ErrorIcon from "../components/icons/ErrorIcon";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useState } from "react";
-import AdminTools from "../components/AdminTools";
 import StarRating from "../components/StarRating";
 
 export default function BookingsPage() {
@@ -18,7 +17,6 @@ export default function BookingsPage() {
   const { data: bookings, loading, error } = useFetch(location.pathname);
   const pathname = location.pathname;
   const { token } = useAuth();
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
 
   const [rating, setRating] = useState(0);
@@ -54,24 +52,6 @@ export default function BookingsPage() {
       }
 
       setRating(spaceRating.rating);
-    } catch (error) {
-      setErrorMessage(error);
-    }
-  };
-
-  const handleDelete = async (e, id) => {
-    e.preventDefault();
-
-    try {
-      // TODO: Add a confirmation message before delete
-
-      const data = await fetchEndpoint(`/bookings/${id}`, token, "DELETE");
-
-      if (data?.status === "error") {
-        throw new Error(data.message);
-      }
-
-      navigate("/");
     } catch (error) {
       setErrorMessage(error);
     }
@@ -113,10 +93,6 @@ export default function BookingsPage() {
             />
 
             <div className="flex w-full flex-col gap-3 p-5 md:flex-row md:justify-between">
-              <div className="flex-1">
-                <AdminTools handleDelete={(e) => handleDelete(e, booking.id)} />
-              </div>
-
               <div className="flex flex-col gap-3">
                 <div>
                   <Typography size="xxl" weight="bold">

@@ -105,7 +105,6 @@ npm start
 <strong>GET</strong>    <em>/api/bookings</em>
 <strong>POST</strong>   <em>/api/bookings</em>
 <strong>GET</strong>    <em>/api/bookings/:id</em>
-<strong>PUT</strong>    <em>/api/bookings/:id</em>
 <strong>DELETE</strong> <em>/api/bookings/:id</em>
 </pre>
 

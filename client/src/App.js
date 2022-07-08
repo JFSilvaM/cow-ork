@@ -16,7 +16,6 @@ import SpaceCreatePage from "./pages/SpaceCreatePage";
 import SpacesIdPage from "./pages/SpacesIdPage";
 import UsersPage from "./pages/UsersPage";
 import SpaceEditPage from "./pages/SpaceEditPage";
-import BookingEditPage from "./pages/BookingEditPage";
 import ReportEditPage from "./pages/ReportEditPage";
 
 export default function App() {
@@ -44,10 +43,6 @@ export default function App() {
 
               <Route path="/" element={<RequireAuth admin />}>
                 <Route path="/dashboard" element={<AdminDashboardPage />} />
-                <Route
-                  path="/bookings/:id/edit"
-                  element={<BookingEditPage />}
-                />
                 <Route path="/bookings/all" element={<BookingsPage />} />
                 <Route path="/reports/:id/edit" element={<ReportEditPage />} />
                 <Route path="/reports/all" element={<ReportsPage />} />

@@ -6,7 +6,6 @@ const {
   findAllBookingsById,
   findOneBooking,
   createBooking,
-  updateBooking,
   removeBooking,
   validateBooking,
 } = require("../repositories/bookingsRepository");
@@ -14,10 +13,8 @@ const {
   BOOKING_NOT_FOUND,
   BOOKING_NOT_FOUND_BY_ID,
   BOOKING_NOT_CREATED,
-  BOOKING_NOT_UPDATED,
   BOOKING_NOT_DELETED,
   BOOKING_CREATED,
-  BOOKING_UPDATED,
   BOOKING_DELETED,
   BOOKING_DATE_NOT_AVAILABLE,
 } = require("../messages/messages.json");
@@ -86,32 +83,6 @@ const create = async (req, res, next) => {
   }
 };
 
-const update = async (req, res, next) => {
-  try {
-    const value = await bookingValidation(req.body);
-
-    const result = await validateBooking(value);
-
-    if (result) {
-      generateError(BOOKING_DATE_NOT_AVAILABLE, 400);
-    }
-
-    const affectedRows = await updateBooking(value, req.params.id, req.auth.id);
-
-    if (!affectedRows) {
-      generateError(BOOKING_NOT_UPDATED, 500);
-    }
-
-    const data = await findOneBooking(req.params.id, req.auth.id);
-
-    await sendMail(BOOKING_UPDATED, templateContent(data), "booking");
-
-    res.json({ message: BOOKING_UPDATED });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const remove = async (req, res, next) => {
   try {
     const affectedRows = await removeBooking(req.params.id, req.auth.id);
@@ -163,7 +134,6 @@ module.exports = {
   findAllById,
   findOne,
   create,
-  update,
   remove,
   payment,
 };

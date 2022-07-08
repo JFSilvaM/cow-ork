@@ -54,37 +54,6 @@ const createBooking = async (booking, userId) => {
   return insertId;
 };
 
-const updateBooking = async (booking, id, userId) => {
-  const selectUser = "SELECT * FROM users WHERE id = ? AND is_admin = 1";
-
-  const [[isAdmin]] = await pool.query(selectUser, [userId]);
-
-  if (isAdmin) {
-    const query =
-      "UPDATE bookings SET start_date = ?, end_date = ? WHERE id = ?";
-
-    const [{ affectedRows }] = await pool.query(query, [
-      booking.start_date,
-      booking.end_date,
-      id,
-    ]);
-
-    return affectedRows;
-  }
-
-  const query =
-    "UPDATE bookings SET start_date = ?, end_date = ? WHERE id = ? AND user_id = ?";
-
-  const [{ affectedRows }] = await pool.query(query, [
-    booking.start_date,
-    booking.end_date,
-    id,
-    userId,
-  ]);
-
-  return affectedRows;
-};
-
 const removeBooking = async (id, userId) => {
   const selectUser = "SELECT * FROM users WHERE id = ? AND is_admin = 1";
 
@@ -125,7 +94,6 @@ module.exports = {
   findAllBookingsById,
   findOneBooking,
   createBooking,
-  updateBooking,
   removeBooking,
   validateBooking,
 };

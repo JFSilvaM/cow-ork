@@ -6,6 +6,7 @@ import DatePicker from "../components/DatePicker";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import Typography from "./Typography";
 
 export default function BookingForm({ spaceId, price }) {
   const [startDate, setStartDate] = useState("");
@@ -78,13 +79,13 @@ export default function BookingForm({ spaceId, price }) {
   };
 
   return (
-    <article>
+    <article className="flex w-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-2"
+        className="flex w-full flex-col items-center gap-5"
       >
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 sm:flex-row">
+        <div className="flex flex-col gap-5 px-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-10">
             <DatePicker
               id="start_date"
               name="start_date"
@@ -100,7 +101,14 @@ export default function BookingForm({ spaceId, price }) {
             />
           </div>
 
-          <CardElement />
+          <CardElement className="rounded bg-gray-200 p-2" />
+
+          <Typography className="flex items-center gap-2 self-end">
+            Total:
+            <Typography weight="bold" size="lg">
+              {price}€
+            </Typography>
+          </Typography>
         </div>
 
         <Button size="sm" shape="rounded" disabled={!stripe || !elements}>

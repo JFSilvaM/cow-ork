@@ -39,14 +39,6 @@ export default function BookingsPage() {
       if (data?.status === "error") {
         throw new Error(data.message);
       }
-
-      const spaceRating = await fetchEndpoint(`/space_ratings/${id}`, token);
-
-      if (spaceRating?.status === "error") {
-        throw new Error(spaceRating.message);
-      }
-
-      setRating(spaceRating.rating);
     } catch (error) {
       console.error(error);
     }

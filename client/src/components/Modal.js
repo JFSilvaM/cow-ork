@@ -41,7 +41,7 @@ export default function Modal({ children, isOpen, setIsOpen, onClick }) {
                   </Typography>
                 </Dialog.Title>
 
-                <Dialog.Description className="my-6">
+                <Dialog.Description className="my-6 text-slate-800 dark:text-slate-200">
                   {children}
                 </Dialog.Description>
 

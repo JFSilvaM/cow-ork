@@ -104,7 +104,7 @@ export default function BookingCard({
         <div className="flex flex-col justify-between md:w-fit md:items-end">
           <div className="self-center">
             <form
-              onSubmit={(e) => handleSubmit(e, booking.id)}
+              onSubmit={(e) => handleSubmit(e, booking.space_id)}
               className="flex flex-col items-center gap-2 rounded p-3"
             >
               <div className="flex items-center gap-2">

@@ -81,7 +81,7 @@ export default function SpacesIdPage() {
         </Modal>
 
         <div className="flex flex-col justify-between lg:flex-row">
-          <div className="flex w-full flex-col gap-3 py-2 md:w-1/2">
+          <div className="flex w-full flex-col gap-3 p-2 md:w-1/2">
             <div className="flex flex-col space-y-4">
               <div className="flex justify-between">
                 <div>
@@ -164,7 +164,7 @@ export default function SpacesIdPage() {
           </div>
 
           {token && (
-            <aside className="flex w-full flex-col gap-3 md:w-1/2">
+            <aside className="flex w-full flex-col gap-3 px-2 md:w-1/2">
               <div className="flex flex-col rounded-2xl py-5 shadow">
                 <Typography
                   as="h4"

@@ -150,5 +150,14 @@
   "RATING_MAX_LENGTH": "La puntuación máxima es de 5",
   "RATING_NOT_FOUND": "La puntuación no existe",
   "RATING_UPDATED": "La puntuación ha sido actualizada",
-  "RATING_NOT_UPDATED": "La puntuación no ha sido actualizada"
+  "RATING_NOT_UPDATED": "La puntuación no ha sido actualizada",
+
+  "SPACE_TYPE_REFERENCED": "El tipo de espacio está en uso por uno o más espacios",
+  "SPACE_TYPE_DELETE_ERROR": "Error al eliminar el tipo de espacio",
+
+  "REPORT_CATEGORY_REFERENCED": "La categoría de reporte está en uso por uno o más reportes",
+  "REPORT_CATEGORY_DELETE_ERROR": "Error al eliminar la categoría de reporte",
+
+  "SERVICE_REFERENCED": "El servicio está en uso por uno o más espacios",
+  "SERVICE_DELETE_ERROR": "Error al eliminar el servicio"
 }

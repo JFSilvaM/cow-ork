@@ -1,4 +1,8 @@
 const pool = require("../database/getPool")();
+const {
+  SPACE_TYPE_REFERENCED,
+  SPACE_TYPE_DELETE_ERROR,
+} = require("../messages/messages");
 
 const findAllSpaceTypes = async () => {
   const query = "SELECT * FROM space_types";
@@ -35,7 +39,17 @@ const updateSpaceType = async (spaceType, id) => {
 const removeSpaceType = async (id) => {
   const query = "DELETE FROM space_types WHERE id = ?";
 
-  const [{ affectedRows }] = await pool.query(query, [id]);
+  const [{ affectedRows }] = await pool
+    .query(query, [id])
+    .then((rows) => rows)
+    .catch((err) => {
+      switch (err.code) {
+        case "ER_ROW_IS_REFERENCED_2":
+          throw new Error(SPACE_TYPE_REFERENCED);
+        default:
+          throw new Error(SPACE_TYPE_DELETE_ERROR);
+      }
+    });
 
   return affectedRows;
 };

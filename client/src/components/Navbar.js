@@ -23,7 +23,7 @@ export default function Navbar() {
   }, [darkMode]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800 dark:shadow-white">
+    <nav className="sticky top-0 z-50 bg-white px-2 shadow dark:bg-gray-800 dark:shadow-white">
       <ul className="container mx-auto flex items-center justify-between py-3 px-2">
         <li>
           <Link

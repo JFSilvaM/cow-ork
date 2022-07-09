@@ -1,4 +1,4 @@
-export default function MapIcons() {
+export default function MapIcon() {
   return (
     <svg
       className="h-6 w-6"

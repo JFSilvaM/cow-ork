@@ -88,6 +88,14 @@ export default function LoginPage() {
           </Button>
         </div>
 
+        {error && (
+          <div className="my-4 flex justify-center">
+            <Alert color="error" icon="error">
+              {error.message}
+            </Alert>
+          </div>
+        )}
+
         <Typography
           align="center"
           className="text-slate-800 dark:text-slate-200"
@@ -100,14 +108,6 @@ export default function LoginPage() {
             Regístrate
           </Link>
         </Typography>
-
-        {error && (
-          <div className="flex justify-center pt-5">
-            <Alert color="error" icon="error">
-              {error.message}
-            </Alert>
-          </div>
-        )}
       </fieldset>
     </form>
   );

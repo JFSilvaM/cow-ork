@@ -17,7 +17,7 @@ export default function BookingCard({
   handleDelete,
   handleSubmit,
 }) {
-  const [selectedItem, setSelectedItem] = useState(booking);
+  const [selectedItem, setSelectedItem] = useState({});
 
   const calculateAmount = (booking) => {
     const daysDifference = differenceInDays(
@@ -111,7 +111,7 @@ export default function BookingCard({
                 <StarRating rating={rating} setRating={setRating} />
               </div>
 
-              <div className="">
+              <div>
                 <Button shape="rounded" size="sm">
                   Valorar
                 </Button>

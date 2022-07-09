@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Alert from "../components/Alert";
 import Modal from "../components/Modal";
 import ReportCard from "../components/ReportCard";
 import Spinner from "../components/Spinner";
@@ -7,13 +6,13 @@ import Typography from "../components/Typography";
 import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
+import ItemNotFound from "./ItemNotFound";
 
 export default function ReportsPage() {
-  const { data: reportsList, loading, error } = useFetch("/reports");
+  const { data: reportsList, loading } = useFetch("/reports");
   const { token } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
@@ -36,20 +35,12 @@ export default function ReportsPage() {
       const newReports = reports.filter((report) => report.id !== id);
       setReports(newReports);
     } catch (error) {
-      setErrorMessage(error);
+      console.error(error);
     }
   };
 
   if (loading) {
     return <Spinner />;
-  }
-
-  if (error) {
-    return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
-    );
   }
 
   return (
@@ -68,23 +59,19 @@ export default function ReportsPage() {
           <span className="font-semibold italic">{selectedItem}</span>?
         </Modal>
 
-        {reports.map((report) => (
-          <ReportCard
-            key={report.id}
-            report={report}
-            setIsOpen={setIsOpen}
-            setSelectedItem={setSelectedItem}
-          />
-        ))}
+        {reports.length ? (
+          reports.map((report) => (
+            <ReportCard
+              key={report.id}
+              report={report}
+              setIsOpen={setIsOpen}
+              setSelectedItem={setSelectedItem}
+            />
+          ))
+        ) : (
+          <ItemNotFound>No tienes ningún reporte</ItemNotFound>
+        )}
       </div>
-
-      {errorMessage && (
-        <div className="flex justify-center pt-5">
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
-        </div>
-      )}
     </section>
   );
 }

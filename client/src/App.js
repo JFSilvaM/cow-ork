@@ -25,7 +25,7 @@ export default function App() {
         <div className="flex h-screen flex-col">
           <Navbar />
 
-          <main className="container relative mx-auto flex flex-grow py-5">
+          <main className="container relative mx-auto flex flex-grow py-5 px-2">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/spaces/:id" element={<SpacesIdPage />} />

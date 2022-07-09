@@ -12,12 +12,6 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
       key={report.id}
       className="flex flex-col rounded shadow md:flex-row"
     >
-      <img
-        className="w-full rounded object-cover md:w-2/5 xl:w-1/2"
-        src={`/images/spaces/${report.image}`}
-        alt={report.space_name}
-      />
-
       <div className="flex w-full flex-col gap-5 p-5">
         <div className="flex items-end justify-between">
           <div className="flex gap-2">
@@ -25,7 +19,7 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
               {report.space_name}
             </Typography>
 
-            <div className="">
+            <div>
               {report.status === "PENDING" && (
                 <Chip color="warning">Pendiente</Chip>
               )}
@@ -36,7 +30,7 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
             </div>
           </div>
 
-          <div className="">
+          <div>
             <AdminTools
               handleDelete={() => {
                 setIsOpen(true);
@@ -48,21 +42,21 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
         </div>
 
         <section className="flex flex-col space-y-2">
-          <article className="">
+          <article>
             <Typography as="h3" size="xl">
               Categoría:
             </Typography>
             <Typography>{report.category_name}</Typography>
           </article>
 
-          <article className="">
+          <article>
             <Typography as="h3" size="xl">
               Descripción:
             </Typography>
             <Typography>{report.description}</Typography>
           </article>
 
-          <article className="">
+          <article>
             <Typography as="h3" size="xl">
               Fecha del reporte:
             </Typography>

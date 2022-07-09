@@ -11,7 +11,7 @@
   "USER_INVALID_CREDENTIALS": "Email o contraseña incorrectos",
   "USER_EXISTS": "El usuario con ese correo ya existe",
   "USER_CANNOT_BE_REGISTERED": "No se pudo crear el usuario",
-  "USER_REGISTERED": "Usuario registrado correctamente",
+  "USER_REGISTERED": "Usuario registrado correctamente, revisa tu correo para activar tu cuenta",
   "USER_CANNOT_BE_ACTIVATED": "El usuario se activó correctamente",
   "USER_ACTIVATED": "El usuario se activó correctamente",
 

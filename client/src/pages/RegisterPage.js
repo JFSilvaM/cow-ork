@@ -149,6 +149,22 @@ export default function RegisterPage() {
           </Button>
         </div>
 
+        {errorMessage && (
+          <div className="my-4 flex justify-center">
+            <Alert color="error" icon="error">
+              {errorMessage}
+            </Alert>
+          </div>
+        )}
+
+        {successMessage && (
+          <div className="my-4 flex justify-center">
+            <Alert color="success" icon="success">
+              {successMessage}
+            </Alert>
+          </div>
+        )}
+
         <Typography
           align="center"
           className="text-slate-800 dark:text-slate-200"
@@ -158,22 +174,6 @@ export default function RegisterPage() {
             Inicia sesión
           </Link>
         </Typography>
-
-        {errorMessage && (
-          <div className="flex justify-center pt-5">
-            <Alert color="error" icon="error">
-              {errorMessage}
-            </Alert>
-          </div>
-        )}
-
-        {successMessage && (
-          <div className="flex justify-center pt-5">
-            <Alert color="error" icon="error">
-              {successMessage}
-            </Alert>
-          </div>
-        )}
       </fieldset>
     </form>
   );

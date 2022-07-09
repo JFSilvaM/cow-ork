@@ -3,17 +3,17 @@ import Button from "../components/Button";
 import ErrorPage from "../components/ErrorPage";
 import Typography from "../components/Typography";
 
-export default function NotFoundPage() {
+export default function ItemNotFound({ children }) {
   const navigate = useNavigate();
 
   return (
-    <ErrorPage image="pageNotFound.svg">
+    <ErrorPage image="john-travolta.webp">
       <Typography as="h3" weight="bold" size="xxl">
-        Página no encontrada
+        {children}
       </Typography>
 
-      <Button shape="rounded" size="sm" onClick={() => navigate(-1)}>
-        Volver atrás
+      <Button shape="rounded" size="sm" onClick={() => navigate("/")}>
+        Ir al inicio
       </Button>
     </ErrorPage>
   );

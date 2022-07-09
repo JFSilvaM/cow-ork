@@ -1,4 +1,3 @@
-import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
 import useFetch from "../hooks/useFetch";
@@ -6,11 +5,11 @@ import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useEffect, useState } from "react";
 import BookingCard from "../components/BookingCard";
+import ItemNotFound from "./ItemNotFound";
 
 export default function BookingsPage() {
-  const { data: baseBookings, loading, error } = useFetch("/bookings");
+  const { data: baseBookings, loading } = useFetch("/bookings");
   const { token } = useAuth();
-  const [errorMessage, setErrorMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [bookings, setBookings] = useState([]);
   const [rating, setRating] = useState(0);
@@ -49,7 +48,7 @@ export default function BookingsPage() {
 
       setRating(spaceRating.rating);
     } catch (error) {
-      setErrorMessage(error);
+      console.error(error);
     }
   };
 
@@ -67,20 +66,12 @@ export default function BookingsPage() {
       const newBookings = bookings.filter((booking) => booking.id !== id);
       setBookings(newBookings);
     } catch (error) {
-      setErrorMessage(error);
+      console.error(error);
     }
   };
 
   if (loading) {
     return <Spinner />;
-  }
-
-  if (error) {
-    return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
-    );
   }
 
   return (
@@ -90,23 +81,21 @@ export default function BookingsPage() {
           Mis reservas
         </Typography>
 
-        {bookings.map((booking) => (
-          <BookingCard
-            key={booking.id}
-            booking={booking}
-            rating={rating}
-            setRating={setRating}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            handleDelete={handleDelete}
-            handleSubmit={handleSubmit}
-          />
-        ))}
-
-        {errorMessage && (
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
+        {bookings.length ? (
+          bookings.map((booking) => (
+            <BookingCard
+              key={booking.id}
+              booking={booking}
+              rating={rating}
+              setRating={setRating}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              handleDelete={handleDelete}
+              handleSubmit={handleSubmit}
+            />
+          ))
+        ) : (
+          <ItemNotFound>No tienes ninguna reserva</ItemNotFound>
         )}
       </div>
     </section>

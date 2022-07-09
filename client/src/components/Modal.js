@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import Button from "./Button";
 import Typography from "./Typography";
 
-export default function Modal({ isOpen, setIsOpen, selectedItem, onClick }) {
+export default function Modal({ children, isOpen, setIsOpen, onClick }) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -45,11 +45,7 @@ export default function Modal({ isOpen, setIsOpen, selectedItem, onClick }) {
                   <Typography className="underline" weight="bold">
                     Esta acción no podrá deshacerse.
                   </Typography>
-                  <Typography>
-                    ¿Realmente deseas borrar el elemento{" "}
-                    <span className="font-semibold italic">{selectedItem}</span>
-                    ?
-                  </Typography>
+                  <Typography>{children}</Typography>
                 </Dialog.Description>
 
                 <div className="space-x-2">

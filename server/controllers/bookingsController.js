@@ -2,7 +2,6 @@ const { STRIPE_API_SECRET } = process.env;
 const stripe = require("stripe")(STRIPE_API_SECRET);
 const { generateError } = require("../lib");
 const {
-  findAllBookings,
   findAllBookingsById,
   findOneBooking,
   createBooking,
@@ -20,20 +19,6 @@ const {
 } = require("../messages/messages.json");
 const { bookingValidation } = require("../validations");
 const sendMail = require("../lib/sendMail");
-
-const findAll = async (req, res, next) => {
-  try {
-    const data = await findAllBookings();
-
-    if (data.length === 0) {
-      generateError(BOOKING_NOT_FOUND, 404);
-    }
-
-    res.json({ data });
-  } catch (error) {
-    next(error);
-  }
-};
 
 const findAllById = async (req, res, next) => {
   try {
@@ -130,7 +115,6 @@ const templateContent = (data) => ({
 });
 
 module.exports = {
-  findAll,
   findAllById,
   findOne,
   create,

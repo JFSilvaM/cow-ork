@@ -7,7 +7,6 @@ router
   .get(auth.isLoggedIn, bookingsController.findAllById)
   .post(auth.isLoggedIn, bookingsController.create);
 
-router.get("/all", auth.isLoggedIn, bookingsController.findAll);
 router.post("/payment_intent", auth.isLoggedIn, bookingsController.payment);
 
 router

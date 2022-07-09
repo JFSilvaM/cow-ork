@@ -119,47 +119,24 @@ export default function Dropdown() {
                 )}
               </Menu.Item>
 
-              <Disclosure as="article">
-                <Disclosure.Button className="my-2 flex w-full items-center gap-2 rounded-md px-2 py-1 hover:bg-gray-500 hover:bg-opacity-10 hover:shadow dark:text-slate-200 hover:dark:bg-gray-500 hover:dark:text-slate-200">
-                  <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
-                    <BookingIcon />
-                  </div>
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to="/bookings"
+                    className={`${
+                      active
+                        ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
+                        : "dark:text-slate-200"
+                    } my-2 flex w-full items-center gap-2 rounded-md px-2 py-1`}
+                  >
+                    <div className="rounded-full bg-gray-300 p-2 focus:outline-none dark:bg-gray-400">
+                      <BookingIcon />
+                    </div>
 
-                  <Typography>Reservas</Typography>
-                </Disclosure.Button>
-
-                <Disclosure.Panel className="flex flex-col gap-2 border-y pl-12">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        to="/bookings"
-                        className={`${
-                          active
-                            ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
-                            : "dark:text-slate-200"
-                        } mt-2 flex rounded-md p-2`}
-                      >
-                        Mis reservas
-                      </Link>
-                    )}
-                  </Menu.Item>
-
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        to="/bookings/all"
-                        className={`${
-                          active
-                            ? "bg-gray-500 bg-opacity-10 shadow dark:bg-gray-500 dark:text-slate-200"
-                            : "dark:text-slate-200"
-                        } mb-2 rounded-md p-2 `}
-                      >
-                        Todas las reservas
-                      </Link>
-                    )}
-                  </Menu.Item>
-                </Disclosure.Panel>
-              </Disclosure>
+                    <Typography>Mis Reservas</Typography>
+                  </Link>
+                )}
+              </Menu.Item>
 
               <Disclosure as="article">
                 <Disclosure.Button className="my-2 flex w-full items-center gap-2 rounded-md px-2 py-1 hover:bg-gray-500 hover:bg-opacity-10 hover:shadow dark:text-slate-200 hover:dark:bg-gray-500 hover:dark:text-slate-200">

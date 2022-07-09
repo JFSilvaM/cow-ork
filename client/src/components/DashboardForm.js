@@ -128,9 +128,11 @@ export default function DashboardForm({ fetchUrl }) {
       <Modal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        selectedItem={selectedItem.name}
         onClick={(e) => handleDelete(e, selectedItem.id)}
-      />
+      >
+        ¿Realmente deseas borrar el elemento{" "}
+        <span className="font-semibold italic">{selectedItem.name}</span>?
+      </Modal>
 
       <ul>
         {values &&

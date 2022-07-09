@@ -75,9 +75,11 @@ export default function SpacesIdPage() {
         <Modal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          selectedItem={selectedItem.name}
           onClick={(e) => handleDelete(e, selectedItem.id)}
-        />
+        >
+          ¿Realmente deseas borrar el espacio{" "}
+          <span className="font-semibold italic">{selectedItem.name}</span>?
+        </Modal>
 
         <div className="flex flex-col justify-between gap-5 lg:flex-row">
           <div className="flex w-full flex-col gap-3 py-2">
@@ -123,14 +125,17 @@ export default function SpacesIdPage() {
             <div className="flex gap-2">
               <Typography>Estado de limpieza:</Typography>
 
-              {space.is_clean === 1 ? (
-                <CheckIcon color="green">
+              {space.is_clean ? (
+                <div className="flex gap-2">
+                  <CheckIcon color="green" />
                   <Typography weight="bold">Limpio</Typography>
-                </CheckIcon>
+                </div>
               ) : (
-                <ErrorIcon color="orange">
+                <div className="flex gap-2">
+                  <ErrorIcon color="orange" />
+
                   <Typography weight="bold">Pendiente de limpieza</Typography>
-                </ErrorIcon>
+                </div>
               )}
             </div>
 

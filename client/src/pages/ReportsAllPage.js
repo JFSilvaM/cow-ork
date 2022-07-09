@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "../components/Alert";
 import Modal from "../components/Modal";
 import ReportCard from "../components/ReportCard";
@@ -8,12 +8,19 @@ import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
 
-export default function ReportsPage() {
-  const { data: reports, loading, error } = useFetch("/reports");
+export default function ReportsAllPage() {
+  const { data: reportsList, loading, error } = useFetch("/reports/all");
   const { token } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const [reports, setReports] = useState([]);
+
+  useEffect(() => {
+    if (reportsList) {
+      setReports(reportsList);
+    }
+  }, [reportsList]);
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
@@ -25,6 +32,9 @@ export default function ReportsPage() {
       if (data?.status === "error") {
         throw new Error(data.message);
       }
+
+      const newReports = reports.filter((report) => report.id !== id);
+      setReports(newReports);
     } catch (error) {
       setErrorMessage(error);
     }
@@ -51,8 +61,16 @@ export default function ReportsPage() {
           weight="bold"
           className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
         >
-          Mis reportes
+          Todos los reportes
         </Typography>
+
+        {errorMessage && (
+          <div className="flex justify-center pt-5">
+            <Alert color="error" icon="error">
+              {errorMessage.message}
+            </Alert>
+          </div>
+        )}
 
         <Modal
           isOpen={isOpen}
@@ -72,14 +90,6 @@ export default function ReportsPage() {
           />
         ))}
       </div>
-
-      {errorMessage && (
-        <div className="flex justify-center pt-5">
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
-        </div>
-      )}
     </section>
   );
 }

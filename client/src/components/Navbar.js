@@ -6,6 +6,7 @@ import Button from "./Button";
 import { useAuth } from "../contexts/AuthContext";
 import Dropdown from "./Dropdown";
 import Avatar from "./Avatar";
+import Typography from "./Typography";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(
@@ -25,8 +26,19 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white shadow dark:bg-gray-800 dark:shadow-white">
       <ul className="container mx-auto flex items-center justify-between py-3 px-2">
         <li>
-          <Link to="/" className="focus:outline-none">
+          <Link
+            to="/"
+            className="flex items-center gap-2 duration-300 hover:scale-110"
+          >
             <Avatar src="/images/cow-ork_logo.png" alt="Cow-Ork logo" />
+
+            <Typography
+              as="span"
+              weight="bold"
+              className="-skew-x-12 bg-gradient-to-r from-indigo-500 py-1 pl-2 pr-5 italic tracking-widest text-opacity-80"
+            >
+              COW-ORK
+            </Typography>
           </Link>
         </li>
 

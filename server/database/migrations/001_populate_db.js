@@ -21,7 +21,7 @@ const migrate = async () => {
         ('Donia', 'Marwood', 'dmarwood8@nationalgeographic.com', '${hashedPassword}', 'Morbi ultrices pellentesque dui eget cursus. Maecenas ullamcorper felis non pharetra fringilla. Cras porta volutpat libero blandit imperdiet.', 0, 1, ''),
         ('Alexio', 'Thorndale', 'athorndale9@nsw.gov.au', '${hashedPassword}', 'Nam finibus, ex non iaculis tempor, eros leo ultricies magna, vel molestie elit eros a nulla. Maecenas vel maximus ligula, quis semper velit. Vivamus a ipsum leo.', 0, 1, '');
     `);
-    console.log("Users");
+
     await pool.query(`
         INSERT INTO services (name) VALUES
         ('Wi-Fi'),
@@ -35,7 +35,7 @@ const migrate = async () => {
         ('Pizarra'),
         ('Sofá');
     `);
-    console.log("services");
+
     await pool.query(`
         INSERT INTO report_categories (name) VALUES
         ('Reformas'),
@@ -44,7 +44,7 @@ const migrate = async () => {
         ('Avería'),
         ('Otros');
     `);
-    console.log("report_categories");
+
     await pool.query(`
         INSERT INTO space_types (name) VALUES
         ('Oficina compartida'),
@@ -53,7 +53,7 @@ const migrate = async () => {
         ('Escritorio dedicado'),
         ('Sala de reuniones');
     `);
-    console.log("space_types");
+
     await pool.query(`
         INSERT INTO spaces (name, description, address, price, capacity, is_clean, type_id) VALUES
         ('Espacio polaris', 'Integer eget odio vitae ex venenatis tristique placerat non nulla. Etiam auctor sed urna ac euismod. Integer fermentum arcu vel eros vulputate elementum.', '11 Mosinee Avenue', '526.21', 2, true, 5),
@@ -72,7 +72,7 @@ const migrate = async () => {
         ('Erika park', 'Vivamus non ullamcorper tortor, vel hendrerit nisl. Nulla et justo quis odio cursus egestas. Cras ac aliquam est. Donec tincidunt venenatis blandit.', '33 Ramsey Crossing', '953.70', 1, false, 5),
         ('Artico', 'Maecenas non tortor ornare, aliquam nibh quis, blandit leo. Praesent ullamcorper sem nec neque tincidunt auctor. Nunc ligula neque, posuere ac tellus id, suscipit aliquam sem. Donec et arcu velit. Sed id urna placerat, commodo mi nec, pretium nisi. Quisque convallis molestie sem, vel sagittis nibh sollicitudin eget. Suspendisse interdum leo lorem, sed congue augue blandit dignissim.', '2052 Fairview Way', '256.62', 2, true, 3);
     `);
-    console.log("spaces");
+
     await pool.query(`
         INSERT INTO bookings (space_id, user_id, start_date, end_date) VALUES
         (1, 4, '2022-4-15', '2022-8-15'),
@@ -91,7 +91,7 @@ const migrate = async () => {
         (13, 2, '2022-5-20', '2022-6-20'),
         (13, 6, '2022-8-12', '2022-10-12');
     `);
-    console.log("bookings");
+
     await pool.query(`
         INSERT INTO reports (space_id, user_id, category_id, description, status) VALUES
         (9, 5, 5, 'Aenean ultrices odio lorem, et pharetra enim dignissim ac. Ut id sem nisl. Duis vitae est eget lorem dignissim congue ut vitae elit. Praesent dignissim neque in posuere lacinia.', 'CLOSED'),
@@ -115,7 +115,7 @@ const migrate = async () => {
         (7, 4, 5, 'Donec laoreet condimentum mi, quis sagittis sem interdum luctus. Donec aliquet felis nec risus auctor mattis. Maecenas ac pellentesque nunc. Donec eget lacus eget est tempus congue sed id odio. Sed maximus nibh vel ornare dapibus. Aenean at pharetra est. Maecenas ac dui sed ligula blandit luctus eu vitae mi.', 'CLOSED'),
         (3, 7, 4, 'Fusce vulputate dui nec felis tempor venenatis. Duis a nulla turpis.', 'OPEN');
     `);
-    console.log("reports");
+
     await pool.query(`
         INSERT INTO space_services (space_id, service_id) VALUES
         (1, 2),
@@ -152,7 +152,7 @@ const migrate = async () => {
         (15, 2),
         (15, 9);
     `);
-    console.log("space_services");
+
     await pool.query(`
         INSERT INTO space_ratings (space_id, user_id, rating) VALUES
         (1, 4, 3),

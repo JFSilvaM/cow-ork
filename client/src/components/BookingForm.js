@@ -113,10 +113,10 @@ export default function BookingForm({ spaceId, price }) {
           <CardElement className="rounded bg-gray-200 p-2" />
 
           <Typography className="flex items-center gap-2 self-end">
-            Total:
-            <Typography weight="bold" size="lg">
+            Total:{" "}
+            <span className="font-bold">
               {amount > 0 ? (amount / 100).toFixed(2) : price}€
-            </Typography>
+            </span>
           </Typography>
         </div>
 

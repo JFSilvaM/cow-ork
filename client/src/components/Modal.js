@@ -37,15 +37,12 @@ export default function Modal({ children, isOpen, setIsOpen, onClick }) {
               <Dialog.Panel className="w-full max-w-screen-sm rounded bg-white p-4 dark:bg-slate-800">
                 <Dialog.Title>
                   <Typography className="uppercase" weight="bold">
-                    Borrar elemento
+                    Acción no reversible
                   </Typography>
                 </Dialog.Title>
 
                 <Dialog.Description className="my-6">
-                  <Typography className="underline" weight="bold">
-                    Esta acción no podrá deshacerse.
-                  </Typography>
-                  <Typography>{children}</Typography>
+                  {children}
                 </Dialog.Description>
 
                 <div className="space-x-2">

@@ -133,7 +133,6 @@ export default function SpacesIdPage() {
               ) : (
                 <div className="flex gap-2">
                   <ErrorIcon color="orange" />
-
                   <Typography weight="bold">Pendiente de limpieza</Typography>
                 </div>
               )}

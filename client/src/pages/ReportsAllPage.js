@@ -55,12 +55,7 @@ export default function ReportsAllPage() {
   return (
     <section className="flex w-full justify-center px-3 text-slate-800 dark:text-slate-200">
       <div className="flex w-full flex-col gap-5 lg:w-3/4">
-        <Typography
-          as="h4"
-          size="xxxl"
-          weight="bold"
-          className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
-        >
+        <Typography as="h4" size="xxxl" weight="bold" align="center">
           Todos los reportes
         </Typography>
 

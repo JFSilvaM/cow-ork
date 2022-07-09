@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import formatDate from "../helpers/formatDate";
 import AdminTools from "./AdminTools";
+import Chip from "./Chip";
 import Typography from "./Typography";
 
 export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
@@ -9,7 +10,7 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
   return (
     <article
       key={report.id}
-      className="flex flex-col rounded p-2 shadow dark:shadow-white md:flex-row"
+      className="flex flex-col rounded shadow md:flex-row"
     >
       <img
         className="w-full rounded object-cover md:w-2/5 xl:w-1/2"
@@ -18,52 +19,56 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
       />
 
       <div className="flex w-full flex-col gap-5 p-5">
-        <div className="flex-1">
-          <AdminTools
-            handleDelete={() => {
-              setIsOpen(true);
-              setSelectedItem(report.id);
-            }}
-            handleEdit={() => navigate(`/reports/${report.id}/edit`)}
-          />
-        </div>
-
         <div className="flex items-end justify-between">
-          <Typography size="xxl" weight="bold">
-            {report.space_name}
-          </Typography>
-
-          {report.status === "PENDING" && (
-            <Typography className="text-yellow-500" size="xl" weight="bold">
-              {report.status}
+          <div className="flex gap-2">
+            <Typography size="xxl" weight="bold">
+              {report.space_name}
             </Typography>
-          )}
 
-          {report.status === "OPEN" && (
-            <Typography className="text-green-500" size="xl" weight="bold">
-              {report.status}
-            </Typography>
-          )}
+            <div className="">
+              {report.status === "PENDING" && (
+                <Chip color="warning">Pendiente</Chip>
+              )}
 
-          {report.status === "CLOSED" && (
-            <Typography className="text-red-500" size="xl" weight="bold">
-              {report.status}
-            </Typography>
-          )}
+              {report.status === "OPEN" && <Chip color="success">Abierto</Chip>}
+
+              {report.status === "CLOSED" && <Chip color="error">Cerrado</Chip>}
+            </div>
+          </div>
+
+          <div className="">
+            <AdminTools
+              handleDelete={() => {
+                setIsOpen(true);
+                setSelectedItem(report.id);
+              }}
+              handleEdit={() => navigate(`/reports/${report.id}/edit`)}
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-3">
-          <Typography className="flex gap-1">
-            Categoría:
-            <Typography weight="bold">{report.category_name}</Typography>
-          </Typography>
+        <section className="flex flex-col space-y-2">
+          <article className="">
+            <Typography as="h3" size="xl">
+              Categoría:
+            </Typography>
+            <Typography>{report.category_name}</Typography>
+          </article>
 
-          <Typography>Descripción: {report.description}</Typography>
+          <article className="">
+            <Typography as="h3" size="xl">
+              Descripción:
+            </Typography>
+            <Typography>{report.description}</Typography>
+          </article>
 
-          <Typography>
-            Fecha del reporte: {formatDate(report.created_at)}
-          </Typography>
-        </div>
+          <article className="">
+            <Typography as="h3" size="xl">
+              Fecha del reporte:
+            </Typography>
+            <Typography>{formatDate(report.created_at)}</Typography>
+          </article>
+        </section>
       </div>
     </article>
   );

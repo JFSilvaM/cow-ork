@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "../components/Alert";
 import Modal from "../components/Modal";
 import ReportCard from "../components/ReportCard";
@@ -9,11 +9,18 @@ import fetchEndpoint from "../helpers/fetchEndpoint";
 import useFetch from "../hooks/useFetch";
 
 export default function ReportsPage() {
-  const { data: reports, loading, error } = useFetch("/reports");
+  const { data: reportsList, loading, error } = useFetch("/reports");
   const { token } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const [reports, setReports] = useState([]);
+
+  useEffect(() => {
+    if (reportsList) {
+      setReports(reportsList);
+    }
+  }, [reportsList]);
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
@@ -25,6 +32,9 @@ export default function ReportsPage() {
       if (data?.status === "error") {
         throw new Error(data.message);
       }
+
+      const newReports = reports.filter((report) => report.id !== id);
+      setReports(newReports);
     } catch (error) {
       setErrorMessage(error);
     }
@@ -45,12 +55,7 @@ export default function ReportsPage() {
   return (
     <section className="flex w-full justify-center px-3 text-slate-800 dark:text-slate-200">
       <div className="flex w-full flex-col gap-5 lg:w-3/4">
-        <Typography
-          as="h4"
-          size="xxxl"
-          weight="bold"
-          className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
-        >
+        <Typography as="h4" size="xxxl" weight="bold" align="center">
           Mis reportes
         </Typography>
 

@@ -81,18 +81,18 @@ export default function ProfilePage() {
         onSubmit={handleSubmit}
         className="flex w-full flex-col items-center gap-5 text-slate-800 dark:text-slate-200"
       >
-        <div className="flex w-full flex-col gap-5 px-3 md:w-fit md:flex-row md:gap-10">
+        <div className="md: flex w-full flex-col justify-center gap-5 px-2 md:flex-row md:gap-10 lg:gap-32">
           <div className="flex flex-col items-center justify-center gap-2">
-            <div className="border-2 p-2">
+            <div className="overflow-auto rounded-full">
               <Avatar size="xxxxl" src={`/images/avatars/${avatar}`} />
             </div>
 
             <Input id="avatar" name="avatar" type="file" />
           </div>
 
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-3 md:flex-row">
-              <label className="block">
+          <div className="flex flex-col gap-3 md:w-1/2">
+            <div className="flex w-full flex-col gap-3 md:flex-row">
+              <label className="w-full">
                 <Typography as="span" className="block">
                   Nombre
                 </Typography>
@@ -106,7 +106,7 @@ export default function ProfilePage() {
                 />
               </label>
 
-              <label className="block">
+              <label className="w-full">
                 <Typography as="span" className="block">
                   Apellidos
                 </Typography>
@@ -185,19 +185,19 @@ export default function ProfilePage() {
               <Button size="sm" shape="rounded">
                 Actualizar
               </Button>
-
-              {successMessage && (
-                <Alert color="success" icon="success">
-                  {successMessage.message}
-                </Alert>
-              )}
-
-              {errorMessage && (
-                <Alert color="error" icon="error">
-                  {errorMessage.message}
-                </Alert>
-              )}
             </div>
+
+            {successMessage && (
+              <Alert color="success" icon="success">
+                {successMessage.message}
+              </Alert>
+            )}
+
+            {errorMessage && (
+              <Alert color="error" icon="error">
+                {errorMessage.message}
+              </Alert>
+            )}
           </div>
         </div>
       </form>

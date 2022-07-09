@@ -42,10 +42,10 @@ export default function RegisterPage() {
 
   return (
     <form
-      className="flex w-full items-center justify-center"
+      className="mx-2 flex w-full items-center justify-center"
       onSubmit={handleSubmit}
     >
-      <fieldset className="rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-2/4">
+      <fieldset className="w-full rounded border border-indigo-500 p-5 dark:border-emerald-500 sm:w-3/4 xl:w-1/2">
         <legend className="px-3 text-slate-800 dark:text-slate-200">
           <Typography size="xxl">Registrarse</Typography>
         </legend>

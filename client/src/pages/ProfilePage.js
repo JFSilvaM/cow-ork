@@ -48,7 +48,7 @@ export default function ProfilePage() {
     e.preventDefault();
 
     try {
-      const formData = {
+      const body = {
         first_name: firstName,
         last_name: lastName,
         email,
@@ -58,12 +58,7 @@ export default function ProfilePage() {
         avatar: avatar || "default.png",
       };
 
-      const data = await fetchEndpoint(
-        `/users/${user.id}`,
-        token,
-        "PUT",
-        formData
-      );
+      const data = await fetchEndpoint(`/users/${user.id}`, token, "PUT", body);
 
       if (data.status === "ok") {
         setErrorMessage("");

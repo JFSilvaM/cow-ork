@@ -43,6 +43,7 @@ export default function SpaceEditPage() {
         setSpaceTypeId(data.type_id);
         setServiceIds(data.service_ids);
         setIsClean(Boolean(data.is_clean));
+        setImage(data.image);
       } catch (error) {
         setErrorMessage(error);
       }
@@ -61,7 +62,7 @@ export default function SpaceEditPage() {
         address,
         price,
         capacity,
-        image,
+        image: image || "default.png",
         type_id: spaceTypeId,
         services: serviceIds,
         is_clean: isClean ? 1 : 0,
@@ -174,10 +175,13 @@ export default function SpaceEditPage() {
           onChange={(e) => setIsClean(e.target.checked)}
         />
 
+        <div className="">
+          <img src={`/images/spaces/${image}`} alt="Espacio" />
+        </div>
+
         <Input
           id="image"
           name="image"
-          value={image}
           onChange={(e) => setImage(e.target.value)}
           type="file"
         />

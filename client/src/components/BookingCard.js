@@ -17,7 +17,7 @@ export default function BookingCard({
   handleDelete,
   handleSubmit,
 }) {
-  const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItem, setSelectedItem] = useState(booking);
 
   const calculateAmount = (booking) => {
     const daysDifference = differenceInDays(
@@ -126,7 +126,7 @@ export default function BookingCard({
               color="error"
               onClick={() => {
                 setIsOpen(true);
-                setSelectedItem(booking.id);
+                setSelectedItem(booking);
               }}
             >
               Cancelar reserva
@@ -137,10 +137,10 @@ export default function BookingCard({
         <Modal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          onClick={(e) => handleDelete(e, selectedItem)}
+          onClick={(e) => handleDelete(e, selectedItem.id)}
         >
           ¿Realmente deseas borrar la reserva número{" "}
-          <span className="font-semibold italic">{selectedItem}</span>?
+          <span className="font-semibold italic">{selectedItem.id}</span>?
         </Modal>
       </div>
     </article>

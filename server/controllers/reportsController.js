@@ -71,7 +71,7 @@ const create = async (req, res, next) => {
       generateError(REPORT_NOT_CREATED, 500);
     }
 
-    res.json({ message: REPORT_CREATED, data: value });
+    res.json({ data: { message: REPORT_CREATED, data: value } });
   } catch (error) {
     next(error);
   }

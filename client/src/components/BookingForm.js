@@ -12,6 +12,7 @@ export default function BookingForm({ spaceId, price }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [amount, setAmount] = useState(0);
   const { token } = useAuth();
 
@@ -77,12 +78,12 @@ export default function BookingForm({ spaceId, price }) {
 
       const data = await fetchEndpoint("/bookings", token, "POST", body);
 
-      if (data?.error) {
-        throw new Error(data.error);
+      if (data.status === "ok") {
+        setErrorMessage("");
+        setSuccessMessage(data);
       }
-
-      setErrorMessage("");
     } catch (error) {
+      setSuccessMessage("");
       setErrorMessage(error);
     }
   };
@@ -119,6 +120,14 @@ export default function BookingForm({ spaceId, price }) {
             </span>
           </Typography>
         </div>
+
+        {successMessage && (
+          <div className="mt-2 flex justify-center">
+            <Alert color="success" icon="success">
+              {successMessage.message}
+            </Alert>
+          </div>
+        )}
 
         {errorMessage && (
           <div className="mt-2 flex justify-center">

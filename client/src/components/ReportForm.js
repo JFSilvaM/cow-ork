@@ -11,6 +11,7 @@ export default function ReportForm({ spaceId }) {
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const { data: categories, loading, error } = useFetch("/report_categories");
   const { token } = useAuth();
 
@@ -29,6 +30,7 @@ export default function ReportForm({ spaceId }) {
         throw new Error(data.error);
       }
 
+      setSuccessMessage(data);
       setErrorMessage("");
     } catch (error) {
       setErrorMessage(error.message);
@@ -81,6 +83,14 @@ export default function ReportForm({ spaceId }) {
             </option>
           ))}
         </select>
+
+        {successMessage && (
+          <div className="mt-2 flex justify-center">
+            <Alert color="success" icon="success">
+              {successMessage.message}
+            </Alert>
+          </div>
+        )}
 
         {errorMessage && (
           <div className="mt-2 flex justify-center">

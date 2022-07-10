@@ -62,7 +62,7 @@ const create = async (req, res, next) => {
 
     await sendMail(BOOKING_CREATED, templateContent(data), "booking");
 
-    res.json({ message: BOOKING_CREATED });
+    res.json({ data: { status: "ok", message: BOOKING_CREATED } });
   } catch (error) {
     next(error);
   }

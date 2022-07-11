@@ -73,7 +73,7 @@ export default function ReportForm({ spaceId }) {
             <Typography as="span" className="truncate">
               {categoryId
                 ? categories.find((category) => category.id === categoryId).name
-                : "Selecciona el tipo de espacio"}
+                : "Selecciona la categoría"}
             </Typography>
 
             <SelectorIcon />

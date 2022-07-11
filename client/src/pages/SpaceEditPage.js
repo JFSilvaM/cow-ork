@@ -130,6 +130,7 @@ export default function SpaceEditPage() {
             <Typography as="span" size="xl">
               Descripción:
             </Typography>
+
             <Input
               id="description"
               name="description"
@@ -143,6 +144,7 @@ export default function SpaceEditPage() {
             <Typography as="span" size="xl">
               Dirección:
             </Typography>
+
             <Input
               id="address"
               name="address"
@@ -155,6 +157,7 @@ export default function SpaceEditPage() {
             <Typography as="span" size="xl">
               Precio:
             </Typography>
+
             <Input
               id="price"
               name="price"
@@ -168,6 +171,7 @@ export default function SpaceEditPage() {
             <Typography as="span" size="xl">
               Capacidad:
             </Typography>
+
             <Input
               id="capacity"
               name="capacity"

@@ -5,7 +5,7 @@ import Alert from "./Alert";
 import Button from "./Button";
 import StarIcon from "./icons/StarIcon";
 
-export default function StarRating({ spaceId }) {
+export default function StarRating({ spaceId, withHover }) {
   const [rating, setRating] = useState(0);
   const [successMessage, setSuccessMessage] = useState("");
   const { token } = useAuth();
@@ -48,11 +48,19 @@ export default function StarRating({ spaceId }) {
         {[...Array(5)].map((_, i) => (
           <Fragment key={i}>
             <label htmlFor={`rating-${spaceId}-${i}`}>
-              <StarIcon
-                className={`${
-                  i < rating ? "fill-yellow-400" : "fill-yellow-100"
-                } h-7 w-7 cursor-pointer stroke-black`}
-              />
+              {withHover ? (
+                <StarIcon
+                  className={`${
+                    i < rating ? "fill-yellow-400" : "fill-yellow-100"
+                  } h-7 w-7 cursor-pointer stroke-black hover:scale-110`}
+                />
+              ) : (
+                <StarIcon
+                  className={`${
+                    i < rating ? "fill-yellow-400" : "fill-yellow-100"
+                  } h-7 w-7 cursor-pointer stroke-black`}
+                />
+              )}
             </label>
             <input
               id={`rating-${spaceId}-${i}`}

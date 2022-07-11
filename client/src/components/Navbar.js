@@ -45,7 +45,7 @@ export default function Navbar() {
         <li>
           <ul className="flex items-center justify-center gap-2">
             <li
-              className="flex cursor-pointer justify-center"
+              className="flex cursor-pointer justify-center hover:opacity-70"
               onClick={() => {
                 setDarkMode(!darkMode);
                 localStorage.setItem("darkMode", !darkMode);

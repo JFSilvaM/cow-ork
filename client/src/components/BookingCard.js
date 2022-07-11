@@ -101,7 +101,7 @@ export default function BookingCard({
 
         <div className="flex flex-col justify-between md:w-fit md:items-end">
           <div className="flex items-center gap-2">
-            <StarRating spaceId={booking.space_id} />
+            <StarRating spaceId={booking.space_id} withHover />
           </div>
 
           <div className="self-center">

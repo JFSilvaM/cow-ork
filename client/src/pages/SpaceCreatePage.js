@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
@@ -9,6 +9,8 @@ import { useAuth } from "../contexts/AuthContext";
 import Typography from "../components/Typography";
 import Switch from "../components/Switch";
 import { useNavigate } from "react-router-dom";
+import { Listbox, Transition } from "@headlessui/react";
+import SelectorIcon from "../components/icons/SelectorIcon";
 
 export default function SpaceCreatePage() {
   const { data: spaceTypes, loading, error } = useFetch("/space_types");
@@ -18,7 +20,7 @@ export default function SpaceCreatePage() {
   const [address, setAddress] = useState("");
   const [price, setPrice] = useState(0);
   const [capacity, setCapacity] = useState(0);
-  const [spaceTypeId, setSpaceTypeId] = useState(0);
+  const [spaceTypeId, setSpaceTypeId] = useState("");
   const [serviceIds, setServiceIds] = useState([]);
   const [image, setImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -76,21 +78,16 @@ export default function SpaceCreatePage() {
   }
 
   return (
-    <article className="flex w-full justify-center px-3 text-slate-800 dark:text-slate-200">
+    <article className="flex w-full justify-center dark:text-slate-800">
       <form
         onSubmit={handleSubmit}
-        className="flex w-full flex-col gap-5 lg:w-3/4"
+        className="flex w-full flex-col items-center gap-5 lg:w-3/4"
       >
-        <Typography
-          as="h4"
-          size="xxxl"
-          weight="bold"
-          className="rounded bg-indigo-500 p-3 text-center text-white dark:bg-emerald-500"
-        >
+        <Typography as="h4" size="xxxl" weight="bold" align="center">
           Crear espacio
         </Typography>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex w-full flex-col gap-5">
           <div className="flex flex-col">
             <Typography as="span" size="xl">
               Nombre:
@@ -164,14 +161,20 @@ export default function SpaceCreatePage() {
             />
           </div>
 
-          <Switch
-            id="is_clean"
-            name="is_clean"
-            checked={isClean}
-            onChange={(e) => setIsClean(e.target.checked)}
-          />
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Estado de limpieza:
+            </Typography>
 
-          <div className="flex gap-2">
+            <Switch
+              id="is_clean"
+              name="is_clean"
+              checked={isClean}
+              onChange={(e) => setIsClean(e.target.checked)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
             <Typography as="span" size="xl">
               Imagen:
             </Typography>
@@ -182,6 +185,7 @@ export default function SpaceCreatePage() {
               value={image}
               onChange={(e) => setImage(e.target.value)}
               type="file"
+              className="dark:text-slate-200"
             />
           </div>
 
@@ -207,16 +211,45 @@ export default function SpaceCreatePage() {
             </div>
           </div>
 
-          {/* Hacer lo siguiente, y después más. ¡¡ÁNIMO BRO!! */}
+          <Listbox as="div" value={spaceTypeId} onChange={setSpaceTypeId}>
+            <Typography as="span" size="xl">
+              Tipo de espacio:
+            </Typography>
 
-          <select onChange={(e) => setSpaceTypeId(e.target.value)}>
-            <option value="">Selecciona el tipo de espacio</option>
-            {spaceTypes.map((spaceType) => (
-              <option key={spaceType.id} value={spaceType.id}>
-                {spaceType.name}
-              </option>
-            ))}
-          </select>
+            <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
+              <Typography as="span" className="truncate">
+                {spaceTypeId
+                  ? spaceTypes.find((spaceType) => spaceType.id === spaceTypeId)
+                      .name
+                  : "Selecciona el tipo de espacio"}
+              </Typography>
+
+              <SelectorIcon />
+            </Listbox.Button>
+
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
+                {spaceTypes.map((spaceType) => (
+                  <Listbox.Option
+                    key={spaceType.id}
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value={spaceType.id}
+                  >
+                    <Typography>{spaceType.name}</Typography>
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </Listbox>
         </div>
 
         <Button size="sm" shape="rounded">

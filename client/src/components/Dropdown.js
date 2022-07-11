@@ -43,7 +43,7 @@ export default function Dropdown() {
         <Avatar
           src={`/images/avatars/${avatar}`}
           alt="Avatar"
-          className="h-full w-full"
+          className="h-full w-full hover:opacity-70"
         />
       </Menu.Button>
 

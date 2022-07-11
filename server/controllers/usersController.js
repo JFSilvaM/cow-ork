@@ -62,22 +62,21 @@ const update = async (req, res, next) => {
   try {
     const value = await userValidation(req.body);
 
-    if (req.files) {
-      const fileName = await uploadFile(
-        req.files.avatar,
-        req.auth.id,
-        "avatars"
-      );
-      value.avatar = fileName;
-    }
-
     const affectedRows = await updateUser(value, req.auth.id);
 
     if (!affectedRows) {
       generateError(USER_NOT_UPDATED, 500);
     }
 
-    res.json({ data: { status: "ok", message: USER_UPDATED } });
+    if (req.files) {
+      const fileName = await uploadFile(
+        req.files.avatar,
+        req.auth.id,
+        "avatars"
+      );
+    }
+
+    res.json({ status: "ok", message: USER_UPDATED });
   } catch (error) {
     next(error);
   }

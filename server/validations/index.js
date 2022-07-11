@@ -180,9 +180,7 @@ const userValidation = async (body) => {
         "any.required": messages.PASSWORD_CONFIRMATION_REQUIRED,
         "any.only": messages.PASSWORD_CONFIRMATION_VALID,
       }),
-    avatar: Joi.any().required().messages({
-      "any.required": messages.USER_AVATAR_REQUIRED,
-    }),
+    avatar: Joi.any(),
   });
 
   return await schema.validateAsync(body);

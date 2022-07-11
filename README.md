@@ -74,6 +74,16 @@ Iniciar la aplicación de React:
 npm start
 ```
 
+## Realizando reservas
+
+Para realizar una reserva, se debe introducir una tarjeta de crédito válida para tests con Stripe, por ejemplo:
+
+```bash
+4242 4242 4242 4242
+```
+
+El resto de los campos pueden ser inventados, pero la fecha de caducidad debe ser mayor a la actual.
+
 ## Autores
 
 - **Adrián Rey** ([@arlomba](https://github.com/arlomba))

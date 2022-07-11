@@ -12,9 +12,11 @@ export default function HomePage() {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 

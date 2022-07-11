@@ -38,9 +38,11 @@ export default function ProfilePage() {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 
@@ -176,23 +178,27 @@ export default function ProfilePage() {
               />
             </label>
 
-            <div className="flex flex-col items-end gap-2">
+            {successMessage && (
+              <div className="flex">
+                <Alert color="success" icon="success">
+                  {successMessage.message}
+                </Alert>
+              </div>
+            )}
+
+            {errorMessage && (
+              <div className="flex">
+                <Alert color="error" icon="error">
+                  {errorMessage.message}
+                </Alert>
+              </div>
+            )}
+
+            <div className="flex gap-2">
               <Button size="sm" shape="rounded">
                 Actualizar
               </Button>
             </div>
-
-            {successMessage && (
-              <Alert color="success" icon="success">
-                {successMessage.message}
-              </Alert>
-            )}
-
-            {errorMessage && (
-              <Alert color="error" icon="error">
-                {errorMessage.message}
-              </Alert>
-            )}
           </div>
         </div>
       </form>

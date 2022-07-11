@@ -57,9 +57,11 @@ export default function SpacesIdPage() {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 
@@ -82,7 +84,7 @@ export default function SpacesIdPage() {
         </Modal>
 
         <div className="flex flex-col justify-between lg:flex-row">
-          <div className="flex w-full flex-col gap-3 p-2 md:p-0">
+          <div className="flex w-full flex-col gap-3 p-2 md:p-4">
             <div className="flex flex-col space-y-4">
               <div className="flex justify-between">
                 <div>
@@ -169,7 +171,7 @@ export default function SpacesIdPage() {
           </div>
 
           {token && (
-            <aside className="flex w-full flex-col gap-3 px-2 md:px-0 md:pl-2">
+            <aside className="flex w-full flex-col gap-3 px-2 md:p-4">
               <div className="flex flex-col rounded-2xl border py-5 shadow">
                 <Typography
                   as="h4"
@@ -195,9 +197,11 @@ export default function SpacesIdPage() {
         </div>
 
         {errorMessage && (
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
+          <div className="flex">
+            <Alert color="error" icon="error">
+              {errorMessage.message}
+            </Alert>
+          </div>
         )}
       </article>
     </section>

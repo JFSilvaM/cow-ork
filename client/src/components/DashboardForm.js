@@ -95,9 +95,11 @@ export default function DashboardForm({ fetchUrl }) {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 
@@ -118,7 +120,7 @@ export default function DashboardForm({ fetchUrl }) {
       </form>
 
       {errorMessage && (
-        <aside className="mb-4 px-2">
+        <aside className="mb-4 flex px-2">
           <Alert color="error" icon="error">
             {errorMessage.message}
           </Alert>

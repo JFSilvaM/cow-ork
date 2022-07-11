@@ -51,6 +51,7 @@ const reportValidation = async (body) => {
       "number.min": messages.SPACE_ID_MIN_LENGTH,
     }),
     category_id: Joi.number().min(1).required().messages({
+      "number.base": messages.CATEGORY_ID_REQUIRED,
       "number.empty": messages.CATEGORY_ID_REQUIRED,
       "any.required": messages.CATEGORY_ID_REQUIRED,
       "number.min": messages.CATEGORY_ID_MIN_LENGTH,

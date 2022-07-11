@@ -67,9 +67,11 @@ export default function ReportEditPage() {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 
@@ -202,9 +204,11 @@ export default function ReportEditPage() {
         </Button>
 
         {errorMessage && (
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
+          <div className="flex">
+            <Alert color="error" icon="error">
+              {errorMessage.message}
+            </Alert>
+          </div>
         )}
       </form>
     </article>

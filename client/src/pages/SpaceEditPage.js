@@ -96,9 +96,11 @@ export default function SpaceEditPage() {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 
@@ -181,59 +183,6 @@ export default function SpaceEditPage() {
             />
           </div>
 
-          <div className="flex flex-col">
-            <Typography as="span" size="xl">
-              Estado de limpieza:
-            </Typography>
-
-            <Switch
-              id="is_clean"
-              name="is_clean"
-              checked={isClean}
-              onChange={(e) => setIsClean(e.target.checked)}
-            />
-          </div>
-
-          <div className="w-full self-center md:w-3/4">
-            <img src={`/images/spaces/${image}`} alt="Espacio" />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Typography as="span" size="xl">
-              Imagen:
-            </Typography>
-
-            <Input
-              id="image"
-              name="image"
-              onChange={(e) => setImage(e.target.value)}
-              type="file"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <Typography as="span" size="xl">
-              Servicios:
-            </Typography>
-
-            <div className="flex flex-col flex-wrap">
-              {services &&
-                services.map((service) => (
-                  <label key={service.id} className="flex gap-2">
-                    <Input
-                      type="checkbox"
-                      name="services"
-                      value={service.id}
-                      onChange={handleServiceChange}
-                      checked={serviceIds.includes(service.id)}
-                    />
-
-                    <Typography as="span">{service.name}</Typography>
-                  </label>
-                ))}
-            </div>
-          </div>
-
           <Listbox as="div" value={spaceTypeId} onChange={setSpaceTypeId}>
             <Typography as="span" size="xl">
               Tipo de espacio:
@@ -273,17 +222,72 @@ export default function SpaceEditPage() {
               </Listbox.Options>
             </Transition>
           </Listbox>
+
+          <div className="w-full self-center md:w-3/4">
+            <img src={`/images/spaces/${image}`} alt="Espacio" />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Typography as="span" size="xl">
+              Imagen:
+            </Typography>
+
+            <Input
+              id="image"
+              name="image"
+              onChange={(e) => setImage(e.target.value)}
+              type="file"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Servicios:
+            </Typography>
+
+            <div className="flex flex-wrap gap-4">
+              {services &&
+                services.map((service) => (
+                  <label key={service.id} className="flex gap-2">
+                    <Input
+                      type="checkbox"
+                      name="services"
+                      value={service.id}
+                      onChange={handleServiceChange}
+                      checked={serviceIds.includes(service.id)}
+                    />
+
+                    <Typography as="span">{service.name}</Typography>
+                  </label>
+                ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Estado de limpieza:
+            </Typography>
+
+            <Switch
+              id="is_clean"
+              name="is_clean"
+              checked={isClean}
+              onChange={(e) => setIsClean(e.target.checked)}
+            />
+          </div>
         </div>
 
-        <Button size="sm" shape="rounded">
+        {errorMessage && (
+          <div className="flex">
+            <Alert color="error" icon="error">
+              {errorMessage.message}
+            </Alert>
+          </div>
+        )}
+
+        <Button size="sm" shape="rounded" className="self-start">
           Editar espacio
         </Button>
-
-        {errorMessage && (
-          <Alert color="error" icon="error">
-            {errorMessage.message}
-          </Alert>
-        )}
       </form>
     </article>
   );

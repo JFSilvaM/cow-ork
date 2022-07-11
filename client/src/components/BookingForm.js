@@ -118,13 +118,6 @@ export default function BookingForm({ spaceId, price }) {
           </div>
 
           <CardElement className="rounded bg-gray-200 p-2" />
-
-          <Typography className="flex items-center gap-2 self-end">
-            Total:{" "}
-            <span className="font-bold">
-              {amount > 0 ? (amount / 100).toFixed(2) : price}€
-            </span>
-          </Typography>
         </div>
 
         {successMessage && (
@@ -143,20 +136,31 @@ export default function BookingForm({ spaceId, price }) {
           </div>
         )}
 
-        <div className="">
-          <Button
-            size="sm"
-            shape="rounded"
-            disabled={!stripe || !elements || processing}
-          >
-            {processing ? (
-              <span className="flex items-center justify-center space-x-2">
-                <Spinner size="xs" /> <p>Procesando...</p>
+        <div className="flex w-full items-center justify-between px-5">
+          <div className="">
+            <Button
+              size="sm"
+              shape="rounded"
+              disabled={!stripe || !elements || processing}
+            >
+              {processing ? (
+                <span className="flex items-center justify-center space-x-2">
+                  <Spinner size="xs" /> <p>Procesando...</p>
+                </span>
+              ) : (
+                <p>Reservar</p>
+              )}
+            </Button>
+          </div>
+
+          <div className="">
+            <Typography className="flex items-center gap-2 self-end">
+              Total:{" "}
+              <span className="font-bold">
+                {amount > 0 ? (amount / 100).toFixed(2) : price}€
               </span>
-            ) : (
-              <p>Reservar</p>
-            )}
-          </Button>
+            </Typography>
+          </div>
         </div>
       </form>
     </article>

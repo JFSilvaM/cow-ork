@@ -48,9 +48,11 @@ export default function ReportForm({ spaceId }) {
 
   if (error) {
     return (
-      <Alert color="error" icon="error">
-        Error: {error.message}
-      </Alert>
+      <div className="flex">
+        <Alert color="error" icon="error">
+          Error: {error.message}
+        </Alert>
+      </div>
     );
   }
 
@@ -122,7 +124,7 @@ export default function ReportForm({ spaceId }) {
           </div>
         )}
 
-        <Button size="sm" shape="rounded">
+        <Button size="sm" shape="rounded" className="self-start">
           Reportar
         </Button>
       </form>

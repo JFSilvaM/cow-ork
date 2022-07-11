@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
@@ -7,6 +7,9 @@ import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import Input from "../components/Input";
+import Typography from "../components/Typography";
+import { Listbox, Transition } from "@headlessui/react";
+import SelectorIcon from "../components/icons/SelectorIcon";
 
 export default function ReportEditPage() {
   const { id } = useParams();
@@ -64,47 +67,126 @@ export default function ReportEditPage() {
   }
 
   return (
-    <article>
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-        <Input
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          multiline
-        />
+    <article className="flex w-full justify-center dark:text-slate-800">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full flex-col items-center gap-5 lg:w-3/4"
+      >
+        <Typography as="h4" size="xxxl" weight="bold" align="center">
+          Editar reporte
+        </Typography>
 
-        <select
-          id="report_category"
-          name="report_category"
-          onChange={(e) => setCategoryId(e.target.value)}
-          className="h-10 rounded-md px-2"
-          value={categoryId}
-          required
-        >
-          <option value="" disabled>
-            Selecciona la categoria
-          </option>
-          {categories &&
-            categories.map((category) => (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            ))}
-        </select>
+        <div className="flex w-full flex-col gap-5">
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Descripción:
+            </Typography>
 
-        <select
-          name="status"
-          onChange={(e) => setStatus(e.target.value)}
-          value={status}
-          required
-        >
-          <option value="">Select status</option>
-          <option value="OPEN">Abierto</option>
-          <option value="CLOSED">Cerrado</option>
-          <option value="PENDING">Pendiente</option>
-        </select>
+            <Input
+              name="description"
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              multiline
+            />
+          </div>
 
-        <input type="hidden" name="space_id" value={spaceId} />
+          <Listbox as="div" value={categoryId} onChange={setCategoryId}>
+            <Typography as="span" size="xl">
+              Categoría del reporte:
+            </Typography>
+
+            <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
+              <Typography as="span" className="truncate">
+                {categoryId &&
+                  categories.find((category) => category.id === categoryId)
+                    .name}
+              </Typography>
+
+              <SelectorIcon />
+            </Listbox.Button>
+
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
+                {categories.map((category) => (
+                  <Listbox.Option
+                    key={category.id}
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value={category.id}
+                  >
+                    <Typography>{category.name}</Typography>
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </Listbox>
+
+          <Listbox as="div" value={status} onChange={setStatus}>
+            <Typography as="span" size="xl">
+              Estado del reporte:
+            </Typography>
+
+            <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
+              <Typography as="span" className="truncate">
+                {status && status}
+              </Typography>
+
+              <SelectorIcon />
+            </Listbox.Button>
+
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
+                <Listbox.Option
+                  className={({ active }) =>
+                    `cursor-pointer py-2 px-3 pr-4 ${
+                      active && "bg-gray-200 dark:bg-gray-500"
+                    }`
+                  }
+                  value="OPEN"
+                >
+                  <Typography>Abierto</Typography>
+                </Listbox.Option>
+
+                <Listbox.Option
+                  className={({ active }) =>
+                    `cursor-pointer py-2 px-3 pr-4 ${
+                      active && "bg-gray-200 dark:bg-gray-500"
+                    }`
+                  }
+                  value="CLOSED"
+                >
+                  <Typography>Cerrado</Typography>
+                </Listbox.Option>
+
+                <Listbox.Option
+                  className={({ active }) =>
+                    `cursor-pointer py-2 px-3 pr-4 ${
+                      active && "bg-gray-200 dark:bg-gray-500"
+                    }`
+                  }
+                  value="PENDING"
+                >
+                  <Typography>Pendiente</Typography>
+                </Listbox.Option>
+              </Listbox.Options>
+            </Transition>
+          </Listbox>
+
+          <input type="hidden" name="space_id" value={spaceId} />
+        </div>
 
         <Button size="sm" shape="rounded">
           Editar reporte

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
@@ -9,6 +9,8 @@ import { useAuth } from "../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import Switch from "../components/Switch";
 import Typography from "../components/Typography";
+import { Listbox, Transition } from "@headlessui/react";
+import SelectorIcon from "../components/icons/SelectorIcon";
 
 export default function SpaceEditPage() {
   const { data: spaceTypes, loading, error } = useFetch("/space_types");
@@ -101,90 +103,173 @@ export default function SpaceEditPage() {
   }
 
   return (
-    <article>
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-        <Input
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          id="description"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          multiline
-        />
+    <article className="flex w-full justify-center dark:text-slate-800">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full flex-col items-center gap-5 lg:w-3/4"
+      >
+        <Typography as="h4" size="xxxl" weight="bold" align="center">
+          Editar espacio
+        </Typography>
 
-        <Input
-          id="address"
-          name="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
+        <div className="flex w-full flex-col gap-5">
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Nombre:
+            </Typography>
 
-        <Input
-          id="price"
-          name="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          type="number"
-        />
+            <Input
+              id="name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-        <Input
-          id="capacity"
-          name="capacity"
-          value={capacity}
-          onChange={(e) => setCapacity(e.target.value)}
-          type="number"
-        />
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Descripción:
+            </Typography>
+            <Input
+              id="description"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              multiline
+            />
+          </div>
 
-        <div className="flex space-x-2">
-          {services &&
-            services.map((service) => (
-              <label key={service.id} className="flex flex-wrap">
-                <Input
-                  type="checkbox"
-                  name="services"
-                  value={service.id}
-                  onChange={handleServiceChange}
-                  checked={serviceIds.includes(service.id)}
-                />
-                <Typography className="ml-2">{service.name}</Typography>
-              </label>
-            ))}
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Dirección:
+            </Typography>
+            <Input
+              id="address"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Precio:
+            </Typography>
+            <Input
+              id="price"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              type="number"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Capacidad:
+            </Typography>
+            <Input
+              id="capacity"
+              name="capacity"
+              value={capacity}
+              onChange={(e) => setCapacity(e.target.value)}
+              type="number"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Estado de limpieza:
+            </Typography>
+
+            <Switch
+              id="is_clean"
+              name="is_clean"
+              checked={isClean}
+              onChange={(e) => setIsClean(e.target.checked)}
+            />
+          </div>
+
+          <div className="w-full self-center md:w-3/4">
+            <img src={`/images/spaces/${image}`} alt="Espacio" />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Typography as="span" size="xl">
+              Imagen:
+            </Typography>
+
+            <Input
+              id="image"
+              name="image"
+              onChange={(e) => setImage(e.target.value)}
+              type="file"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <Typography as="span" size="xl">
+              Servicios:
+            </Typography>
+
+            <div className="flex flex-col flex-wrap">
+              {services &&
+                services.map((service) => (
+                  <label key={service.id} className="flex gap-2">
+                    <Input
+                      type="checkbox"
+                      name="services"
+                      value={service.id}
+                      onChange={handleServiceChange}
+                      checked={serviceIds.includes(service.id)}
+                    />
+
+                    <Typography as="span">{service.name}</Typography>
+                  </label>
+                ))}
+            </div>
+          </div>
+
+          <Listbox as="div" value={spaceTypeId} onChange={setSpaceTypeId}>
+            <Typography as="span" size="xl">
+              Tipo de espacio:
+            </Typography>
+
+            <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
+              <Typography as="span" className="truncate">
+                {spaceTypeId
+                  ? spaceTypes.find((spaceType) => spaceType.id === spaceTypeId)
+                      .name
+                  : "Selecciona el tipo de espacio"}
+              </Typography>
+
+              <SelectorIcon />
+            </Listbox.Button>
+
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
+                {spaceTypes.map((spaceType) => (
+                  <Listbox.Option
+                    key={spaceType.id}
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value={spaceType.id}
+                  >
+                    <Typography>{spaceType.name}</Typography>
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </Listbox>
         </div>
-
-        <select
-          onChange={(e) => setSpaceTypeId(e.target.value)}
-          value={spaceTypeId}
-        >
-          <option value="">Selecciona el tipo de espacio</option>
-          {spaceTypes.map((spaceType) => (
-            <option key={spaceType.id} value={spaceType.id}>
-              {spaceType.name}
-            </option>
-          ))}
-        </select>
-
-        <Switch
-          id="is_clean"
-          name="is_clean"
-          checked={isClean}
-          onChange={(e) => setIsClean(e.target.checked)}
-        />
-
-        <div className="">
-          <img src={`/images/spaces/${image}`} alt="Espacio" />
-        </div>
-
-        <Input
-          id="image"
-          name="image"
-          onChange={(e) => setImage(e.target.value)}
-          type="file"
-        />
 
         <Button size="sm" shape="rounded">
           Editar espacio

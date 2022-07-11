@@ -67,7 +67,7 @@ export default function SpacesIdPage() {
     <section className="flex w-full flex-col items-center px-2 xl:px-0">
       <article className="flex w-full flex-col gap-5 dark:text-slate-200 xl:w-3/4">
         <img
-          className="rounded object-cover"
+          className="h-1/4 w-full self-center rounded object-cover md:h-[35rem]"
           src={`/images/spaces/${space.image}`}
           alt={space.name}
         />
@@ -82,7 +82,7 @@ export default function SpacesIdPage() {
         </Modal>
 
         <div className="flex flex-col justify-between lg:flex-row">
-          <div className="flex w-full flex-col gap-3 p-2 md:w-1/2">
+          <div className="flex w-full flex-col gap-3 p-2 md:p-0">
             <div className="flex flex-col space-y-4">
               <div className="flex justify-between">
                 <div>
@@ -169,8 +169,8 @@ export default function SpacesIdPage() {
           </div>
 
           {token && (
-            <aside className="flex w-full flex-col gap-3 px-2 md:w-1/2">
-              <div className="flex flex-col rounded-2xl py-5 shadow">
+            <aside className="flex w-full flex-col gap-3 px-2 md:px-0 md:pl-2">
+              <div className="flex flex-col rounded-2xl border py-5 shadow">
                 <Typography
                   as="h4"
                   className="px-5 pb-5"
@@ -183,7 +183,7 @@ export default function SpacesIdPage() {
                 <BookingForm spaceId={id} price={space.price} />
               </div>
 
-              <div className="flex flex-col items-center rounded-2xl py-5 shadow">
+              <div className="flex flex-col items-center rounded-2xl border py-5 shadow">
                 <Typography as="h4" className="pb-5" size="xl">
                   Reporte de incidencias
                 </Typography>

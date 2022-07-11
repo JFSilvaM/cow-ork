@@ -52,7 +52,7 @@ export default function BookingForm({ spaceId, price }) {
       };
 
       const paymentIntent = await fetch(
-        `${process.env.REACT_APP_SERVER_API}/bookings/payment_intent`,
+        `${process.env.REACT_APP_SERVER_URL}/api/bookings/payment_intent`,
         {
           method: "POST",
           headers: {

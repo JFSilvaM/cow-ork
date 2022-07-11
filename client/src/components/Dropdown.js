@@ -41,7 +41,7 @@ export default function Dropdown() {
     <Menu>
       <Menu.Button className="h-12 w-12 overflow-hidden rounded-full bg-white focus:outline-none">
         <Avatar
-          src={`/images/avatars/${avatar}`}
+          src={`${process.env.REACT_APP_SERVER_URL}/images/avatars/${avatar}`}
           alt="Avatar"
           className="h-full w-full hover:opacity-70"
         />

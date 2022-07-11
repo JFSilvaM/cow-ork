@@ -30,7 +30,7 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2 duration-300 hover:scale-110"
           >
-            <Avatar src="/images/cow-ork_logo.png" alt="Cow-Ork logo" />
+            <Avatar src={`/images/cow-ork_logo.png`} alt="Cow-Ork logo" />
 
             <Typography
               as="span"

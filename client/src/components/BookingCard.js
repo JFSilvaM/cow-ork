@@ -33,7 +33,7 @@ export default function BookingCard({
     >
       <img
         className="w-full rounded object-cover md:w-2/5 xl:w-1/2"
-        src={`/images/spaces/${booking.image}`}
+        src={`${process.env.REACT_APP_SERVER_URL}/images/spaces/${booking.image}`}
         alt={booking.name}
       />
 

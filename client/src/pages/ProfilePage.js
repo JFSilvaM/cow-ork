@@ -81,7 +81,10 @@ export default function ProfilePage() {
         <div className="md: flex w-full flex-col justify-center gap-5 px-2 md:flex-row md:gap-10 lg:gap-32">
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="overflow-auto rounded-full">
-              <Avatar size="xxxxl" src={`/images/avatars/${avatar}`} />
+              <Avatar
+                size="xxxxl"
+                src={`${process.env.REACT_APP_SERVER_URL}/images/avatars/${avatar}`}
+              />
             </div>
 
             <Input id="avatar" name="avatar" type="file" />

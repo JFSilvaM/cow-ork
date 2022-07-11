@@ -2,6 +2,9 @@
 
 - [cow-ork](#cow-ork)
   - [Instalación y uso](#instalación-y-uso)
+    - [server/.env.example](#serverenvexample)
+    - [client/.env.example](#clientenvexample)
+  - [Realizando reservas](#realizando-reservas)
   - [Autores](#autores)
 
 ## Instalación y uso
@@ -15,6 +18,7 @@ npm install
 Copiar los archivos `server/.env.example` y `client/.env.example` y renombrar ambos a `.env`. Probablemente sea necesario modificar el usuario y la contraseña, también se debe crear la base de datos, adicionalmente, será necesaria una cuenta en [Mailjet](https://www.mailjet.com/) y [Stripe](https://stripe.com/), para ajustar las variables de entorno según correspondan.
 
 ### server/.env.example
+
 ```
 HOST=localhost
 PORT=3001
@@ -36,8 +40,9 @@ STRIPE_API_SECRET=
 ```
 
 ### client/.env.example
+
 ```
-REACT_APP_SERVER_API=http://localhost:3001/api
+REACT_APP_SERVER_URL=http://localhost:3001
 REACT_APP_STRIPE_PUBLIC_KEY=
 ```
 

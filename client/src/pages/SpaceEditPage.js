@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import Spinner from "../components/Spinner";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Switch from "../components/Switch";
 import Typography from "../components/Typography";
 import { Listbox, Transition } from "@headlessui/react";
@@ -25,8 +25,10 @@ export default function SpaceEditPage() {
   const [image, setImage] = useState("");
   const [isClean, setIsClean] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const imgRef = useRef(null);
   const { id } = useParams();
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,25 +60,33 @@ export default function SpaceEditPage() {
     e.preventDefault();
 
     try {
-      const body = {
-        name,
-        description,
-        address,
-        price,
-        capacity,
-        image: image || "default.png",
-        type_id: spaceTypeId,
-        services: serviceIds,
-        is_clean: isClean ? 1 : 0,
-      };
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("address", address);
+      formData.append("price", price);
+      formData.append("capacity", capacity);
+      formData.append("type_id", spaceTypeId);
+      formData.append("services", JSON.stringify(serviceIds));
+      formData.append("is_clean", isClean ? 1 : 0);
+      formData.append("image", imgRef.current.files[0] || image);
 
-      const data = await fetchEndpoint(`/spaces/${id}`, token, "PUT", body);
+      const data = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/spaces/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
-      if (data?.status === "error") {
+      if (data.status === "error") {
         throw new Error(data.message);
       }
 
-      setErrorMessage("");
+      navigate(`/spaces/${id}`);
     } catch (error) {
       setErrorMessage(error);
     }
@@ -224,7 +234,10 @@ export default function SpaceEditPage() {
           </Listbox>
 
           <div className="w-full self-center md:w-3/4">
-            <img src={`/images/spaces/${image}`} alt="Espacio" />
+            <img
+              src={`${process.env.REACT_APP_SERVER_URL}/images/spaces/${image}`}
+              alt="Espacio"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -232,12 +245,7 @@ export default function SpaceEditPage() {
               Imagen:
             </Typography>
 
-            <Input
-              id="image"
-              name="image"
-              onChange={(e) => setImage(e.target.value)}
-              type="file"
-            />
+            <input id="image" name="image" ref={imgRef} type="file" />
           </div>
 
           <div className="flex flex-col">

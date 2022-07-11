@@ -70,7 +70,7 @@ export default function SpacesIdPage() {
       <article className="flex w-full flex-col gap-5 dark:text-slate-200 xl:w-3/4">
         <img
           className="h-1/4 w-full self-center rounded object-cover md:h-[35rem]"
-          src={`/images/spaces/${space.image}`}
+          src={`${process.env.REACT_APP_SERVER_URL}/images/spaces/${space.image}`}
           alt={space.name}
         />
 

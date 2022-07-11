@@ -14,7 +14,7 @@ export default async function fetchEndpoint(
   };
 
   const res = await fetch(
-    process.env.REACT_APP_SERVER_API + path,
+    `${process.env.REACT_APP_SERVER_URL}/api${path}`,
     fetchOptions
   );
   const json = await res.json();

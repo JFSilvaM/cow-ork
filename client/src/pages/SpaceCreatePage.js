@@ -1,10 +1,9 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
-import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
 import Typography from "../components/Typography";
 import Switch from "../components/Switch";
@@ -22,9 +21,9 @@ export default function SpaceCreatePage() {
   const [capacity, setCapacity] = useState(0);
   const [spaceTypeId, setSpaceTypeId] = useState("");
   const [serviceIds, setServiceIds] = useState([]);
-  const [image, setImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isClean, setIsClean] = useState(true);
+  const imgRef = useRef(null);
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -32,19 +31,27 @@ export default function SpaceCreatePage() {
     e.preventDefault();
 
     try {
-      const body = {
-        name,
-        description,
-        address,
-        price,
-        capacity,
-        image,
-        type_id: spaceTypeId,
-        services: serviceIds,
-        is_clean: isClean ? 1 : 0,
-      };
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("address", address);
+      formData.append("price", price);
+      formData.append("capacity", capacity);
+      formData.append("type_id", spaceTypeId);
+      formData.append("services", JSON.stringify(serviceIds));
+      formData.append("is_clean", isClean ? 1 : 0);
+      formData.append("image", imgRef.current.files[0] || "");
 
-      const data = await fetchEndpoint("/spaces", token, "POST", body);
+      const data = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/spaces`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       if (data.status === "error") {
         throw new Error(data.message);
@@ -208,12 +215,11 @@ export default function SpaceCreatePage() {
               Imagen:
             </Typography>
 
-            <Input
+            <input
               id="image"
               name="image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
               type="file"
+              ref={imgRef}
               className="dark:text-slate-200"
             />
           </div>

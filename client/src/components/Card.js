@@ -8,7 +8,7 @@ export default function Card({ space }) {
       <div className="overflow-hidden rounded">
         <img
           className="h-72 w-full object-cover sm:h-56"
-          src={`/images/spaces/${space.image}`}
+          src={`${process.env.REACT_APP_SERVER_URL}/images/spaces/${space.image}`}
           alt={space.name}
         />
       </div>

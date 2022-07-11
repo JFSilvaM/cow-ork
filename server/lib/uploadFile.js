@@ -38,25 +38,10 @@ const uploadFile = async (file, id, dir) => {
 
     switch (dir) {
       case "avatars":
-        const userImage = "SELECT avatar FROM users WHERE id = ?";
-        const [[userData]] = await pool.query(userImage, [id]);
-
-        if (userData.avatar && userData.avatar !== "default.png") {
-          await deleteFile(userData.avatar, "avatars");
-        }
-
         query = "UPDATE users SET avatar = ? WHERE id = ?";
-
         break;
 
       case "spaces":
-        const spaceImage = "SELECT image FROM spaces WHERE id = ?";
-        const [[spaceData]] = await pool.query(spaceImage, [id]);
-
-        if (spaceData.image && spaceData.image !== "default.png") {
-          await deleteFile(spaceData.image, "spaces");
-        }
-
         query = "UPDATE spaces SET image = ? WHERE id = ?";
         break;
     }
@@ -64,25 +49,6 @@ const uploadFile = async (file, id, dir) => {
     await pool.query(query, [fileName, id]);
 
     return fileName;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const deleteFile = async (fileName, dir) => {
-  try {
-    const filePath = path.join(
-      __dirname,
-      "..",
-      "public",
-      "images",
-      dir,
-      fileName
-    );
-
-    fs.access(filePath)
-      .then(() => fs.unlink(filePath))
-      .catch((err) => console.log(err));
   } catch (error) {
     throw error;
   }

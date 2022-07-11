@@ -1,5 +1,7 @@
 const pool = require("../database/getPool")();
 const {
+  REPORT_CATEGORY_DUPLICATED,
+  REPORT_CATEGORY_INSERT_ERROR,
   REPORT_CATEGORY_REFERENCED,
   REPORT_CATEGORY_DELETE_ERROR,
 } = require("../messages/messages");
@@ -23,7 +25,17 @@ const findOneReportCategory = async (id) => {
 const createReportCategory = async (reportCategory) => {
   const query = "INSERT INTO report_categories (name) VALUES (?)";
 
-  const [{ insertId }] = await pool.query(query, [reportCategory.name]);
+  const [{ insertId }] = await pool
+    .query(query, [reportCategory.name])
+    .then((rows) => rows)
+    .catch((err) => {
+      switch (err.code) {
+        case "ER_DUP_ENTRY":
+          throw new Error(REPORT_CATEGORY_DUPLICATED);
+        default:
+          throw new Error(REPORT_CATEGORY_INSERT_ERROR);
+      }
+    });
 
   return insertId;
 };

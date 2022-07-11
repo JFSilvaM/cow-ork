@@ -152,12 +152,18 @@
   "RATING_UPDATED": "La puntuación ha sido actualizada",
   "RATING_NOT_UPDATED": "La puntuación no ha sido actualizada",
 
+  "SPACE_TYPE_DUPLICATED": "El tipo de espacio que intentas añadir ya existe",
+  "SPACE_TYPE_INSERT_ERROR": "No se pudo crear el tipo de espacio especificado",
   "SPACE_TYPE_REFERENCED": "El tipo de espacio está en uso por uno o más espacios",
   "SPACE_TYPE_DELETE_ERROR": "Error al eliminar el tipo de espacio",
 
+  "REPORT_CATEGORY_DUPLICATED": "La categoría de reporte que intentas añadir ya existe",
+  "REPORT_CATEGORY_INSERT_ERROR": "No se pudo crear la categoría de reporte especificada",
   "REPORT_CATEGORY_REFERENCED": "La categoría de reporte está en uso por uno o más reportes",
   "REPORT_CATEGORY_DELETE_ERROR": "Error al eliminar la categoría de reporte",
 
+  "SERVICE_DUPLICATED": "El servicio que intentas añadir ya existe",
+  "SERVICE_INSERT_ERROR": "No se pudo crear el servicio especificado",
   "SERVICE_REFERENCED": "El servicio está en uso por uno o más espacios",
   "SERVICE_DELETE_ERROR": "Error al eliminar el servicio"
 }

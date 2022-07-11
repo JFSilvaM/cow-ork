@@ -1,5 +1,7 @@
 const pool = require("../database/getPool")();
 const {
+  SPACE_TYPE_DUPLICATED,
+  SPACE_TYPE_INSERT_ERROR,
   SPACE_TYPE_REFERENCED,
   SPACE_TYPE_DELETE_ERROR,
 } = require("../messages/messages");
@@ -23,7 +25,17 @@ const findOneSpaceType = async (id) => {
 const createSpaceType = async (spaceType) => {
   const query = "INSERT INTO space_types (name) VALUES (?)";
 
-  const [{ insertId }] = await pool.query(query, [spaceType.name]);
+  const [{ insertId }] = await pool
+    .query(query, [spaceType.name])
+    .then((rows) => rows)
+    .catch((err) => {
+      switch (err.code) {
+        case "ER_DUP_ENTRY":
+          throw new Error(SPACE_TYPE_DUPLICATED);
+        default:
+          throw new Error(SPACE_TYPE_INSERT_ERROR);
+      }
+    });
 
   return insertId;
 };

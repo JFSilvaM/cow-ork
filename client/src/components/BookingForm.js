@@ -7,6 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Typography from "./Typography";
+import Spinner from "./Spinner";
 
 export default function BookingForm({ spaceId, price }) {
   const [startDate, setStartDate] = useState("");
@@ -14,6 +15,7 @@ export default function BookingForm({ spaceId, price }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [amount, setAmount] = useState(0);
+  const [processing, setProcessing] = useState(false);
   const { token } = useAuth();
 
   const elements = useElements();
@@ -31,6 +33,8 @@ export default function BookingForm({ spaceId, price }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setProcessing(true);
 
     try {
       if (!stripe || !elements) {
@@ -85,6 +89,8 @@ export default function BookingForm({ spaceId, price }) {
     } catch (error) {
       setSuccessMessage("");
       setErrorMessage(error);
+    } finally {
+      setProcessing(false);
     }
   };
 
@@ -137,9 +143,21 @@ export default function BookingForm({ spaceId, price }) {
           </div>
         )}
 
-        <Button size="sm" shape="rounded" disabled={!stripe || !elements}>
-          Reservar
-        </Button>
+        <div className="">
+          <Button
+            size="sm"
+            shape="rounded"
+            disabled={!stripe || !elements || processing}
+          >
+            {processing ? (
+              <span className="flex items-center justify-center space-x-2">
+                <Spinner size="xs" /> <p>Procesando...</p>
+              </span>
+            ) : (
+              <p>Reservar</p>
+            )}
+          </Button>
+        </div>
       </form>
     </article>
   );

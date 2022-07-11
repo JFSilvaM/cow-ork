@@ -61,12 +61,13 @@ const updateReport = async (report, id, userId) => {
 
   if (isAdmin) {
     const query =
-      "UPDATE reports SET space_id = ?, category_id = ?, description = ? WHERE id = ?";
+      "UPDATE reports SET space_id = ?, category_id = ?, description = ?, status = ? WHERE id = ?";
 
     const [{ affectedRows }] = await pool.query(query, [
       report.space_id,
       report.category_id,
       report.description,
+      report.status,
       id,
     ]);
 

@@ -35,6 +35,8 @@ export default function ReportForm({ spaceId }) {
 
       setSuccessMessage(data);
       setErrorMessage("");
+      setDescription("");
+      setCategoryId("");
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -86,19 +88,20 @@ export default function ReportForm({ spaceId }) {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
-              {categories.map((category) => (
-                <Listbox.Option
-                  key={category.id}
-                  className={({ active }) =>
-                    `cursor-pointer py-2 px-3 pr-4 ${
-                      active && "bg-gray-200 dark:bg-gray-500"
-                    }`
-                  }
-                  value={category.id}
-                >
-                  <Typography>{category.name}</Typography>
-                </Listbox.Option>
-              ))}
+              {categories &&
+                categories.map((category) => (
+                  <Listbox.Option
+                    key={category.id}
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value={category.id}
+                  >
+                    <Typography>{category.name}</Typography>
+                  </Listbox.Option>
+                ))}
             </Listbox.Options>
           </Transition>
         </Listbox>

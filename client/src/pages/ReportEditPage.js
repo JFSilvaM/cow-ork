@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Spinner from "../components/Spinner";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Input from "../components/Input";
 import Typography from "../components/Typography";
 import { Listbox, Transition } from "@headlessui/react";
@@ -21,6 +21,13 @@ export default function ReportEditPage() {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  const statuses = {
+    OPEN: "Abierto",
+    CLOSED: "Cerrado",
+    PENDING: "Pendiente",
+  };
 
   useEffect(() => {
     if (report) {
@@ -48,7 +55,7 @@ export default function ReportEditPage() {
         throw new Error(data.message);
       }
 
-      setErrorMessage("");
+      navigate("/reports");
     } catch (error) {
       setErrorMessage(error);
     }
@@ -98,6 +105,7 @@ export default function ReportEditPage() {
             <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
               <Typography as="span" className="truncate">
                 {categoryId &&
+                  categories &&
                   categories.find((category) => category.id === categoryId)
                     .name}
               </Typography>
@@ -112,19 +120,20 @@ export default function ReportEditPage() {
               leaveTo="opacity-0"
             >
               <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
-                {categories.map((category) => (
-                  <Listbox.Option
-                    key={category.id}
-                    className={({ active }) =>
-                      `cursor-pointer py-2 px-3 pr-4 ${
-                        active && "bg-gray-200 dark:bg-gray-500"
-                      }`
-                    }
-                    value={category.id}
-                  >
-                    <Typography>{category.name}</Typography>
-                  </Listbox.Option>
-                ))}
+                {categories &&
+                  categories.map((category) => (
+                    <Listbox.Option
+                      key={category.id}
+                      className={({ active }) =>
+                        `cursor-pointer py-2 px-3 pr-4 ${
+                          active && "bg-gray-200 dark:bg-gray-500"
+                        }`
+                      }
+                      value={category.id}
+                    >
+                      <Typography>{category.name}</Typography>
+                    </Listbox.Option>
+                  ))}
               </Listbox.Options>
             </Transition>
           </Listbox>
@@ -136,7 +145,7 @@ export default function ReportEditPage() {
 
             <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
               <Typography as="span" className="truncate">
-                {status && status}
+                {statuses[status]}
               </Typography>
 
               <SelectorIcon />

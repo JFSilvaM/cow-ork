@@ -211,7 +211,7 @@ export default function SpaceCreatePage() {
             </div>
           </div>
 
-          <Listbox as="div" value={spaceTypeId} onChange={setSpaceTypeId}>
+          <Listbox as="div" onChange={setSpaceTypeId}>
             <Typography as="span" size="xl">
               Tipo de espacio:
             </Typography>

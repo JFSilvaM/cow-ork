@@ -7,6 +7,8 @@ import Spinner from "../components/Spinner";
 import fetchEndpoint from "../helpers/fetchEndpoint";
 import { useAuth } from "../contexts/AuthContext";
 import Typography from "../components/Typography";
+import Switch from "../components/Switch";
+import { useNavigate } from "react-router-dom";
 
 export default function SpaceCreatePage() {
   const { data: spaceTypes, loading, error } = useFetch("/space_types");
@@ -20,7 +22,9 @@ export default function SpaceCreatePage() {
   const [serviceIds, setServiceIds] = useState([]);
   const [image, setImage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isClean, setIsClean] = useState(true);
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +39,7 @@ export default function SpaceCreatePage() {
         image,
         type_id: spaceTypeId,
         services: serviceIds,
+        is_clean: isClean ? 1 : 0,
       };
 
       const data = await fetchEndpoint("/spaces", token, "POST", body);
@@ -43,6 +48,7 @@ export default function SpaceCreatePage() {
         throw new Error(data.message);
       }
 
+      navigate("/");
       setErrorMessage("");
     } catch (error) {
       setErrorMessage(error);
@@ -157,6 +163,13 @@ export default function SpaceCreatePage() {
               className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
             />
           </div>
+
+          <Switch
+            id="is_clean"
+            name="is_clean"
+            checked={isClean}
+            onChange={(e) => setIsClean(e.target.checked)}
+          />
 
           <div className="flex gap-2">
             <Typography as="span" size="xl">

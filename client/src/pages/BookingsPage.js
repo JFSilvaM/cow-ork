@@ -12,37 +12,12 @@ export default function BookingsPage() {
   const { token } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [bookings, setBookings] = useState([]);
-  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     if (baseBookings) {
       setBookings(baseBookings);
     }
   }, [baseBookings]);
-
-  const handleSubmit = async (e, id) => {
-    e.preventDefault();
-
-    try {
-      const body = {
-        space_id: id,
-        rating,
-      };
-
-      const data = await fetchEndpoint(
-        `/space_ratings/${id}`,
-        token,
-        "PUT",
-        body
-      );
-
-      if (data?.status === "error") {
-        throw new Error(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
@@ -78,12 +53,9 @@ export default function BookingsPage() {
             <BookingCard
               key={booking.id}
               booking={booking}
-              rating={rating}
-              setRating={setRating}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
               handleDelete={handleDelete}
-              handleSubmit={handleSubmit}
             />
           ))
         ) : (

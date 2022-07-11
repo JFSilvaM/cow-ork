@@ -1,6 +1,6 @@
-import StarRating from "./StarRating";
 import Typography from "../components/Typography";
 import Chip from "../components/Chip";
+import ShowStarRating from "./ShowStarRating";
 
 export default function Card({ space }) {
   return (
@@ -29,7 +29,7 @@ export default function Card({ space }) {
         </Typography>
 
         <div className="flex">
-          <StarRating rating={space.rating} />
+          <ShowStarRating rating={space.rating} />
         </div>
 
         <div className="flex flex-row flex-wrap gap-2">

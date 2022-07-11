@@ -10,8 +10,6 @@ import Typography from "./Typography";
 
 export default function BookingCard({
   booking,
-  rating,
-  setRating,
   isOpen,
   setIsOpen,
   handleDelete,
@@ -102,21 +100,8 @@ export default function BookingCard({
         </div>
 
         <div className="flex flex-col justify-between md:w-fit md:items-end">
-          <div className="self-center">
-            <form
-              onSubmit={(e) => handleSubmit(e, booking.space_id)}
-              className="flex flex-col items-center gap-2 rounded p-3"
-            >
-              <div className="flex items-center gap-2">
-                <StarRating rating={rating} setRating={setRating} />
-              </div>
-
-              <div>
-                <Button shape="rounded" size="sm">
-                  Valorar
-                </Button>
-              </div>
-            </form>
+          <div className="flex items-center gap-2">
+            <StarRating spaceId={booking.space_id} />
           </div>
 
           <div className="self-center">

@@ -34,7 +34,7 @@ const update = async (req, res, next) => {
       generateError(RATING_NOT_UPDATED, 500);
     }
 
-    res.json({ message: RATING_UPDATED });
+    res.json({ data: { status: "ok", message: RATING_UPDATED } });
   } catch (error) {
     next(error);
   }

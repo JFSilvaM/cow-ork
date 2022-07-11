@@ -11,6 +11,7 @@ import MoneyIcon from "../components/icons/MoneyIcon";
 import UserGroupIcon from "../components/icons/UserGroupIcon";
 import Modal from "../components/Modal";
 import ReportForm from "../components/ReportForm";
+import ShowStarRating from "../components/ShowStarRating";
 import Spinner from "../components/Spinner";
 import Typography from "../components/Typography";
 import { useAuth } from "../contexts/AuthContext";
@@ -124,6 +125,10 @@ export default function SpacesIdPage() {
                     />
                   </aside>
                 ) : null}
+              </div>
+
+              <div className="flex">
+                <ShowStarRating rating={space.rating} />
               </div>
 
               <div>

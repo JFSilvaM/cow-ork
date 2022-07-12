@@ -43,7 +43,7 @@ export default function BookingsPage() {
 
   return (
     <section className="flex w-full justify-center px-3 text-slate-800 dark:text-slate-200">
-      <div className="flex w-full flex-col gap-5 lg:w-3/4">
+      <div className="flex w-full flex-col gap-5 xl:w-3/4">
         <Typography as="h4" size="xxxl" weight="bold" align="center">
           Mis reservas
         </Typography>

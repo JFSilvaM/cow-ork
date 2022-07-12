@@ -96,6 +96,7 @@ export default function ReportEditPage() {
               onChange={(e) => setDescription(e.target.value)}
               value={description}
               multiline
+              className="border dark:bg-gray-200"
             />
           </div>
 
@@ -199,7 +200,7 @@ export default function ReportEditPage() {
           <input type="hidden" name="space_id" value={spaceId} />
         </div>
 
-        <Button size="sm" shape="rounded">
+        <Button size="sm" shape="rounded" className="self-start">
           Editar reporte
         </Button>
 

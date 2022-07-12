@@ -10,24 +10,22 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
   return (
     <article
       key={report.id}
-      className="flex flex-col rounded shadow md:flex-row"
+      className="flex flex-col rounded border shadow md:flex-row"
     >
       <div className="flex w-full flex-col gap-5 p-5">
         <div className="flex items-end justify-between">
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <Typography size="xxl" weight="bold">
               {report.space_name}
             </Typography>
 
-            <div>
-              {report.status === "PENDING" && (
-                <Chip color="warning">Pendiente</Chip>
-              )}
+            {report.status === "PENDING" && (
+              <Chip color="warning">Pendiente</Chip>
+            )}
 
-              {report.status === "OPEN" && <Chip color="success">Abierto</Chip>}
+            {report.status === "OPEN" && <Chip color="success">Abierto</Chip>}
 
-              {report.status === "CLOSED" && <Chip color="error">Cerrado</Chip>}
-            </div>
+            {report.status === "CLOSED" && <Chip color="error">Cerrado</Chip>}
           </div>
 
           <div>
@@ -43,23 +41,26 @@ export default function ReportCard({ report, setIsOpen, setSelectedItem }) {
 
         <section className="flex flex-col space-y-2">
           <article>
-            <Typography as="h3" size="xl">
+            <Typography as="h3" size="xl" className="underline">
               Categoría:
             </Typography>
+
             <Typography>{report.category_name}</Typography>
           </article>
 
           <article>
-            <Typography as="h3" size="xl">
+            <Typography as="h3" size="xl" className="underline">
               Descripción:
             </Typography>
+
             <Typography>{report.description}</Typography>
           </article>
 
           <article>
-            <Typography as="h3" size="xl">
+            <Typography as="h3" size="xl" className="underline">
               Fecha del reporte:
             </Typography>
+
             <Typography>{formatDate(report.created_at)}</Typography>
           </article>
         </section>

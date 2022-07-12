@@ -80,13 +80,15 @@ export default function SpaceEditPage() {
           },
           body: formData,
         }
-      );
+      ).then((res) => res.json());
 
       if (data.status === "error") {
         throw new Error(data.message);
       }
 
-      navigate(`/spaces/${id}`);
+      if (data.status === "ok") {
+        navigate(`/spaces/${id}`);
+      }
     } catch (error) {
       setErrorMessage(error);
     }

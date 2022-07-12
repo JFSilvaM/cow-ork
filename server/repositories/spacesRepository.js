@@ -61,10 +61,7 @@ const createSpace = async (space) => {
   const insertServices =
     "INSERT INTO space_services (space_id, service_id) VALUES ?";
 
-  const services = JSON.parse(space.services).map((serviceId) => [
-    insertId,
-    serviceId,
-  ]);
+  const services = space.services.map((serviceId) => [insertId, serviceId]);
 
   await pool.query(insertServices, [services]);
 
@@ -94,10 +91,7 @@ const updateSpace = async (space, id) => {
   const insertServices =
     "INSERT INTO space_services (space_id, service_id) VALUES ?";
 
-  const services = JSON.parse(space.services).map((serviceId) => [
-    id,
-    serviceId,
-  ]);
+  const services = space.services.map((serviceId) => [id, serviceId]);
 
   await pool.query(insertServices, [services]);
 

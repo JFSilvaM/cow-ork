@@ -49,6 +49,10 @@ const findOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
+    if (req.body?.services) {
+      req.body.services = JSON.parse(req.body.services);
+    }
+
     const value = await spaceValidation(req.body);
 
     const insertId = await createSpace(value);
@@ -61,7 +65,7 @@ const create = async (req, res, next) => {
       const fileName = await uploadFile(req.files.image, insertId, "spaces");
     }
 
-    res.json({ message: SPACE_CREATED, data: value });
+    res.json({ status: "ok", message: SPACE_CREATED, data: value });
   } catch (error) {
     next(error);
   }
@@ -69,7 +73,17 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
+    if (req.body?.services) {
+      req.body.services = JSON.parse(req.body.services);
+    }
+
     const value = await spaceValidation(req.body);
+
+    const affectedRows = await updateSpace(value, req.params.id);
+
+    if (!affectedRows) {
+      generateError(SPACE_NOT_UPDATED, 500);
+    }
 
     if (req.files) {
       const fileName = await uploadFile(
@@ -79,12 +93,7 @@ const update = async (req, res, next) => {
       );
     }
 
-    const affectedRows = await updateSpace(value, req.params.id);
-
-    if (!affectedRows) {
-      generateError(SPACE_NOT_UPDATED, 500);
-    }
-    res.json({ message: SPACE_UPDATED });
+    res.json({ status: "ok", message: SPACE_UPDATED });
   } catch (error) {
     next(error);
   }

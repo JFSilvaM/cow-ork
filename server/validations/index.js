@@ -101,14 +101,14 @@ const spaceValidation = async (body) => {
       "string.max": messages.SPACE_ADDRESS_MAX_LENGTH,
     }),
     price: Joi.number().min(1).max(1000).required().messages({
+      "number.base": messages.SPACE_PRICE_REQUIRED,
       "number.empty": messages.SPACE_PRICE_REQUIRED,
-      "any.required": messages.SPACE_PRICE_REQUIRED,
       "number.min": messages.SPACE_PRICE_MIN_LENGTH,
       "number.max": messages.SPACE_PRICE_MAX_LENGTH,
     }),
     capacity: Joi.number().min(1).required().messages({
+      "number.base": messages.SPACE_CAPACITY_REQUIRED,
       "number.empty": messages.SPACE_CAPACITY_REQUIRED,
-      "any.required": messages.SPACE_CAPACITY_REQUIRED,
       "number.min": messages.SPACE_CAPACITY_MIN_LENGTH,
     }),
     type_id: Joi.number().min(1).required().messages({
@@ -117,7 +117,9 @@ const spaceValidation = async (body) => {
       "number.required": messages.TYPE_ID_REQUIRED,
       "number.min": messages.TYPE_ID_MIN_LENGTH,
     }),
-    services: Joi.any().required().messages({
+    services: Joi.array().items(Joi.number()).min(1).messages({
+      "array.base": messages.SPACE_SERVICES_REQUIRED,
+      "array.empty": messages.SPACE_SERVICES_REQUIRED,
       "array.min": messages.SPACE_SERVICES_MIN_LENGTH,
     }),
     image: Joi.any(),

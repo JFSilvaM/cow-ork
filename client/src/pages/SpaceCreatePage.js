@@ -51,14 +51,15 @@ export default function SpaceCreatePage() {
           },
           body: formData,
         }
-      );
+      ).then((res) => res.json());
 
       if (data.status === "error") {
         throw new Error(data.message);
       }
 
-      navigate("/");
-      setErrorMessage("");
+      if (data.status === "ok") {
+        navigate("/");
+      }
     } catch (error) {
       setErrorMessage(error);
     }
@@ -91,6 +92,7 @@ export default function SpaceCreatePage() {
       <form
         onSubmit={handleSubmit}
         className="flex w-full flex-col items-center gap-5 lg:w-3/4"
+        encType="multipart/form-data"
       >
         <Typography as="h4" size="xxxl" weight="bold" align="center">
           Crear espacio
@@ -193,19 +195,20 @@ export default function SpaceCreatePage() {
               leaveTo="opacity-0"
             >
               <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
-                {spaceTypes.map((spaceType) => (
-                  <Listbox.Option
-                    key={spaceType.id}
-                    className={({ active }) =>
-                      `cursor-pointer py-2 px-3 pr-4 ${
-                        active && "bg-gray-200 dark:bg-gray-500"
-                      }`
-                    }
-                    value={spaceType.id}
-                  >
-                    <Typography>{spaceType.name}</Typography>
-                  </Listbox.Option>
-                ))}
+                {spaceTypes &&
+                  spaceTypes.map((spaceType) => (
+                    <Listbox.Option
+                      key={spaceType.id}
+                      className={({ active }) =>
+                        `cursor-pointer py-2 px-3 pr-4 ${
+                          active && "bg-gray-200 dark:bg-gray-500"
+                        }`
+                      }
+                      value={spaceType.id}
+                    >
+                      <Typography>{spaceType.name}</Typography>
+                    </Listbox.Option>
+                  ))}
               </Listbox.Options>
             </Transition>
           </Listbox>
@@ -261,7 +264,7 @@ export default function SpaceCreatePage() {
         </div>
 
         {errorMessage && (
-          <div className="flex">
+          <div className="flex self-start">
             <Alert color="error" icon="error">
               {errorMessage.message}
             </Alert>

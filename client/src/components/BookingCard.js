@@ -29,15 +29,15 @@ export default function BookingCard({
   return (
     <article
       key={booking.id}
-      className="flex flex-col rounded shadow dark:shadow-white md:flex-row"
+      className="flex flex-col items-center gap-5 rounded p-2 shadow dark:shadow-white lg:flex-row"
     >
       <img
-        className="w-full rounded object-cover md:w-2/5 xl:w-1/2"
+        className="w-full rounded-md object-cover md:h-96 lg:w-3/5"
         src={`${process.env.REACT_APP_SERVER_URL}/images/spaces/${booking.image}`}
         alt={booking.name}
       />
 
-      <div className="flex w-full flex-col gap-3 p-5 md:flex-row md:justify-between">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-between">
         <div className="flex flex-col gap-3">
           <div>
             <Typography size="xxl" weight="bold">
@@ -99,8 +99,8 @@ export default function BookingCard({
           </div>
         </div>
 
-        <div className="flex flex-col justify-between md:w-fit md:items-end">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col justify-between gap-5 md:w-fit md:items-end">
+          <div className="gap-2 self-center rounded border px-3 shadow">
             <StarRating spaceId={booking.space_id} withHover />
           </div>
 

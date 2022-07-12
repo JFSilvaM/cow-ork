@@ -109,7 +109,7 @@ export default function SpaceCreatePage() {
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              className="rounded-md p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
             />
           </div>
 
@@ -124,7 +124,7 @@ export default function SpaceCreatePage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               multiline
-              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              className="rounded-md p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
             />
           </div>
 
@@ -138,7 +138,7 @@ export default function SpaceCreatePage() {
               name="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              className="rounded-md p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
             />
           </div>
 
@@ -153,7 +153,7 @@ export default function SpaceCreatePage() {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               type="number"
-              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              className="rounded-md p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
             />
           </div>
 
@@ -168,7 +168,7 @@ export default function SpaceCreatePage() {
               value={capacity}
               onChange={(e) => setCapacity(e.target.value)}
               type="number"
-              className="rounded-md bg-gray-200 p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+              className="rounded-md p-2 px-3 shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
             />
           </div>
 
@@ -254,12 +254,20 @@ export default function SpaceCreatePage() {
               Estado de limpieza:
             </Typography>
 
-            <Switch
-              id="is_clean"
-              name="is_clean"
-              checked={isClean}
-              onChange={(e) => setIsClean(e.target.checked)}
-            />
+            <div className="flex items-center gap-3">
+              <Switch
+                id="is_clean"
+                name="is_clean"
+                checked={isClean}
+                onChange={(e) => setIsClean(e.target.checked)}
+              />
+
+              {isClean === true ? (
+                <Typography>Limpio</Typography>
+              ) : (
+                <Typography>Pendiente de limpieza</Typography>
+              )}
+            </div>
           </div>
         </div>
 

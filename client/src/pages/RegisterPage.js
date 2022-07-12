@@ -64,7 +64,7 @@ export default function RegisterPage() {
             value={firstName}
             setValue={setFirstName}
             placeholder="Nombre"
-            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 
@@ -82,7 +82,7 @@ export default function RegisterPage() {
             value={lastName}
             setValue={setLastName}
             placeholder="Apellidos"
-            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 
@@ -101,7 +101,7 @@ export default function RegisterPage() {
             value={email}
             setValue={setEmail}
             placeholder="E-mail"
-            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 
@@ -120,7 +120,7 @@ export default function RegisterPage() {
             value={password}
             setValue={setPassword}
             placeholder="Contraseña"
-            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 
@@ -139,7 +139,7 @@ export default function RegisterPage() {
             value={passwordConfirmation}
             setValue={setPasswordConfirmation}
             placeholder="Confirmar contraseña"
-            className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+            className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm ring-2 ring-indigo-500 placeholder:text-slate-600 focus:outline-none focus:ring focus:ring-indigo-500 dark:bg-gray-200 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
           />
         </label>
 

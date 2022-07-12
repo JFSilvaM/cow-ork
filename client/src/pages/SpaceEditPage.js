@@ -278,12 +278,20 @@ export default function SpaceEditPage() {
               Estado de limpieza:
             </Typography>
 
-            <Switch
-              id="is_clean"
-              name="is_clean"
-              checked={isClean}
-              onChange={(e) => setIsClean(e.target.checked)}
-            />
+            <div className="flex items-center gap-3">
+              <Switch
+                id="is_clean"
+                name="is_clean"
+                checked={isClean}
+                onChange={(e) => setIsClean(e.target.checked)}
+              />
+
+              {isClean === true ? (
+                <Typography>Limpio</Typography>
+              ) : (
+                <Typography>Pendiente de limpieza</Typography>
+              )}
+            </div>
           </div>
         </div>
 

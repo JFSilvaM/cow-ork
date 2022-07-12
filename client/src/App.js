@@ -39,11 +39,11 @@ export default function App() {
                 <Route path="/bookings" element={<BookingsPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/reports" element={<ReportsPage />} />
+                <Route path="/reports/:id/edit" element={<ReportEditPage />} />
               </Route>
 
               <Route path="/" element={<RequireAuth admin />}>
                 <Route path="/dashboard" element={<AdminDashboardPage />} />
-                <Route path="/reports/:id/edit" element={<ReportEditPage />} />
                 <Route path="/reports/all" element={<ReportsAllPage />} />
                 <Route path="/spaces/new" element={<SpaceCreatePage />} />
                 <Route path="/spaces/:id/edit" element={<SpaceEditPage />} />

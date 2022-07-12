@@ -10,6 +10,7 @@ import Input from "../components/Input";
 import Typography from "../components/Typography";
 import { Listbox, Transition } from "@headlessui/react";
 import SelectorIcon from "../components/icons/SelectorIcon";
+import decodeToken from "../helpers/decodeToken";
 
 export default function ReportEditPage() {
   const { id } = useParams();
@@ -22,6 +23,7 @@ export default function ReportEditPage() {
   const [status, setStatus] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const admin = token && decodeToken(token).is_admin;
 
   const statuses = {
     OPEN: "Abierto",
@@ -141,61 +143,63 @@ export default function ReportEditPage() {
             </Transition>
           </Listbox>
 
-          <Listbox as="div" value={status} onChange={setStatus}>
-            <Typography as="span" size="xl">
-              Estado del reporte:
-            </Typography>
-
-            <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
-              <Typography as="span" className="truncate">
-                {statuses[status]}
+          {admin ? (
+            <Listbox as="div" value={status} onChange={setStatus}>
+              <Typography as="span" size="xl">
+                Estado del reporte:
               </Typography>
 
-              <SelectorIcon />
-            </Listbox.Button>
+              <Listbox.Button className="flex w-full cursor-pointer justify-between rounded-lg border py-2 px-3 shadow focus:outline-none">
+                <Typography as="span" className="truncate">
+                  {statuses[status]}
+                </Typography>
 
-            <Transition
-              as={Fragment}
-              leave="transition ease-in duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
-                <Listbox.Option
-                  className={({ active }) =>
-                    `cursor-pointer py-2 px-3 pr-4 ${
-                      active && "bg-gray-200 dark:bg-gray-500"
-                    }`
-                  }
-                  value="OPEN"
-                >
-                  <Typography>Abierto</Typography>
-                </Listbox.Option>
+                <SelectorIcon />
+              </Listbox.Button>
 
-                <Listbox.Option
-                  className={({ active }) =>
-                    `cursor-pointer py-2 px-3 pr-4 ${
-                      active && "bg-gray-200 dark:bg-gray-500"
-                    }`
-                  }
-                  value="CLOSED"
-                >
-                  <Typography>Cerrado</Typography>
-                </Listbox.Option>
+              <Transition
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Listbox.Options className="mt-1 w-full rounded-lg border py-1 shadow focus:outline-none">
+                  <Listbox.Option
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value="OPEN"
+                  >
+                    <Typography>Abierto</Typography>
+                  </Listbox.Option>
 
-                <Listbox.Option
-                  className={({ active }) =>
-                    `cursor-pointer py-2 px-3 pr-4 ${
-                      active && "bg-gray-200 dark:bg-gray-500"
-                    }`
-                  }
-                  value="PENDING"
-                >
-                  <Typography>Pendiente</Typography>
-                </Listbox.Option>
-              </Listbox.Options>
-            </Transition>
-          </Listbox>
+                  <Listbox.Option
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value="CLOSED"
+                  >
+                    <Typography>Cerrado</Typography>
+                  </Listbox.Option>
+
+                  <Listbox.Option
+                    className={({ active }) =>
+                      `cursor-pointer py-2 px-3 pr-4 ${
+                        active && "bg-gray-200 dark:bg-gray-500"
+                      }`
+                    }
+                    value="PENDING"
+                  >
+                    <Typography>Pendiente</Typography>
+                  </Listbox.Option>
+                </Listbox.Options>
+              </Transition>
+            </Listbox>
+          ) : null}
 
           <input type="hidden" name="space_id" value={spaceId} />
         </div>

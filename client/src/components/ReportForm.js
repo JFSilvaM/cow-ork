@@ -69,7 +69,7 @@ export default function ReportForm({ spaceId }) {
           onChange={(e) => setDescription(e.target.value)}
           multiline
           placeholder="Información del reporte"
-          className="h-20 w-full rounded-md border p-2"
+          className="h-20 w-full rounded-md border p-2 dark:text-slate-800"
         />
 
         <Listbox as="div" className="w-full" onChange={setCategoryId}>

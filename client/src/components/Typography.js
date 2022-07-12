@@ -1,6 +1,6 @@
 const colors = {
   base: "text-slate-800 dark:text-slate-200",
-  muted: "text-slate-500 dark:text-slate-600",
+  muted: "text-slate-500 dark:text-slate-400",
   primary: "text-indigo-800 dark:text-emerald-800",
   inherit: "text-inherit",
 };

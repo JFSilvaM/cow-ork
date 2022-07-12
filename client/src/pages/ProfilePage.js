@@ -89,13 +89,14 @@ export default function ProfilePage() {
       >
         <div className="md: flex w-full flex-col justify-center gap-5 px-2 md:flex-row md:gap-10 lg:gap-32">
           <div className="flex flex-col items-center justify-center gap-2">
-            <div className="overflow-auto rounded-full">
-              {avatar && (
-                <Avatar
-                  size="xxxxl"
-                  src={`${process.env.REACT_APP_SERVER_URL}/images/avatars/${avatar}`}
-                />
-              )}
+            <div className="">
+              <div className="h-64 w-64 overflow-hidden rounded-full bg-cover object-cover">
+                {avatar && (
+                  <Avatar
+                    src={`${process.env.REACT_APP_SERVER_URL}/images/avatars/${avatar}`}
+                  />
+                )}
+              </div>
             </div>
 
             <input id="avatar" name="avatar" type="file" ref={avatarRef} />
@@ -104,7 +105,13 @@ export default function ProfilePage() {
           <div className="flex flex-col gap-3 md:w-1/2">
             <div className="flex w-full flex-col gap-3 md:flex-row">
               <label className="w-full">
-                <Typography as="span" className="block">
+                <Typography
+                  as="label"
+                  className="block"
+                  weight="semibold"
+                  color="muted"
+                  htmlFor="first_name"
+                >
                   Nombre
                 </Typography>
 
@@ -113,12 +120,18 @@ export default function ProfilePage() {
                   name="first_name"
                   value={firstName}
                   setValue={setFirstName}
-                  className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 text-slate-600 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm dark:text-slate-800 sm:text-sm"
                 />
               </label>
 
               <label className="w-full">
-                <Typography as="span" className="block">
+                <Typography
+                  as="label"
+                  className="block"
+                  weight="semibold"
+                  color="muted"
+                  htmlFor="last_name"
+                >
                   Apellidos
                 </Typography>
 
@@ -127,13 +140,19 @@ export default function ProfilePage() {
                   name="last_name"
                   value={lastName}
                   setValue={setLastName}
-                  className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 text-slate-600 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm dark:text-slate-800 sm:text-sm"
                 />
               </label>
             </div>
 
             <label className="block">
-              <Typography as="span" className="block">
+              <Typography
+                as="label"
+                className="block"
+                weight="semibold"
+                color="muted"
+                htmlFor="email"
+              >
                 E-mail
               </Typography>
 
@@ -143,12 +162,18 @@ export default function ProfilePage() {
                 type="email"
                 value={email}
                 setValue={setEmail}
-                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 text-slate-600 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm dark:text-slate-800 sm:text-sm"
               />
             </label>
 
             <label className="block">
-              <Typography as="span" className="block">
+              <Typography
+                as="label"
+                className="block"
+                weight="semibold"
+                color="muted"
+                htmlFor="password"
+              >
                 Contraseña
               </Typography>
 
@@ -158,12 +183,18 @@ export default function ProfilePage() {
                 type="password"
                 value={password}
                 setValue={setPassword}
-                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 text-slate-600 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm dark:text-slate-800 sm:text-sm"
               />
             </label>
 
             <label className="block">
-              <Typography as="span" className="block">
+              <Typography
+                as="label"
+                className="block"
+                weight="semibold"
+                color="muted"
+                htmlFor="password_confirmation"
+              >
                 Confirmar contraseña
               </Typography>
 
@@ -173,12 +204,18 @@ export default function ProfilePage() {
                 type="password"
                 value={passwordConfirmation}
                 setValue={setPasswordConfirmation}
-                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 text-slate-600 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm dark:text-slate-800 sm:text-sm"
               />
             </label>
 
             <label className="block">
-              <Typography as="span" className="block">
+              <Typography
+                as="label"
+                className="block"
+                weight="semibold"
+                color="muted"
+                htmlFor="bio"
+              >
                 Biografía
               </Typography>
 
@@ -188,7 +225,7 @@ export default function ProfilePage() {
                 value={bio}
                 setValue={setBio}
                 multiline
-                className="mt-1 block w-full rounded-md bg-gray-200 px-3 py-2 text-slate-600 shadow-sm ring-2 ring-indigo-500 focus:outline-none focus:ring focus:ring-indigo-500 dark:ring-emerald-500 focus:dark:ring-emerald-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md px-3 py-2 shadow-sm dark:text-slate-800 sm:text-sm"
               />
             </label>
 

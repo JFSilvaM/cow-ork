@@ -5,7 +5,6 @@ import SunIcon from "./icons/SunIcon";
 import Button from "./Button";
 import { useAuth } from "../contexts/AuthContext";
 import Dropdown from "./Dropdown";
-import Avatar from "./Avatar";
 import Typography from "./Typography";
 
 export default function Navbar() {
@@ -30,7 +29,11 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2 duration-300 hover:scale-110"
           >
-            <Avatar src={`/images/cow-ork_logo.png`} alt="Cow-Ork logo" />
+            <img
+              src="/images/cow-ork_logo.png"
+              alt="Cow-Ork logo"
+              className="h-16 w-16"
+            />
 
             <Typography
               as="span"

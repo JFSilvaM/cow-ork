@@ -40,11 +40,13 @@ export default function Dropdown() {
   return (
     <Menu>
       <Menu.Button className="h-12 w-12 overflow-hidden rounded-full bg-white focus:outline-none">
-        <Avatar
-          src={`${process.env.REACT_APP_SERVER_URL}/images/avatars/${avatar}`}
-          alt="Avatar"
-          className="h-full w-full hover:opacity-70"
-        />
+        {avatar && (
+          <Avatar
+            src={`${process.env.REACT_APP_SERVER_URL}/images/avatars/${avatar}`}
+            alt="Avatar"
+            className="h-full w-full hover:opacity-70"
+          />
+        )}
       </Menu.Button>
 
       <Transition

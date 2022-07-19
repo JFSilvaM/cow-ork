@@ -80,7 +80,17 @@ const validateBooking = async (booking) => {
   return row;
 };
 
+const findBookingDates = async (spaceId, userId) => {
+  const query =
+    "SELECT start_date, end_date FROM bookings WHERE space_id = ? AND user_id = ?";
+
+  const [[row]] = await pool.query(query, [spaceId, userId]);
+
+  return row;
+};
+
 module.exports = {
+  findBookingDates,
   findAllBookingsById,
   findOneBooking,
   createBooking,

@@ -65,6 +65,7 @@
   "REPORT_NOT_CREATED": "No se pudo crear el reporte",
   "REPORT_NOT_FOUND": "No se encontró ningún reporte",
   "REPORT_NOT_FOUND_BY_ID": "No se encontró el reporte especificado",
+  "REPORT_NOT_ALLOWED": "Todavía no puedes crear un reporte para este espacio",
 
   "USER_UPDATED": "Usuario actualizado correctamente",
   "USER_DELETED": "Usuario eliminado correctamente",
@@ -151,6 +152,7 @@
   "RATING_NOT_FOUND": "La puntuación no existe",
   "RATING_UPDATED": "La puntuación ha sido actualizada",
   "RATING_NOT_UPDATED": "La puntuación no ha sido actualizada",
+  "RATING_NOT_ALLOWED": "Todavía no puedes valorar este espacio",
 
   "SPACE_TYPE_DUPLICATED": "El tipo de espacio que intentas añadir ya existe",
   "SPACE_TYPE_INSERT_ERROR": "No se pudo crear el tipo de espacio especificado",

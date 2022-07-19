@@ -7,6 +7,7 @@ import StarIcon from "./icons/StarIcon";
 
 export default function StarRating({ spaceId, withHover }) {
   const [rating, setRating] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const { token } = useAuth();
 
@@ -31,10 +32,12 @@ export default function StarRating({ spaceId, withHover }) {
       }
 
       if (data?.status === "ok") {
+        setErrorMessage("");
         setSuccessMessage(data);
       }
     } catch (error) {
       setSuccessMessage("");
+      setErrorMessage(error);
       console.error(error);
     }
   };
@@ -73,6 +76,14 @@ export default function StarRating({ spaceId, withHover }) {
           </Fragment>
         ))}
       </div>
+
+      {errorMessage && (
+        <div className="mt-2 flex justify-center">
+          <Alert color="error" icon="error">
+            {errorMessage.message}
+          </Alert>
+        </div>
+      )}
 
       {successMessage && (
         <div className="mt-2 flex justify-center">

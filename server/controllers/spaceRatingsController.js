@@ -7,8 +7,10 @@ const {
   RATING_NOT_FOUND,
   RATING_UPDATED,
   RATING_NOT_UPDATED,
+  RATING_NOT_ALLOWED,
 } = require("../messages/messages.json");
 const { spaceRatingValidation } = require("../validations");
+const { findBookingDates } = require("../repositories/bookingsRepository");
 
 const findOne = async (req, res, next) => {
   try {
@@ -27,6 +29,12 @@ const findOne = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const value = await spaceRatingValidation(req.body);
+
+    const date = await findBookingDates(value.space_id, req.auth.id);
+
+    if (!date || new Date(date.end_date).getTime() > Date.now()) {
+      generateError(RATING_NOT_ALLOWED, 500);
+    }
 
     const affectedRows = await updateSpaceRating(value, req.auth.id);
 

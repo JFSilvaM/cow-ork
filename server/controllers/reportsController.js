@@ -16,8 +16,10 @@ const {
   REPORT_CREATED,
   REPORT_UPDATED,
   REPORT_DELETED,
+  REPORT_NOT_ALLOWED,
 } = require("../messages/messages.json");
 const { reportValidation } = require("../validations");
+const { findBookingDates } = require("../repositories/bookingsRepository");
 
 const findAll = async (req, res, next) => {
   try {
@@ -64,6 +66,12 @@ const findOne = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const value = await reportValidation(req.body);
+
+    const date = await findBookingDates(value.space_id, req.auth.id);
+
+    if (!date || new Date(date.start_date).getTime() > Date.now()) {
+      generateError(REPORT_NOT_ALLOWED, 500);
+    }
 
     const insertId = await createReport(value, req.auth.id);
 

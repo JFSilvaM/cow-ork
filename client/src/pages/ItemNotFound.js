@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import ErrorPage from "../components/ErrorPage";
 import Typography from "../components/Typography";
 
-export default function ItemNotFound({ children }) {
+export default function ItemNotFound({ children, simple }) {
   const navigate = useNavigate();
 
   return (
@@ -12,9 +12,11 @@ export default function ItemNotFound({ children }) {
         {children}
       </Typography>
 
-      <Button shape="rounded" size="sm" onClick={() => navigate("/")}>
-        Ir al inicio
-      </Button>
+      {!simple && (
+        <Button shape="rounded" size="sm" onClick={() => navigate("/")}>
+          Ir al inicio
+        </Button>
+      )}
     </ErrorPage>
   );
 }

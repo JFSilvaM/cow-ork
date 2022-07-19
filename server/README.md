@@ -80,6 +80,8 @@ npm start
 <pre>
 <strong>GET</strong>    <em>/api/spaces</em>
 <strong>GET</strong>    <em>/api/spaces/:id</em>
+<strong>GET</strong>    <em>/api/services</em>
+<strong>GET</strong>    <em>/api/space_types</em>
 </pre>
 
 ### Accesibles por usuarios anónimos
@@ -125,12 +127,10 @@ npm start
 <strong>PUT</strong>    <em>/api/report_categories/:id</em>
 <strong>DELETE</strong> <em>/api/report_categories/:id</em>
 
-<strong>GET</strong>    <em>/api/services</em>
 <strong>POST</strong>   <em>/api/services</em>
 <strong>PUT</strong>    <em>/api/services/:id</em>
 <strong>DELETE</strong> <em>/api/services/:id</em>
 
-<strong>GET</strong>    <em>/api/space_types</em>
 <strong>POST</strong>   <em>/api/space_types</em>
 <strong>PUT</strong>    <em>/api/space_types/:id</em>
 <strong>DELETE</strong> <em>/api/space_types/:id</em>

@@ -4,7 +4,7 @@ const { auth } = require("../middlewares");
 
 router
   .route("/")
-  .get(auth.isLoggedIn, auth.isAdmin, spaceTypesController.findAll)
+  .get(spaceTypesController.findAll)
   .post(auth.isLoggedIn, auth.isAdmin, spaceTypesController.create);
 
 router

@@ -10,17 +10,19 @@ const findAllSpaces = async (queryParams) => {
     ) sp
     INNER JOIN space_types st ON sp.type_id = st.id
     LEFT JOIN space_ratings sr ON sp.id = sr.space_id
-    WHERE sp.name LIKE ? AND sp.address LIKE ? AND sp.price BETWEEN ? AND ? AND st.name LIKE ? AND service_names LIKE ?
+    WHERE sp.name LIKE ? AND sp.address LIKE ? AND sp.price BETWEEN ? AND ? AND st.name LIKE ? AND JSON_CONTAINS(service_ids, JSON_ARRAY(?))
     GROUP BY sp.id ORDER BY sp.id
   `;
 
+  const services = queryParams?.services?.split(",").map(Number);
+
   const [rows] = await pool.query(query, [
-    queryParams.name || "%",
-    queryParams.address || "%",
+    queryParams.name ? `%${queryParams.name}%` : "%",
+    queryParams.address ? `%${queryParams.address}%` : "%",
     queryParams.minPrice || 0,
     queryParams.maxPrice || Number.MAX_SAFE_INTEGER,
     queryParams.type || "%",
-    queryParams.services || "%",
+    queryParams.services ? services : [],
   ]);
 
   return rows;

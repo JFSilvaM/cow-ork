@@ -7,7 +7,7 @@ const {
 } = require("../messages/messages");
 
 const findAllSpaceTypes = async () => {
-  const query = "SELECT * FROM space_types";
+  const query = "SELECT * FROM space_types ORDER BY id";
 
   const [rows] = await pool.query(query);
 

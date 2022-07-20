@@ -116,7 +116,7 @@ const activate = async (req, res, next) => {
 
     res.json({
       data: {
-        status: "success",
+        status: "ok",
         message: USER_ACTIVATED,
       },
     });
@@ -127,7 +127,7 @@ const activate = async (req, res, next) => {
 
 const templateContent = ({ value, activationCode }) => ({
   fullName: `${value.first_name} ${value.last_name}`,
-  siteUrl: `${HOST}:${PORT}/api/auth/activate/${activationCode}`,
+  siteUrl: `${HOST}:3000/activate/${activationCode}`,
   email: value.email,
 });
 
